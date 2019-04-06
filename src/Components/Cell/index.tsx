@@ -5,12 +5,17 @@ import { styles } from "./styles";
 
 type ClassNames = WithStyles<typeof styles>;
 
-interface Props extends ClassNames {}
+interface Props extends ClassNames {
+  value: number
+}
 
-const Header = ({ classes }: Props) => (
+const Cell = ({
+  classes,
+  value,
+}: Props) => (
   <div className={classes.root}>
-    ssfff
+    {value === 0 ? 0 : Math.pow(2, value)}
   </div>
 )
 
-export default withStyles(styles)(Header);
+export default withStyles(styles)(Cell);

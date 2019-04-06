@@ -1,6 +1,5 @@
 import React from "react";
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-import withRoot from "../../hocs/withRoot";
 import Header from '../Header';
 import Main from '../Main';
 import Footer from '../Footer';
@@ -19,4 +18,4 @@ const Layout = ({ classes }: Props) => (
   </div>
 )
 
-export default withRoot(withStyles(styles)(Layout));
+export default withStyles(styles)(Layout);
