@@ -5,6 +5,20 @@ export const styles = (theme: Theme) =>
     root: {
       display: 'flex',
       flexWrap: 'wrap',
-      backgroundColor: theme.palette.primary.main,
     },
+    spaceForCell: {
+      backgroundColor: theme.palette.grey[500],
+      // borderColor: theme.palette.grey[700],
+      // borderWidth: 1,
+      // borderStyle: 'solid'
+    },
+    cellSize: {
+      position: 'relative',
+      top: 0,
+      left: 0,
+      height: 0,
+      width: '100%',
+      paddingBottom: '100%',
+      transition: '0.1s top, 0.1s left',
+    }
   });

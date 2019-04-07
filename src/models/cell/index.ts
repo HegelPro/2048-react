@@ -5,13 +5,13 @@ import { CellType, CellInitParams } from './types'
 import { Vector } from '../vector'
 
 
-export class Cell extends Record<CellType>({
+export class CellRecord extends Record<CellType>({
   changedByVector: new Vector(),
   value: 0,
   id: 0,
 }) {
-  static init(initParams: CellInitParams): Cell {
-    return new Cell({
+  static init(initParams: CellInitParams): CellRecord {
+    return new CellRecord({
       value: initParams.value,
       id: Math.random(),
     })

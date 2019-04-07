@@ -7,7 +7,10 @@ import {
   initField,
   moveCells,
 } from './actions'
-import { selectField } from './selectors'
+import {
+  selectPrevField,
+  selectCurrentField,
+} from './selectors'
 import { moveCells$ } from "../../streams/window";
 
 
@@ -17,7 +20,8 @@ interface Props {
 }
 
 const mapState = (state: RootState) => ({
-  field: selectField(state)
+  field: selectCurrentField(state),
+  prevField: selectPrevField(state),
 })
 
 const Field = ({
@@ -25,7 +29,7 @@ const Field = ({
   columns,
 }: Props) => {
   const dispatch = useDispatch()
-  const { field } = useMappedState(mapState)
+  const { field, prevField } = useMappedState(mapState)
   const [isInitField, setIsInitField] = useState(false);
   useEffect(() => {
     const subscriber = moveCells$.subscribe(diraction => {
@@ -39,6 +43,6 @@ const Field = ({
     }
     return () => subscriber.unsubscribe()
   })
-  return <FieldView field={field} />
+  return <FieldView field={field} prevField={prevField} />
 }
 export default Field;

@@ -1,5 +1,9 @@
 import { RootState } from "../../store/types";
 
-export function selectField(state: RootState) {
-  return state.field
+export function selectCurrentField(state: RootState) {
+  return state.field.current
+}
+
+export function selectPrevField(state: RootState) {
+  return state.field.history.last(undefined)
 }

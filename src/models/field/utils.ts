@@ -1,15 +1,15 @@
 import { List } from 'immutable'
 
-import { Cell } from '../cell'
+import { CellRecord } from '../cell'
 
 export function initCells(
   columns: number,
   rows: number,
-): List<Cell> {
-  let cellList = List<Cell>()
+): List<CellRecord> {
+  let cellList = List<CellRecord>()
   for (let y = 0; y < rows * columns; y++) {
     cellList = cellList.push(
-      Cell.init({ value: 0 })
+      CellRecord.init({ value: 0 })
     )
   }
   return cellList

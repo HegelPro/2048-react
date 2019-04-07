@@ -1,21 +1,20 @@
 import React from "react";
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import { styles } from "./styles";
+import { CellRecord } from "../../models/cell";
 
 
 type ClassNames = WithStyles<typeof styles>;
 
 interface Props extends ClassNames {
-  value: number
+  cell: CellRecord
 }
 
 const Cell = ({
   classes,
-  value,
-}: Props) => (
-  <div className={classes.root}>
-    {value === 0 ? 0 : Math.pow(2, value)}
-  </div>
-)
+  cell,
+}: Props) => cell.value !== 0
+  ? <div className={classes.root}>{Math.pow(2, cell.value)}</div>
+  : null
 
 export default withStyles(styles)(Cell);

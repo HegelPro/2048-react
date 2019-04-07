@@ -9,9 +9,9 @@ type ClassNames = WithStyles<typeof styles>;
 interface Props extends ClassNames {}
 
 const Main = ({ classes }: Props) => (
-  <Grid container className={classes.root}>
-    <Grid item xs={12}>
-      <Field columns={3} rows={3} />
+  <Grid container className={classes.root} justify='center'>
+    <Grid item md={6} xs={12}>
+      <Field columns={5} rows={3} />
     </Grid>
   </Grid>
 )

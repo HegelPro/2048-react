@@ -4,25 +4,34 @@ import { initCells } from './utils'
 import {
   FieldInitParams,
   FieldType,
-  Change,
 } from './types'
 
-import { Cell } from '../cell'
+import { CellRecord } from '../cell'
 import { Vector } from '../vector'
 
 export class FieldRecord extends Record<FieldType>({
   cells: List(),
   columns: 0,
   rows: 0,
-  changes: List(),
 }) {
-  getCell(vector: Vector): Cell {
+  getCellPosition(cell: CellRecord): Vector | undefined {
+    const position = this.cells.findIndex(cellOne => cellOne.id === cell.id)
+    return position !== -1
+      ? new Vector({
+        x: position % this.columns,
+        y: Math.floor((position / this.columns))
+      })
+      : undefined
+
+  }
+  
+  getCell(vector: Vector): CellRecord {
     const cell = this.cells.get(vector.x + vector.y * this.columns)
-    if (!cell) throw new Error('Cell isn\'t exist')
+    if (!cell) throw new Error('CellRecord isn\'t exist')
     return cell
   }
 
-  setCell(vector: Vector, cell: Cell): FieldRecord {
+  setCell(vector: Vector, cell: CellRecord): FieldRecord {
     return this.update(
       'cells',
       cells => cells.set(vector.x + vector.y * this.columns, cell))
@@ -43,17 +52,13 @@ export class FieldRecord extends Record<FieldType>({
   coalitionCells(vectorOne: Vector, vectorTwo: Vector): FieldRecord {
     let field = this.setCell(
       vectorOne,
-      Cell.init({ value: 0 })
+      CellRecord.init({ value: 0 })
     )
     return field.setCell(
       vectorTwo,
       field.getCell(vectorTwo)
         .update('value', value => ++value)
     )
-  }
-
-  pushChange(change: Change) {
-    return this.set('changes', this.changes.push(change))
   }
 
   hasCell(vector: Vector): boolean {
