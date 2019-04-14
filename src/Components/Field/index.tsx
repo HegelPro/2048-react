@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React from 'react';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-import { styles } from "./styles";
-import { FieldRecord } from "../../models/field";
-import Cell from "../../Components/Cell";
+import { styles } from './styles';
+import { FieldRecord } from '../../models/field';
+import CellContainer from '../CellContainer';
+import { Vector } from '../../models/vector';
 
 
 type ClassNames = WithStyles<typeof styles>;
@@ -17,60 +18,25 @@ const Field = ({
   field,
   prevField,
 }: Props) => {
-  useEffect(() => {
-    field.cells.forEach(cell => {
-      if (cell) {
-        const cellElem = document.getElementById(`cell_${cell.id}`)
-        if(cellElem) {
-          cellElem.style.top = '0'
-          cellElem.style.left = '0'
-        }
-      }
-    })
-  })
   return (
     <div className={classes.root}>
       {field.cells.map(cell => {
+        let prevPosition: Vector | undefined
+        const currentPosition = field.getCellPosition(cell)
         if(prevField) {
-          const currentPosition = field.getCellPosition(cell)
-          const prevPosition = prevField.getCellPosition(cell)
-          if(prevPosition && currentPosition) {
-            console.log(`prevPosition: (${prevPosition.x}, ${prevPosition.y})`)
-            console.log(`currentPosition: (${currentPosition.x}, ${currentPosition.y})`)
-            const dx = (prevPosition.x - currentPosition.x)
-            const dy = (prevPosition.y - currentPosition.y)
-            return (
-              <div
-                className={classes.spaceForCell}
-                key={cell.id}
-                style={{ width: `${100 / field.columns}%` }}
-              >
-                <div
-                  id={`cell_${cell.id}`}
-                  className={classes.cellSize}
-                  style={{
-                    top: `${100 * dy}%`,
-                    left: `${100 * dx}%`,
-                  }}
-                >
-                  <Cell cell={cell} />
-                </div>
-              </div>
-            )
-          }
+          prevPosition = prevField.getCellPosition(cell)
         }
         return (
           <div
             className={classes.spaceForCell}
-            key={cell.id}
+            key={Math.random()}
             style={{ width: `${100 / field.columns}%` }}
           >
-            <div
-              id={`cell_${cell.id}`}
-              className={classes.cellSize}
-            >
-              <Cell cell={cell}/>
-            </div>
+            <CellContainer
+              cell={cell}
+              position={currentPosition}
+              prevPosition={prevPosition}
+            />
           </div>
         )
       })}

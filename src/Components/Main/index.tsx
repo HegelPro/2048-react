@@ -11,7 +11,7 @@ interface Props extends ClassNames {}
 const Main = ({ classes }: Props) => (
   <Grid container className={classes.root} justify='center'>
     <Grid item md={6} xs={12}>
-      <Field columns={5} rows={3} />
+      <Field columns={10} rows={10} />
     </Grid>
   </Grid>
 )

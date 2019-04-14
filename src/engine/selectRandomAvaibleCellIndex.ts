@@ -1,4 +1,5 @@
 import { FieldRecord } from '../models/field'
+import { CellRecord } from '../models/cell';
 
 export default function selectRandomAvaibleCellPoint(field: FieldRecord): FieldRecord {
   const avaibleCells = field.cells.filter(cell => cell.value === 0)
@@ -9,10 +10,10 @@ export default function selectRandomAvaibleCellPoint(field: FieldRecord): FieldR
   return avaibleCells.size > 0
     ? field.update(
         'cells',
-        cells => cells.update(
+        cells => cells.set(
           cellsIndex,
-          cell => cell.set(
-            'value',
-            Math.random() > 0.8 ? 2 : 1 )))
+          CellRecord.init({
+            value: Math.random() > 0.8 ? 2 : 1
+          })))
     : field
 }

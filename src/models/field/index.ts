@@ -50,14 +50,14 @@ export class FieldRecord extends Record<FieldType>({
   }
 
   coalitionCells(vectorOne: Vector, vectorTwo: Vector): FieldRecord {
-    let field = this.setCell(
+    const field = this.setCell(
+      vectorTwo,
+      this.getCell(vectorTwo)
+        .set('id', this.getCell(vectorOne).id)
+        .update('value', value => ++value))
+    return field.setCell(
       vectorOne,
       CellRecord.init({ value: 0 })
-    )
-    return field.setCell(
-      vectorTwo,
-      field.getCell(vectorTwo)
-        .update('value', value => ++value)
     )
   }
 

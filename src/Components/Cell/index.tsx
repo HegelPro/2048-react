@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-import { styles } from "./styles";
-import { CellRecord } from "../../models/cell";
+import { styles } from './styles';
+import { CellRecord } from '../../models/cell';
 
 
 type ClassNames = WithStyles<typeof styles>;
