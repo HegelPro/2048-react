@@ -1,9 +1,11 @@
 import { fromEvent } from "rxjs";
 import { map } from "rxjs/operators";
+import { merge } from 'rxjs';
 import { Vector } from "../models/vector";
 import { DIRACTIONS } from "../models/vector/constants";
 
-export const moveCells$ = fromEvent<KeyboardEvent>(window, 'keydown').pipe<Vector | undefined>(
+
+const moveDiractionFromKeyboardEvent$ = fromEvent<KeyboardEvent>(window, 'keydown').pipe<Vector | undefined>(
   map((event: KeyboardEvent) => {
     if (event.key === 'w' || event.key === 'ц' || event.key === 'ArrowUp') {
       return DIRACTIONS.UP
@@ -16,3 +18,5 @@ export const moveCells$ = fromEvent<KeyboardEvent>(window, 'keydown').pipe<Vecto
     }
   })
 )
+
+export const moveDiraction$ = merge(moveDiractionFromKeyboardEvent$)

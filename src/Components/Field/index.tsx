@@ -4,6 +4,7 @@ import { styles } from './styles';
 import { FieldRecord } from '../../models/field';
 import CellContainer from '../CellContainer';
 import { Vector } from '../../models/vector';
+import Cell from '../Cell';
 
 
 type ClassNames = WithStyles<typeof styles>;
@@ -17,31 +18,31 @@ const Field = ({
   classes,
   field,
   prevField,
-}: Props) => {
-  return (
-    <div className={classes.root}>
-      {field.cells.map(cell => {
-        let prevPosition: Vector | undefined
-        const currentPosition = field.getCellPosition(cell)
-        if(prevField) {
-          prevPosition = prevField.getCellPosition(cell)
-        }
-        return (
-          <div
-            className={classes.spaceForCell}
-            key={Math.random()}
-            style={{ width: `${100 / field.columns}%` }}
+}: Props) => (
+  <>
+    {field.cells.map(cell => {
+      let prevPosition: Vector | undefined
+      const currentPosition = field.getCellPosition(cell)
+      if(prevField) {
+        prevPosition = prevField.getCellPosition(cell)
+      }
+      return (
+        <div
+          className={classes.spaceForCell}
+          key={Math.random()}
+          style={{ width: `${100 / field.columns}%` }}
+        >
+          <CellContainer
+            cell={cell}
+            position={currentPosition}
+            prevPosition={prevPosition}
           >
-            <CellContainer
-              cell={cell}
-              position={currentPosition}
-              prevPosition={prevPosition}
-            />
-          </div>
-        )
-      })}
-    </div>
-  )
-}
+            <Cell cell={cell} />
+          </CellContainer>
+        </div>
+      )
+    })}
+  </>
+)
 
 export default withStyles(styles)(Field);

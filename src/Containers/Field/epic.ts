@@ -1,6 +1,6 @@
-import { from, of } from 'rxjs'
+import { of } from 'rxjs'
 import { filter, debounceTime, switchMap } from 'rxjs/operators'
-import { RootActions, Epic } from '../../store/types'
+import { Epic } from '../../store/types'
 import actions from '../../store/actions'
 import { isActionOf } from 'typesafe-actions'
 import { doNextGameStep } from '../../engine'

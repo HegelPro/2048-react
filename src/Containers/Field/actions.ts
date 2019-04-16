@@ -1,4 +1,4 @@
-import { createAction, createStandardAction } from 'typesafe-actions'
+import { createStandardAction } from 'typesafe-actions'
 
 import { FieldInitParams } from '../../models/field/types'
 import { Vector } from '../../models/vector'

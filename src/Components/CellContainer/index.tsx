@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import { styles } from './styles';
 import { CellRecord } from '../../models/cell';
-import Cell from '../../Components/Cell';
 import { Vector } from '../../models/vector';
 
 
@@ -12,11 +11,13 @@ interface Props extends ClassNames {
   cell: CellRecord
   position?: Vector
   prevPosition?: Vector
+  children: React.ReactNode
 }
 
 const CellContainer = ({
   classes,
   cell,
+  children,
   position,
   prevPosition,
 }: Props) => {
@@ -49,7 +50,7 @@ const CellContainer = ({
           : 'scale(0)'
       }}
     >
-      <Cell cell={cell} />
+      {children}
     </div>
   )
 }

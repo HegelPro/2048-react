@@ -11,7 +11,7 @@ import {
   selectPrevField,
   selectCurrentField,
 } from './selectors'
-import { moveCells$ } from "../../streams/window";
+import { moveDiraction$ } from "../../streams/moveDiraction";
 
 
 interface Props {
@@ -32,7 +32,7 @@ const Field = ({
   const { field, prevField } = useMappedState(mapState)
   const [isInitField, setIsInitField] = useState(false);
   useEffect(() => {
-    const subscriber = moveCells$.subscribe(diraction => {
+    const subscriber = moveDiraction$.subscribe(diraction => {
       if(diraction !== undefined) {
         dispatch(moveCells(diraction))
       }

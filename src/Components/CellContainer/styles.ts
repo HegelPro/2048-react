@@ -9,6 +9,6 @@ export const styles = (theme: Theme) =>
       height: 0,
       width: '100%',
       paddingBottom: '100%',
-      transition: '0.1s top, 0.1s left, 0.2s transform',
+      transition: '0.2s top, 0.2s left, 0.3s transform',
     }
   });
