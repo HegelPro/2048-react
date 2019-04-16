@@ -8,10 +8,10 @@ import { Vector } from '../../models/vector';
 type ClassNames = WithStyles<typeof styles>;
 
 interface Props extends ClassNames {
+  children: React.ReactNode
   cell: CellRecord
   position?: Vector
   prevPosition?: Vector
-  children: React.ReactNode
 }
 
 const CellContainer = ({

@@ -2,7 +2,7 @@ import React from 'react';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import { styles } from './styles';
 import { FieldRecord } from '../../models/field';
-import CellContainer from '../CellContainer';
+import FieldContainer from '../FieldContainer';
 import { Vector } from '../../models/vector';
 import Cell from '../Cell';
 
@@ -19,7 +19,7 @@ const Field = ({
   field,
   prevField,
 }: Props) => (
-  <>
+  <FieldContainer field={field}>
     {field.cells.map(cell => {
       let prevPosition: Vector | undefined
       const currentPosition = field.getCellPosition(cell)
@@ -32,17 +32,15 @@ const Field = ({
           key={Math.random()}
           style={{ width: `${100 / field.columns}%` }}
         >
-          <CellContainer
+          <Cell
             cell={cell}
             position={currentPosition}
             prevPosition={prevPosition}
-          >
-            <Cell cell={cell} />
-          </CellContainer>
+          />
         </div>
       )
     })}
-  </>
+  </FieldContainer>
 )
 
 export default withStyles(styles)(Field);
