@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Layout from './Components/Layout';
-import Providers from './Setup/Providers';
+import Providers from './setup/Providers';
 import * as serviceWorker from './serviceWorker';
 
 const App = () => (

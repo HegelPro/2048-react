@@ -13,7 +13,7 @@ const Main = ({ classes }: Props) => (
   <Grid container className={classes.root} justify='center'>
     <Grid item md={5} xs={12}>
       <FieldContainer>
-        <Field columns={10} rows={10} />
+        <Field columns={4} rows={4} />
       </FieldContainer>
     </Grid>
   </Grid>
