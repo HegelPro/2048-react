@@ -6,12 +6,14 @@ import { RootState } from '../../store/types'
 import {
   initField,
   moveCells,
+  returnPrevField,
 } from './actions'
 import {
   selectPrevField,
   selectCurrentField,
 } from './selectors'
 import { moveDiraction$ } from "../../streams/moveDiraction";
+import FieldHeader from "../../Components/FieldHeader";
 
 
 interface Props {
@@ -43,6 +45,15 @@ const Field = ({
     }
     return () => subscriber.unsubscribe()
   })
-  return <FieldView field={field} prevField={prevField} />
+  return (
+    <>
+      <FieldHeader
+        field={field}
+        onClickBack={() => dispatch(returnPrevField())}
+        onClickRestart={() => dispatch(initField({ rows, columns }))}
+      />
+      <FieldView field={field} prevField={prevField} />
+    </>
+  )
 }
 export default Field;

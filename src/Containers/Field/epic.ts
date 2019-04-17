@@ -18,8 +18,12 @@ export const moveFieldEpic: Epic = (action$, state$) =>
         let changedField = doNextGameStep(saveField, payload)
         if(!changedField.cells.equals(saveField.cells)) {
           changedField = selectRandomAvaibleCellPoint(changedField)
+          return of(
+            actions.field.setField(changedField),
+            actions.field.addFieldInHistory(saveField),
+          )
         }
-        return of(actions.field.setField(changedField))
+        return of(actions.null())
       })
     )
 
@@ -33,7 +37,23 @@ export const initFieldEpic: Epic = action$ =>
           rows:payload.rows,
         })
         field = selectRandomAvaibleCellPoint(field)
-        return of(actions.field.setField(field))
+        return of(
+          actions.field.setField(field),
+          actions.field.resetFieldHistory()
+        )
       })
     )
 
+export const returnPrevFieldEpic: Epic = (action$, state$) =>
+  action$
+    .pipe(
+      filter(isActionOf(actions.field.returnPrevField)),
+      switchMap(() => {
+        const fieldState = state$.value.field
+        const prevField = fieldState.history.last(undefined) || fieldState.current
+        return of(
+          actions.field.setField(prevField),
+          actions.field.remoteLostFieldInHistory(),
+        )
+      })
+    )
