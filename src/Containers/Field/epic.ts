@@ -14,13 +14,13 @@ export const moveFieldEpic: Epic = (action$, state$) =>
       filter(isActionOf(actions.field.moveCells)),
       debounceTime(100),
       switchMap(({payload}) => {
-        const saveField = state$.value.field.current
-        let changedField = doNextGameStep(saveField, payload)
-        if(!changedField.cells.equals(saveField.cells)) {
+        const savedField = state$.value.field.current
+        let changedField = doNextGameStep(savedField, payload)
+        if(!changedField.cells.equals(savedField.cells)) {
           changedField = selectRandomAvaibleCellPoint(changedField)
           return of(
-            actions.field.setField(changedField),
-            actions.field.addFieldInHistory(saveField),
+            actions.field.setCurrentField(changedField),
+            actions.field.setPreviousField(savedField),
           )
         }
         return of(actions.null())
@@ -38,8 +38,8 @@ export const initFieldEpic: Epic = action$ =>
         })
         field = selectRandomAvaibleCellPoint(field)
         return of(
-          actions.field.setField(field),
-          actions.field.resetFieldHistory()
+          actions.field.setCurrentField(field),
+          actions.field.setPreviousField(field),
         )
       })
     )
@@ -50,10 +50,7 @@ export const returnPrevFieldEpic: Epic = (action$, state$) =>
       filter(isActionOf(actions.field.returnPrevField)),
       switchMap(() => {
         const fieldState = state$.value.field
-        const prevField = fieldState.history.last(undefined) || fieldState.current
-        return of(
-          actions.field.setField(prevField),
-          actions.field.remoteLostFieldInHistory(),
-        )
+        const prevField = fieldState.previous
+        return of(actions.field.setCurrentField(prevField))
       })
     )

@@ -19,7 +19,9 @@ const Field = ({
   onClickRestart,
 }: Props) => (
   <div>
-    fff
+    <p>{field.cells.reduce((result, cell) => cell.value !== 0
+      ? result + Math.pow(2, cell.value)
+      : result, 0)}</p>
     <button onClick={onClickBack}>PrevField</button>
     <button onClick={onClickRestart}>Restart</button>
   </div>

@@ -10,21 +10,21 @@ type ClassNames = WithStyles<typeof styles>;
 interface Props extends ClassNames {
   children: React.ReactNode
   cell: CellRecord
-  position?: Vector
-  prevPosition?: Vector
+  currentPosition?: Vector
+  previousPosition?: Vector
 }
 
 const CellContainer = ({
   classes,
   cell,
   children,
-  position,
-  prevPosition,
+  currentPosition,
+  previousPosition,
 }: Props) => {
   useEffect(() => {
     const cellElem = document.getElementById(`cell_${cell.id}`)
     if(cellElem) {
-      if(prevPosition) {
+      if(previousPosition) {
         cellElem.style.top = '0'
         cellElem.style.left = '0'
       } else {
@@ -34,9 +34,9 @@ const CellContainer = ({
   })
   let dx = 0
   let dy = 0
-  if(prevPosition && position) {
-    dx = (prevPosition.x - position.x)
-    dy = (prevPosition.y - position.y)
+  if(previousPosition && currentPosition) {
+    dx = (previousPosition.x - currentPosition.x)
+    dy = (previousPosition.y - currentPosition.y)
   }
   return (
     <div
@@ -45,7 +45,7 @@ const CellContainer = ({
       style={{
         top: `${100 * dy}%`,
         left: `${100 * dx}%`,
-        transform: prevPosition
+        transform: previousPosition
           ? ''
           : 'scale(0)'
       }}

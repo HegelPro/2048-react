@@ -13,23 +13,23 @@ type ClassNames = WithStyles<typeof styles>;
 interface Props extends ClassNames,
 WithTheme {
   cell: CellRecord
-  position?: Vector
-  prevPosition?: Vector
+  currentPosition?: Vector
+  previousPosition?: Vector
 }
 
 const Cell = ({
   classes,
   cell,
-  position,
-  prevPosition,
+  currentPosition,
+  previousPosition,
   theme,
 }: Props) => {
   const cellColor = selectCellColor(cell.value)
   return (
     <CellContainer
       cell={cell}
-      position={position}
-      prevPosition={prevPosition}
+      currentPosition={currentPosition}
+      previousPosition={previousPosition}
     >
       {cell.value !== 0
         ? (

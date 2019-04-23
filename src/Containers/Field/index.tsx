@@ -9,7 +9,7 @@ import {
   returnPrevField,
 } from './actions'
 import {
-  selectPrevField,
+  selectPreviousField,
   selectCurrentField,
 } from './selectors'
 import { moveDiraction$ } from "../../streams/moveDiraction";
@@ -23,7 +23,7 @@ interface Props {
 
 const mapState = (state: RootState) => ({
   field: selectCurrentField(state),
-  prevField: selectPrevField(state),
+  prevField: selectPreviousField(state),
 })
 
 const Field = ({
