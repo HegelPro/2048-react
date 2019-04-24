@@ -19,6 +19,7 @@ const Field = ({
   return (
     <div className={classes.root}>
       {children}
+      <div className={classes.border} />
     </div>
   )
 }
