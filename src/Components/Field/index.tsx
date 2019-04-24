@@ -19,7 +19,7 @@ const Field = ({
   field,
   prevField,
 }: Props) => (
-  <FieldContainer field={field}>
+  <FieldContainer>
     {field.cells.map(cell => {
       let previousPosition: Vector | undefined
       const currentPosition = field.getCellPosition(cell)

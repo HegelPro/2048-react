@@ -14,24 +14,24 @@ import {
 } from './selectors'
 import { moveDiraction$ } from "../../streams/moveDiraction";
 import FieldHeader from "../../Components/FieldHeader";
+import { selectSettingRows, selectSettingsColumns } from "../Settings/selectors";
 
-
-interface Props {
-  rows: number
-  columns: number
-}
 
 const mapState = (state: RootState) => ({
   field: selectCurrentField(state),
   prevField: selectPreviousField(state),
+  rows: selectSettingRows(state),
+  columns: selectSettingsColumns(state),
 })
 
-const Field = ({
-  rows,
-  columns,
-}: Props) => {
+const Field = () => {
   const dispatch = useDispatch()
-  const { field, prevField } = useMappedState(mapState)
+  const {
+    field,
+    prevField,
+    rows,
+    columns,
+  } = useMappedState(mapState)
   const [isInitField, setIsInitField] = useState(false);
   useEffect(() => {
     const subscriber = moveDiraction$.subscribe(diraction => {

@@ -4,6 +4,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { theme } from '../theme'
 import { store } from '../../store';
+import { BrowserRouter } from 'react-router-dom';
 
 
 interface Props {
@@ -13,8 +14,10 @@ interface Props {
 const Providers = ({ children }: Props) => (
   <MuiThemeProvider theme={theme}>
     <StoreContext.Provider value={store}>
-      <CssBaseline />
-      {children}
+      <BrowserRouter>
+        <CssBaseline />
+        {children}
+      </BrowserRouter>
     </StoreContext.Provider>
   </MuiThemeProvider>
 )
