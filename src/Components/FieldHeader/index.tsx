@@ -1,14 +1,13 @@
 import React from 'react'
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-import Button from '@material-ui/core/Button';
-import { styles } from './styles';
-import { FieldRecord } from '../../models/field';
-import history from '../../setup/history';
+import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
+import Button from '@material-ui/core/Button'
+import { styles } from './styles'
+import { FieldRecord } from '../../models/field'
+import history from '../../setup/history'
 
+type ClassNames = WithStyles<typeof styles>
 
-type ClassNames = WithStyles<typeof styles>;
-
-interface Props extends ClassNames {
+interface IProps extends ClassNames {
   field: FieldRecord
   onClickBack: () => void
   onClickRestart: () => void
@@ -19,7 +18,7 @@ const Field = ({
   field,
   onClickBack,
   onClickRestart,
-}: Props) => (
+}: IProps) => (
   <div>
     <p>{field.cells.reduce((result, cell) => cell.value !== 0
       ? result + Math.pow(2, cell.value)
@@ -45,4 +44,4 @@ const Field = ({
   </div>
 )
 
-export default withStyles(styles)(Field);
+export default withStyles(styles)(Field)

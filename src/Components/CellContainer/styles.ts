@@ -1,6 +1,6 @@
-import { createStyles, Theme } from "@material-ui/core";
+import { createStyles } from '@material-ui/core'
 
-export const styles = (theme: Theme) =>
+export const styles = () =>
   createStyles({
     root: {
       position: 'relative',
@@ -10,5 +10,5 @@ export const styles = (theme: Theme) =>
       width: '100%',
       paddingBottom: '100%',
       transition: '0.2s top, 0.2s left, 0.3s transform',
-    }
-  });
+    },
+  })

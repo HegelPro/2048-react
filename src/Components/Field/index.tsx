@@ -1,15 +1,14 @@
-import React from 'react';
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-import { styles } from './styles';
-import { FieldRecord } from '../../models/field';
-import FieldContainer from '../FieldContainer';
-import { Vector } from '../../models/vector';
-import Cell from '../Cell';
+import React from 'react'
+import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
+import { styles } from './styles'
+import { FieldRecord } from '../../models/field'
+import FieldContainer from '../FieldContainer'
+import { Vector } from '../../models/vector'
+import Cell from '../Cell'
 
+type ClassNames = WithStyles<typeof styles>
 
-type ClassNames = WithStyles<typeof styles>;
-
-interface Props extends ClassNames {
+interface IProps extends ClassNames {
   field: FieldRecord
   prevField?: FieldRecord
 }
@@ -18,12 +17,12 @@ const Field = ({
   classes,
   field,
   prevField,
-}: Props) => (
+}: IProps) => (
   <FieldContainer>
-    {field.cells.map(cell => {
+    {field.cells.map((cell) => {
       let previousPosition: Vector | undefined
       const currentPosition = field.getCellPosition(cell)
-      if(prevField) {
+      if (prevField) {
         previousPosition = prevField.getCellPosition(cell)
       }
       return (
@@ -43,4 +42,4 @@ const Field = ({
   </FieldContainer>
 )
 
-export default withStyles(styles)(Field);
+export default withStyles(styles)(Field)

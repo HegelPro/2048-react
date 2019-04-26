@@ -3,7 +3,7 @@ import { ActionType, getType } from 'typesafe-actions'
 import * as fieldActions from './actions'
 
 import { FieldRecord } from '../../models/field'
-import { Record } from 'immutable';
+import { Record } from 'immutable'
 
 const defaultState = {
   current: new FieldRecord(),

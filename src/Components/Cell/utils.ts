@@ -5,7 +5,6 @@ import {
   SECOND_COLOR,
 } from './config'
 
-
 function selectColorRatio(value: number): number {
   if (value < MIN_VALUE) {
     return MIN_VALUE

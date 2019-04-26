@@ -2,7 +2,7 @@ import { ActionType, getType } from 'typesafe-actions'
 
 import * as fieldSettingActions from './actions'
 
-import { Record } from 'immutable';
+import { Record } from 'immutable'
 
 const defaultState = {
   rows: 4,

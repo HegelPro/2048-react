@@ -1,14 +1,12 @@
 import { List } from 'immutable'
 
 import { CellRecord } from '../cell'
-import { Vector } from '../vector';
 
-
-export interface FieldInitParams {
+export interface IFieldInitParams {
   columns: number
   rows: number
 }
 
-export interface FieldType extends FieldInitParams {
+export interface IFieldType extends IFieldInitParams {
   cells: List<CellRecord>,
 }

@@ -1,11 +1,10 @@
 import { createStandardAction } from 'typesafe-actions'
 
-import { FieldInitParams } from '../../models/field/types'
+import { IFieldInitParams } from '../../models/field/types'
 import { Vector } from '../../models/vector'
 import { FieldRecord } from '../../models/field'
 
-
-export const initField = createStandardAction('field/INIT_FIELD')<FieldInitParams>()
+export const initField = createStandardAction('field/INIT_FIELD')<IFieldInitParams>()
 
 export const setCurrentField = createStandardAction('field/SET_CURRENT_FIELD')<FieldRecord>()
 

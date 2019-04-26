@@ -5,8 +5,7 @@ import actions from '../../store/actions'
 import { isActionOf } from 'typesafe-actions'
 import { doNextGameStep } from '../../engine'
 import { FieldRecord } from '../../models/field'
-import selectRandomAvaibleCellPoint from '../../engine/selectRandomAvaibleCellIndex';
-
+import selectRandomAvaibleCellPoint from '../../engine/selectRandomAvaibleCellIndex'
 
 export const moveFieldEpic: Epic = (action$, state$) =>
   action$
@@ -16,7 +15,7 @@ export const moveFieldEpic: Epic = (action$, state$) =>
       switchMap(({payload}) => {
         const savedField = state$.value.field.current
         let changedField = doNextGameStep(savedField, payload)
-        if(!changedField.cells.equals(savedField.cells)) {
+        if (!changedField.cells.equals(savedField.cells)) {
           changedField = selectRandomAvaibleCellPoint(changedField)
           return of(
             actions.field.setCurrentField(changedField),
@@ -24,24 +23,24 @@ export const moveFieldEpic: Epic = (action$, state$) =>
           )
         }
         return of(actions.null())
-      })
+      }),
     )
 
-export const initFieldEpic: Epic = action$ =>
+export const initFieldEpic: Epic = (action$) =>
   action$
     .pipe(
       filter(isActionOf(actions.field.initField)),
       switchMap(({payload}) => {
         let field = FieldRecord.init({
           columns: payload.columns,
-          rows:payload.rows,
+          rows: payload.rows,
         })
         field = selectRandomAvaibleCellPoint(field)
         return of(
           actions.field.setCurrentField(field),
           actions.field.setPreviousField(field),
         )
-      })
+      }),
     )
 
 export const returnPrevFieldEpic: Epic = (action$, state$) =>
@@ -52,5 +51,5 @@ export const returnPrevFieldEpic: Epic = (action$, state$) =>
         const fieldState = state$.value.field
         const prevField = fieldState.previous
         return of(actions.field.setCurrentField(prevField))
-      })
+      }),
     )

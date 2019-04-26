@@ -9,13 +9,13 @@ import {
   setFieldColumnsAction,
 } from './actions'
 import { avaibleSizesForField } from './config'
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import { RootState } from '../../store/types';
+import TextField from '@material-ui/core/TextField'
+import MenuItem from '@material-ui/core/MenuItem'
+import { RootState } from '../../store/types'
 import {
   selectSettingRows,
   selectSettingsColumns,
-} from './selectors';
+} from './selectors'
 
 const mapState = (state: RootState) => ({
   rows: selectSettingRows(state),
@@ -30,7 +30,7 @@ const Settings = () => {
   } = useMappedState(mapState)
   const [rowsInputValue, setRowsInputValue] = useState(rows)
   const [columnsInputValue, setColumnsInputValue] = useState(columns)
-  const menuItemsForSelectors = avaibleSizesForField.map(elem => <MenuItem key={elem} value={elem}>{elem}</MenuItem>)
+  const menuItemsForSelectors = avaibleSizesForField.map((elem) => <MenuItem key={elem} value={elem}>{elem}</MenuItem>)
   return (
     <FormGroup>
       <TextField
@@ -55,6 +55,5 @@ const Settings = () => {
     </FormGroup>
   )
 }
-  
 
 export default Settings

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useMappedState } from 'redux-react-hook';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useMappedState } from 'redux-react-hook'
 import FieldView from '../../Components/Field'
 import { RootState } from '../../store/types'
-
 import {
   initField,
   moveCells,
@@ -12,10 +11,9 @@ import {
   selectPreviousField,
   selectCurrentField,
 } from './selectors'
-import { moveDiraction$ } from "../../streams/moveDiraction";
-import FieldHeader from "../../Components/FieldHeader";
-import { selectSettingRows, selectSettingsColumns } from "../Settings/selectors";
-
+import { moveDiraction$ } from '../../streams/moveDiraction'
+import FieldHeader from '../../Components/FieldHeader'
+import { selectSettingRows, selectSettingsColumns } from '../Settings/selectors'
 
 const mapState = (state: RootState) => ({
   field: selectCurrentField(state),
@@ -32,14 +30,14 @@ const Field = () => {
     rows,
     columns,
   } = useMappedState(mapState)
-  const [isInitField, setIsInitField] = useState(false);
+  const [isInitField, setIsInitField] = useState(false)
   useEffect(() => {
-    const subscriber = moveDiraction$.subscribe(diraction => {
-      if(diraction !== undefined) {
+    const subscriber = moveDiraction$.subscribe((diraction) => {
+      if (diraction !== undefined) {
         dispatch(moveCells(diraction))
       }
     })
-    if(!isInitField) {
+    if (!isInitField) {
       dispatch(initField({ rows, columns }))
       setIsInitField(true)
     }
@@ -56,4 +54,4 @@ const Field = () => {
     </>
   )
 }
-export default Field;
+export default Field

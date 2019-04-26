@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react';
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-import { styles } from './styles';
-import { CellRecord } from '../../models/cell';
-import { Vector } from '../../models/vector';
+import React, { useEffect } from 'react'
+import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
+import { styles } from './styles'
+import { CellRecord } from '../../models/cell'
+import { Vector } from '../../models/vector'
 
+type ClassNames = WithStyles<typeof styles>
 
-type ClassNames = WithStyles<typeof styles>;
-
-interface Props extends ClassNames {
+interface IProps extends ClassNames {
   children: React.ReactNode
   cell: CellRecord
   currentPosition?: Vector
@@ -20,11 +19,11 @@ const CellContainer = ({
   children,
   currentPosition,
   previousPosition,
-}: Props) => {
+}: IProps) => {
   useEffect(() => {
     const cellElem = document.getElementById(`cell_${cell.id}`)
-    if(cellElem) {
-      if(previousPosition) {
+    if (cellElem) {
+      if (previousPosition) {
         cellElem.style.top = '0'
         cellElem.style.left = '0'
       } else {
@@ -34,7 +33,7 @@ const CellContainer = ({
   })
   let dx = 0
   let dy = 0
-  if(previousPosition && currentPosition) {
+  if (previousPosition && currentPosition) {
     dx = (previousPosition.x - currentPosition.x)
     dy = (previousPosition.y - currentPosition.y)
   }
@@ -47,7 +46,7 @@ const CellContainer = ({
         left: `${100 * dx}%`,
         transform: previousPosition
           ? ''
-          : 'scale(0)'
+          : 'scale(0)',
       }}
     >
       {children}
@@ -55,4 +54,4 @@ const CellContainer = ({
   )
 }
 
-export default withStyles(styles)(CellContainer);
+export default withStyles(styles)(CellContainer)

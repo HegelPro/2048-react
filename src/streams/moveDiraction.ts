@@ -1,9 +1,8 @@
-import { fromEvent } from "rxjs";
-import { map } from "rxjs/operators";
-import { merge } from 'rxjs';
-import { Vector } from "../models/vector";
-import { DIRACTIONS } from "../models/vector/constants";
-
+import { fromEvent } from 'rxjs'
+import { map } from 'rxjs/operators'
+import { merge } from 'rxjs'
+import { Vector } from '../models/vector'
+import { DIRACTIONS } from '../models/vector/constants'
 
 const moveDiractionFromKeyboardEvent$ = fromEvent<KeyboardEvent>(window, 'keydown').pipe<Vector | undefined>(
   map((event: KeyboardEvent) => {
@@ -16,7 +15,7 @@ const moveDiractionFromKeyboardEvent$ = fromEvent<KeyboardEvent>(window, 'keydow
     } else if (event.key === 'a' || event.key === 'ф' || event.key === 'ArrowLeft') {
       return DIRACTIONS.RIGHT
     }
-  })
+  }),
 )
 
 export const moveDiraction$ = merge(moveDiractionFromKeyboardEvent$)

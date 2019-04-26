@@ -1,6 +1,5 @@
 import { Vector } from '.'
 
-
 export const DIRACTIONS = {
   RIGHT: new Vector({ x: 1, y: 0 }),
   LEFT: new Vector({ x: -1, y: 0 }),

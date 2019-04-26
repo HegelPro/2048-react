@@ -1,4 +1,4 @@
-import { createStyles, Theme } from "@material-ui/core";
+import { createStyles } from '@material-ui/core'
 
 export const styles = () =>
   createStyles({
@@ -12,5 +12,5 @@ export const styles = () =>
     },
     footer: {
       flex: '0 0 auto',
-    }
-  });
+    },
+  })

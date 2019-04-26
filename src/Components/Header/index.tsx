@@ -1,16 +1,15 @@
-import React from "react";
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-import { styles } from "./styles";
+import React from 'react'
+import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
+import { styles } from './styles'
 
+type ClassNames = WithStyles<typeof styles>
 
-type ClassNames = WithStyles<typeof styles>;
+interface IProps extends ClassNames {}
 
-interface Props extends ClassNames {}
-
-const Header = ({ classes }: Props) => (
+const Header = ({ classes }: IProps) => (
   <div className={classes.root}>
     Header
   </div>
 )
 
-export default withStyles(styles)(Header);
+export default withStyles(styles)(Header)

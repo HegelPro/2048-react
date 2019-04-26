@@ -1,4 +1,4 @@
-import { createStyles, Theme } from "@material-ui/core";
+import { createStyles, Theme } from '@material-ui/core'
 
 export const styles = (theme: Theme) => {
   const borderWidth = 4
@@ -18,6 +18,6 @@ export const styles = (theme: Theme) => {
       borderRadius: theme.shape.borderRadius * 4,
       borderColor: theme.palette.primary.dark,
       borderStyle: 'solid',
-    }
-  });
+    },
+  })
 }

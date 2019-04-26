@@ -1,4 +1,4 @@
-import { RootState } from "../../store/types";
+import { RootState } from '../../store/types'
 
 export function selectCurrentField(state: RootState) {
   return state.field.current

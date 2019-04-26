@@ -1,5 +1,5 @@
 import { StateType, ActionType } from 'typesafe-actions'
-import { Epic as ROEpic } from 'redux-observable';
+import { Epic as ROEpic } from 'redux-observable'
 
 export type Store = StateType<typeof import('./index').store>
 export type RootActions = ActionType<typeof import('./actions').default>

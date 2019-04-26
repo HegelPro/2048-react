@@ -1,4 +1,4 @@
-import { RootState } from "../../store/types";
+import { RootState } from '../../store/types'
 
 export function selectSettingRows(state: RootState) {
   return state.settings.rows

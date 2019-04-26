@@ -1,18 +1,17 @@
-import React from 'react';
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-import { styles } from './styles';
+import React from 'react'
+import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
+import { styles } from './styles'
 
+type ClassNames = WithStyles<typeof styles>
 
-type ClassNames = WithStyles<typeof styles>;
-
-interface Props extends ClassNames {
+interface IProps extends ClassNames {
   children: React.ReactNode
 }
 
 const Field = ({
   classes,
   children,
-}: Props) => {
+}: IProps) => {
   return (
     <div className={classes.root}>
       {children}
@@ -21,4 +20,4 @@ const Field = ({
   )
 }
 
-export default withStyles(styles)(Field);
+export default withStyles(styles)(Field)
