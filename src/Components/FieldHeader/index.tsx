@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
 import { styles } from './styles';
 import { FieldRecord } from '../../models/field';
-import { Link } from 'react-router-dom';
+import history from '../../setup/history';
 
 
 type ClassNames = WithStyles<typeof styles>;
@@ -36,14 +36,12 @@ const Field = ({
       size='small'
       onClick={onClickRestart}
     >Restart</Button>
-    <Link to='/settings'>
-      <Button
-        color='primary'
-        variant='contained'
-        size='small'
-      >Settings</Button>
-    </Link>
-    
+    <Button
+      color='primary'
+      variant='contained'
+      size='small'
+      onClick={() => history.push('/settings')}
+    >Settings</Button>
   </div>
 )
 

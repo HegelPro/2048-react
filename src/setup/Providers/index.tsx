@@ -4,20 +4,20 @@ import { MuiThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { theme } from '../theme'
 import { store } from '../../store';
-import { BrowserRouter } from 'react-router-dom';
-
+import { Router } from 'react-router-dom'
+import history from '../history'
 
 interface Props {
-  children: React.ReactNode
+  children: React.ReactNode,
 }
 
 const Providers = ({ children }: Props) => (
   <MuiThemeProvider theme={theme}>
     <StoreContext.Provider value={store}>
-      <BrowserRouter>
+      <Router history={history}>
         <CssBaseline />
         {children}
-      </BrowserRouter>
+      </Router>
     </StoreContext.Provider>
   </MuiThemeProvider>
 )

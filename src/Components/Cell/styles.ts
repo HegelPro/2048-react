@@ -1,18 +1,18 @@
-import { createStyles, Theme } from "@material-ui/core";
+import { createStyles, Theme } from '@material-ui/core'
 
 export const styles = (theme: Theme) =>
   createStyles({
     root: {
-      position: 'absolute',
       display: 'flex',
-      justifyContent: 'center',
+      position: 'absolute',
       alignItems: 'center',
-      width: '100%',
       height: '100%',
+      width: '100%',
+      justifyContent: 'center',
       borderRadius: theme.shape.borderRadius * 4,
     },
     side: {
-      display: 'block', 
+      display: 'block',
       position: 'absolute',
       top: theme.spacing.unit / 2,
       width: '100%',
@@ -32,4 +32,4 @@ export const styles = (theme: Theme) =>
       transform: 'translate(-50%, -50%)',
     },
     value: {},
-  });
+  })

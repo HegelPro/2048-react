@@ -3,13 +3,17 @@ import {
   MAX_VALUE,
   FIRST_COLOR,
   SECOND_COLOR,
-} from "./config";
+} from './config'
 
 
 function selectColorRatio(value: number): number {
-  if (value < MIN_VALUE) return MIN_VALUE
-  if (value > MAX_VALUE) return MAX_VALUE
-  return value / MAX_VALUE;
+  if (value < MIN_VALUE) {
+    return MIN_VALUE
+  }
+  if (value > MAX_VALUE) {
+    return MAX_VALUE
+  }
+  return value / MAX_VALUE
 }
 
 function selectColor(startColor: number, endColor: number, ratio: number) {

@@ -1,8 +1,16 @@
 import { createStyles, Theme } from "@material-ui/core";
 
-export const styles = (theme: Theme) =>
+export const styles = () =>
   createStyles({
     root: {
-      textAlign: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
     },
+    content: {
+      flex: '1 0 auto',
+    },
+    footer: {
+      flex: '0 0 auto',
+    }
   });

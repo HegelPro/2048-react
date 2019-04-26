@@ -9,7 +9,7 @@ interface Props extends ClassNames {}
 
 const Header = ({ classes }: Props) => (
   <div className={classes.root}>
-    ssfff
+    Header
   </div>
 )
 
