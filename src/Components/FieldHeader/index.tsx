@@ -12,24 +12,28 @@ type ClassNames = WithStyles<typeof styles>
 
 interface IProps extends ClassNames {
   field: FieldRecord
+  prevField: FieldRecord
   onClickBack: () => void
   onClickRestart: () => void
 }
 
 const Field = ({
-  classes,
   field,
+  prevField,
   onClickBack,
   onClickRestart,
 }: IProps) => (
   <div>
-    <p>{field.cells.reduce((result, cell) => cell.value !== 0
-      ? result + Math.pow(2, cell.value)
-      : result, 0)}</p>
+    <p>
+      {field.cells.reduce((result, cell) => cell.value !== 0
+        ? result + Math.pow(2, cell.value)
+        : result, 0)}
+    </p>
     <Fab
       color='primary'
       aria-label='Previous Field'
       onClick={onClickBack}
+      disabled={field.cells.equals(prevField.cells)}
     >
       <Reply />
     </Fab>

@@ -2,6 +2,7 @@ import React from 'react'
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 import { styles } from './styles'
 import classnames from 'classnames'
+import { Typography } from '@material-ui/core'
 
 type ClassNames = WithStyles<typeof styles>
 
@@ -14,7 +15,7 @@ const Footer = ({
   classes,
 }: IProps) => (
   <div className={classnames(classes.root, className)}>
-    &#9400; Димонстрационный проект Палкина Льва.
+    <Typography>&#9400; Димонстрационный проект Палкина Льва.</Typography>
   </div>
 )
 

@@ -29,7 +29,6 @@ const Cell = ({
   const cellColor = selectCellColor(cell.value)
   return (
     <CellContainer
-      cell={cell}
       currentPosition={currentPosition}
       previousPosition={previousPosition}
     >

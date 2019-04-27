@@ -47,6 +47,7 @@ const Field = () => {
     <>
       <FieldHeader
         field={field}
+        prevField={prevField}
         onClickBack={() => dispatch(returnPrevField())}
         onClickRestart={() => dispatch(initField({ rows, columns }))}
       />

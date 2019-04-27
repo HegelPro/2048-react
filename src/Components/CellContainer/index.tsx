@@ -1,36 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 import { styles } from './styles'
-import { CellRecord } from '../../models/cell'
 import { Vector } from '../../models/vector'
 
 type ClassNames = WithStyles<typeof styles>
 
 interface IProps extends ClassNames {
   children: React.ReactNode
-  cell: CellRecord
   currentPosition?: Vector
   previousPosition?: Vector
 }
 
 const CellContainer = ({
   classes,
-  cell,
   children,
   currentPosition,
   previousPosition,
 }: IProps) => {
-  useEffect(() => {
-    const cellElem = document.getElementById(`cell_${cell.id}`)
-    if (cellElem) {
-      if (previousPosition) {
-        cellElem.style.top = '0'
-        cellElem.style.left = '0'
-      } else {
-        cellElem.style.transform = 'scale(1)'
-      }
-    }
-  })
   let dx = 0
   let dy = 0
   if (previousPosition && currentPosition) {
@@ -39,7 +25,18 @@ const CellContainer = ({
   }
   return (
     <div
-      id={`cell_${cell.id}`}
+      ref={(el) => {
+        setTimeout(() => {
+          if (el) {
+            if (previousPosition) {
+              el.style.top = '0'
+              el.style.left = '0'
+            } else {
+              el.style.transform = 'scale(1)'
+            }
+          }
+        }, 0)
+      }}
       className={classes.root}
       style={{
         top: `${100 * dy}%`,

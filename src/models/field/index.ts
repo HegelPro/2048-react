@@ -30,7 +30,6 @@ export class FieldRecord extends Record<IFieldType>({
         y: Math.floor((position / this.columns)),
       })
       : undefined
-
   }
 
   public getCell(vector: Vector): CellRecord {

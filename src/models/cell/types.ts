@@ -1,10 +1,10 @@
 import { Vector } from '../vector'
 
-export interface CellInitParams {
+export interface ICellInitParams {
   value: number
 }
 
-export interface CellType extends CellInitParams {
+export interface ICellType extends ICellInitParams {
   changedByVector: Vector
   id: number
 }

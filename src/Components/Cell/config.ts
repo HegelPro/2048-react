@@ -8,6 +8,7 @@ export const FIRST_COLOR: IColor = {
   green: 219,
   red: 237,
 }
+
 export const SECOND_COLOR: IColor = {
   blue: 1,
   green: 1,
