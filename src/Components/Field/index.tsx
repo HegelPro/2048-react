@@ -27,7 +27,7 @@ const Field = ({
       return (
         <div
           className={classes.spaceForCell}
-          key={Math.random()}
+          key={cell.renderId}
           style={{ width: `${100 / settings.columns}%` }}
         >
           <Cell

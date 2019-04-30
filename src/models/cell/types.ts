@@ -7,4 +7,5 @@ export interface ICellInitParams {
 export interface ICellType extends ICellInitParams {
   changedByVector: Vector
   id: number
+  renderId: number
 }
