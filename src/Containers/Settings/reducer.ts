@@ -1,19 +1,11 @@
 import { ActionType, getType } from 'typesafe-actions'
 
 import * as fieldSettingActions from './actions'
-
-import { Record } from 'immutable'
-
-const defaultState = {
-  rows: 4,
-  columns: 4,
-}
-
-export class FieldSettingStateRecord extends Record(defaultState) {}
+import { FieldSettingsRecord } from '../../models/fieldSettings'
 
 export type FieldAction = ActionType<typeof fieldSettingActions>
 
-export default (state = new FieldSettingStateRecord(), action: FieldAction): FieldSettingStateRecord => {
+export default (state = new FieldSettingsRecord(), action: FieldAction): FieldSettingsRecord => {
   switch (action.type) {
     case (getType(fieldSettingActions.setFieldRowsAction)):
       return state.set('rows', action.payload)

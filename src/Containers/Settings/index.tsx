@@ -4,15 +4,13 @@ import Button from '@material-ui/core/Button'
 import { useDispatch, useMappedState } from 'redux-react-hook'
 
 import history from '../../setup/history'
-import {
-  setFieldRowsAction,
-  setFieldColumnsAction,
-} from './actions'
+import { setFieldSettingsAction } from './actions'
 import { avaibleSizesForField } from './config'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import { RootState } from '../../store/types'
 import { selectSettings } from './selectors'
+import { initField } from '../Field/actions'
 
 const mapState = (state: RootState) => ({
   fieldSettings: selectSettings(state),
@@ -40,8 +38,10 @@ const Settings = () => {
       >{menuItemsForSelectors}</TextField>
       <Button
         onClick={() => {
-          dispatch(setFieldRowsAction(rowsInputValue))
-          dispatch(setFieldColumnsAction(columnsInputValue))
+          dispatch(setFieldSettingsAction({
+            rows: rowsInputValue,
+            columns: columnsInputValue,
+          }))
           history.push('/')
         }}
       >Submit</Button>

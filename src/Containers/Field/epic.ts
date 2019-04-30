@@ -57,16 +57,20 @@ export const returnPrevFieldEpic: Epic = (action$, state$) =>
     )
 
 export const initFieldFromLocalStorageEpic: Epic = (action$, state$) =>
-action$
-  .pipe(
-    filter(isActionOf(actions.field.initFieldFromLocalStorageAction)),
-    switchMap(() => {
-      const stateFromLocalStorage = loadState()
-      return stateFromLocalStorage
-        ? of(
-            actions.field.setCurrentField(stateFromLocalStorage.field.current),
-            actions.field.setPreviousField(stateFromLocalStorage.field.previous),
-          )
-        : of(actions.field.initField())
-    }),
-  )
+  action$
+    .pipe(
+      filter(isActionOf(actions.field.initFieldFromLocalStorageAction)),
+      switchMap(() => {
+        const stateFromLocalStorage = loadState()
+        return stateFromLocalStorage
+          ? of(
+              actions.field.setCurrentField(stateFromLocalStorage.field.current),
+              actions.field.setPreviousField(stateFromLocalStorage.field.previous),
+              actions.settings.setFieldSettingsAction({
+                rows: stateFromLocalStorage.settings.rows,
+                columns: stateFromLocalStorage.settings.columns,
+              }),
+            )
+          : of(actions.field.initField())
+      }),
+    )

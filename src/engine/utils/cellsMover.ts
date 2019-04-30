@@ -3,7 +3,6 @@ import { selectIterationStartPoint } from './iteratetion'
 import { FieldRecord } from '../../models/field'
 import { Vector } from '../../models/vector'
 
-
 export default function cellsMover(
   field: FieldRecord,
   diraction: Vector,

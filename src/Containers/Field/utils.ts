@@ -1,10 +1,10 @@
 import { RootState } from '../../store/types'
 import { FieldReduserStateRecord } from './reducer'
-import { FieldSettingStateRecord } from '../Settings/reducer'
 import { List } from 'immutable'
 import { FieldRecord } from '../../models/field'
 import { CellRecord } from '../../models/cell'
 import { Vector } from '../../models/vector'
+import { FieldSettingsRecord } from '../../models/fieldSettings'
 
 export const loadState = (): RootState | undefined => {
   try {
@@ -35,7 +35,7 @@ export const loadState = (): RootState | undefined => {
           ),
         }),
       }),
-      settings: new FieldSettingStateRecord({
+      settings: new FieldSettingsRecord({
         ...parsedSerializedState.settings,
       }),
     }

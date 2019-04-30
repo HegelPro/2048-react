@@ -4,14 +4,14 @@ import { styles } from './styles'
 import { FieldRecord } from '../../models/field'
 import FieldContainer from '../FieldContainer'
 import Cell from '../Cell'
-import { FieldSettingStateRecord } from '../../Containers/Settings/reducer'
+import { FieldSettingsRecord } from '../../models/fieldSettings'
 
 type ClassNames = WithStyles<typeof styles>
 
 interface IProps extends ClassNames {
   field: FieldRecord
   prevField: FieldRecord
-  settings: FieldSettingStateRecord
+  settings: FieldSettingsRecord
 }
 
 const Field = ({
@@ -20,7 +20,7 @@ const Field = ({
   field,
   prevField,
 }: IProps) => (
-  <FieldContainer>
+  <FieldContainer settings={settings}>
     {field.cells.map((cell) => {
       const currentPosition = field.getCellPosition(cell)
       const previousPosition = prevField.getCellPosition(cell)

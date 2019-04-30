@@ -10,14 +10,14 @@ import { CellRecord } from '../cell'
 import { Vector } from '../vector'
 
 export class FieldRecord extends Record<IFieldType>({
-  cells: List(),
-  columns: 0,
   rows: 0,
+  columns: 0,
+  cells: List(),
 }) {
   public static init({ columns, rows }: IFieldInitParams): FieldRecord {
     return new FieldRecord({
-      columns,
       rows,
+      columns,
       cells: initCells(columns, rows),
     })
   }

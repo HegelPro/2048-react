@@ -4,22 +4,25 @@ import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 
 import { styles } from './styles'
 import { fieldSizes } from './config'
+import { FieldSettingsRecord } from '../../models/fieldSettings'
 
 type ClassNames = WithStyles<typeof styles>
 
 interface IProps extends ClassNames,
   WithWidth {
   children: React.ReactNode
+  settings: FieldSettingsRecord
 }
 
 const Field = ({
   classes,
   children,
+  settings,
   width,
 }: IProps) => {
   const sizeStyle: React.CSSProperties = {
     width: fieldSizes[width],
-    height: fieldSizes[width],
+    height: fieldSizes[width] / settings.columns * settings.rows,
   }
   return (
     <div className={classes.root} style={sizeStyle}>
