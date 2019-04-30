@@ -4,22 +4,20 @@ import FieldView from '../../Components/Field'
 import { RootState } from '../../store/types'
 import {
   initField,
-  moveCells,
+  initFieldFromLocalStorageAction,
   returnPrevField,
 } from './actions'
 import {
   selectPreviousField,
   selectCurrentField,
 } from './selectors'
-import { moveDiraction$ } from '../../streams/moveDiraction'
 import FieldHeader from '../../Components/FieldHeader'
-import { selectSettingRows, selectSettingsColumns } from '../Settings/selectors'
+import { selectSettings } from '../Settings/selectors'
 
 const mapState = (state: RootState) => ({
   field: selectCurrentField(state),
   prevField: selectPreviousField(state),
-  rows: selectSettingRows(state),
-  columns: selectSettingsColumns(state),
+  fieldSettings: selectSettings(state),
 })
 
 const Field = () => {
@@ -27,21 +25,14 @@ const Field = () => {
   const {
     field,
     prevField,
-    rows,
-    columns,
+    fieldSettings,
   } = useMappedState(mapState)
   const [isInitField, setIsInitField] = useState(false)
   useEffect(() => {
-    const subscriber = moveDiraction$.subscribe((diraction) => {
-      if (diraction !== undefined) {
-        dispatch(moveCells(diraction))
-      }
-    })
     if (!isInitField) {
-      dispatch(initField({ rows, columns }))
+      dispatch(initFieldFromLocalStorageAction())
       setIsInitField(true)
     }
-    return () => subscriber.unsubscribe()
   })
   return (
     <>
@@ -49,9 +40,13 @@ const Field = () => {
         field={field}
         prevField={prevField}
         onClickBack={() => dispatch(returnPrevField())}
-        onClickRestart={() => dispatch(initField({ rows, columns }))}
+        onClickRestart={() => dispatch(initField())}
       />
-      <FieldView field={field} prevField={prevField} />
+      <FieldView
+        field={field}
+        prevField={prevField}
+        settings={fieldSettings}
+      />
     </>
   )
 }

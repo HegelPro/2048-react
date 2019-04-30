@@ -12,24 +12,17 @@ import { avaibleSizesForField } from './config'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import { RootState } from '../../store/types'
-import {
-  selectSettingRows,
-  selectSettingsColumns,
-} from './selectors'
+import { selectSettings } from './selectors'
 
 const mapState = (state: RootState) => ({
-  rows: selectSettingRows(state),
-  columns: selectSettingsColumns(state),
+  fieldSettings: selectSettings(state),
 })
 
 const Settings = () => {
   const dispatch = useDispatch()
-  const {
-    rows,
-    columns,
-  } = useMappedState(mapState)
-  const [rowsInputValue, setRowsInputValue] = useState(rows)
-  const [columnsInputValue, setColumnsInputValue] = useState(columns)
+  const { fieldSettings } = useMappedState(mapState)
+  const [rowsInputValue, setRowsInputValue] = useState(fieldSettings.rows)
+  const [columnsInputValue, setColumnsInputValue] = useState(fieldSettings.columns)
   const menuItemsForSelectors = avaibleSizesForField.map((elem) => <MenuItem key={elem} value={elem}>{elem}</MenuItem>)
   return (
     <FormGroup>

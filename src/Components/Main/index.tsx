@@ -15,7 +15,7 @@ interface IProps extends ClassNames {}
 
 const Main = ({ classes }: IProps) => (
   <Grid container className={classes.root} justify='center'>
-    <Grid item md={4} sm={6} xs={12}>
+    <Grid item>
       <Switch>
         <Route exact path='/'>
           <Field />

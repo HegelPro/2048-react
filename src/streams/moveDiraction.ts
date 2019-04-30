@@ -1,10 +1,13 @@
 import { fromEvent } from 'rxjs'
-import { map } from 'rxjs/operators'
-import { merge } from 'rxjs'
-import { Vector } from '../models/vector'
+import {
+  map,
+  filter,
+} from 'rxjs/operators'
 import { DIRACTIONS } from '../models/vector/constants'
+import { moveCells } from '../Containers/Field/actions'
+import { Epic } from '../store/types'
 
-const moveDiractionFromKeyboardEvent$ = fromEvent<KeyboardEvent>(window, 'keydown').pipe<Vector | undefined>(
+export const moveDiractionFromKeyboardEventEpic: Epic = () => fromEvent<KeyboardEvent>(window, 'keydown').pipe(
   map((event: KeyboardEvent) => {
     if (event.key === 'w' || event.key === 'ц' || event.key === 'ArrowUp') {
       return DIRACTIONS.UP
@@ -15,7 +18,8 @@ const moveDiractionFromKeyboardEvent$ = fromEvent<KeyboardEvent>(window, 'keydow
     } else if (event.key === 'a' || event.key === 'ф' || event.key === 'ArrowLeft') {
       return DIRACTIONS.RIGHT
     }
+    return DIRACTIONS.NULL
   }),
+  filter((diraction) => !diraction.equals(DIRACTIONS.NULL)),
+  map((diraction) => moveCells(diraction)),
 )
-
-export const moveDiraction$ = merge(moveDiractionFromKeyboardEvent$)

@@ -3,33 +3,32 @@ import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 import { styles } from './styles'
 import { FieldRecord } from '../../models/field'
 import FieldContainer from '../FieldContainer'
-import { Vector } from '../../models/vector'
 import Cell from '../Cell'
+import { FieldSettingStateRecord } from '../../Containers/Settings/reducer'
 
 type ClassNames = WithStyles<typeof styles>
 
 interface IProps extends ClassNames {
   field: FieldRecord
-  prevField?: FieldRecord
+  prevField: FieldRecord
+  settings: FieldSettingStateRecord
 }
 
 const Field = ({
   classes,
+  settings,
   field,
   prevField,
 }: IProps) => (
   <FieldContainer>
     {field.cells.map((cell) => {
-      let previousPosition: Vector | undefined
       const currentPosition = field.getCellPosition(cell)
-      if (prevField) {
-        previousPosition = prevField.getCellPosition(cell)
-      }
+      const previousPosition = prevField.getCellPosition(cell)
       return (
         <div
           className={classes.spaceForCell}
           key={Math.random()}
-          style={{ width: `${100 / field.columns}%` }}
+          style={{ width: `${100 / settings.columns}%` }}
         >
           <Cell
             cell={cell}

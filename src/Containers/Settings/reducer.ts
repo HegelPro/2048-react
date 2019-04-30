@@ -9,7 +9,7 @@ const defaultState = {
   columns: 4,
 }
 
-class FieldSettingStateRecord extends Record(defaultState) {}
+export class FieldSettingStateRecord extends Record(defaultState) {}
 
 export type FieldAction = ActionType<typeof fieldSettingActions>
 

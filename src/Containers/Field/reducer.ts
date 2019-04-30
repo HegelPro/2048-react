@@ -10,7 +10,7 @@ const defaultState = {
   previous: new FieldRecord(),
 }
 
-class FieldReduserStateRecord extends Record(defaultState) {}
+export class FieldReduserStateRecord extends Record(defaultState) {}
 
 export type FieldActions = ActionType<typeof fieldActions>
 
