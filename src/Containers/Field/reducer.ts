@@ -1,20 +1,12 @@
 import { ActionType, getType } from 'typesafe-actions'
 
+import { FieldStateRecord } from '../../models/fieldState'
+
 import * as fieldActions from './actions'
-
-import { FieldRecord } from '../../models/field'
-import { Record } from 'immutable'
-
-const defaultState = {
-  current: new FieldRecord(),
-  previous: new FieldRecord(),
-}
-
-export class FieldReduserStateRecord extends Record(defaultState) {}
 
 export type FieldActions = ActionType<typeof fieldActions>
 
-export default (state = new FieldReduserStateRecord(), action: FieldActions): FieldReduserStateRecord => {
+export default (state = new FieldStateRecord(), action: FieldActions): FieldStateRecord => {
   switch (action.type) {
     case getType(fieldActions.setCurrentFieldAction):
       return state.set('current', action.payload)

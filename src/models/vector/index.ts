@@ -1,14 +1,10 @@
 import { Record } from 'immutable'
 
-interface IVectorType {
-  x?: number,
-  y?: number,
-}
+import { IVector } from './types'
 
-export class VectorRecord extends Record< Required<IVectorType> >({
-  x: 0,
-  y: 0,
-}) {
+const defaultVector: IVector = { x: 0, y: 0 }
+
+export class VectorRecord extends Record<IVector>(defaultVector) {
   public image(): VectorRecord {
     return new VectorRecord({
       x: this.y,

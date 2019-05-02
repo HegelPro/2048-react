@@ -1,15 +1,17 @@
 import { Record } from 'immutable'
 
-import { ICellType, ICellInitParams } from './types'
+import { ICell, ICellInitParams } from './types'
 
 import { VectorRecord } from '../vector'
 
-export class CellRecord extends Record<ICellType>({
+const defaultCell: ICell = {
   changedByVector: new VectorRecord(),
   value: 0,
   id: 0,
   renderId: 0,
-}) {
+}
+
+export class CellRecord extends Record<ICell>(defaultCell) {
   public static init(initParams: ICellInitParams): CellRecord {
     return new CellRecord({
       value: initParams.value,

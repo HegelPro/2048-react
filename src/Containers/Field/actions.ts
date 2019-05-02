@@ -10,7 +10,13 @@ export const initFieldFromLocalStorageAction = createStandardAction(
 
 export const setCurrentFieldAction = createStandardAction('field/SET_CURRENT_FIELD')<FieldRecord>()
 
+// TODO maybe will be in furter
+// export const requestSetCurrentFieldAction = createStandardAction('field/REQUEST_SET_CURRENT_FIELD')<FieldRecord>()
+
 export const setPreviousFieldAction = createStandardAction('field/SET_PREVIOUS_FIELD')<FieldRecord>()
+
+// TODO maybe will be in furter
+// export const requestSetPreviousFieldAction = createStandardAction('field/REQUEST_SET_PREVIOUS_FIELD')<FieldRecord>()
 
 export const moveCellsAction = createStandardAction('field/MOVE_CELLS')<VectorRecord>()
 

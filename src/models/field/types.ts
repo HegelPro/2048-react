@@ -7,6 +7,6 @@ export interface IFieldInitParams {
   rows: number
 }
 
-export interface IFieldType extends IFieldInitParams {
+export interface IField extends IFieldInitParams {
   cells: List<CellRecord>,
 }

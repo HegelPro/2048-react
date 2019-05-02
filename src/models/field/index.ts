@@ -3,17 +3,19 @@ import { List, Record } from 'immutable'
 import { initCells } from './utils'
 import {
   IFieldInitParams,
-  IFieldType,
+  IField,
 } from './types'
 
 import { CellRecord } from '../cell'
 import { VectorRecord } from '../vector'
 
-export class FieldRecord extends Record<IFieldType>({
+const defaultField: IField = {
   rows: 0,
   columns: 0,
   cells: List(),
-}) {
+}
+
+export class FieldRecord extends Record<IField>(defaultField) {
   public static init({ columns, rows }: IFieldInitParams): FieldRecord {
     return new FieldRecord({
       rows,

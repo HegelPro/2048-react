@@ -1,10 +1,11 @@
-import { RootState } from '../../store/types'
-import { FieldReduserStateRecord } from './reducer'
 import { List } from 'immutable'
+
+import { RootState } from '../../store/types'
 import { FieldRecord } from '../../models/field'
 import { CellRecord } from '../../models/cell'
 import { VectorRecord } from '../../models/vector'
 import { FieldSettingsRecord } from '../../models/fieldSettings'
+import { FieldStateRecord } from '../../models/fieldState'
 
 export const loadState = (): RootState | undefined => {
   try {
@@ -15,7 +16,7 @@ export const loadState = (): RootState | undefined => {
     }
     const parsedSerializedState = JSON.parse(serializedState)
     return {
-      field: new FieldReduserStateRecord({
+      field: new FieldStateRecord({
         current: new FieldRecord({
           ...parsedSerializedState.field.current,
           cells: List(parsedSerializedState.field.current.cells.map(
