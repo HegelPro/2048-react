@@ -3,9 +3,9 @@ import { useDispatch, useMappedState } from 'redux-react-hook'
 import FieldView from '../../Components/Field'
 import { RootState } from '../../store/types'
 import {
-  initField,
+  initFieldAction,
   initFieldFromLocalStorageAction,
-  returnPrevField,
+  returnPrevFieldAction,
 } from './actions'
 import {
   selectPreviousField,
@@ -39,8 +39,8 @@ const Field = () => {
       <FieldHeader
         field={field}
         prevField={prevField}
-        onClickBack={() => dispatch(returnPrevField())}
-        onClickRestart={() => dispatch(initField())}
+        onClickBack={() => dispatch(returnPrevFieldAction())}
+        onClickRestart={() => dispatch(initFieldAction())}
       />
       <FieldView
         field={field}

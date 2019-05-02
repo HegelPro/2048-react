@@ -3,9 +3,9 @@ import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 export const fieldSizes: {
   [K in Breakpoint]: number
 } = {
-  xs: 300,
-  sm: 400,
-  md: 500,
-  lg: 500,
-  xl: 500,
+  xs: 200,
+  sm: 300,
+  md: 400,
+  lg: 400,
+  xl: 400,
 }

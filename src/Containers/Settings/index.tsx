@@ -10,7 +10,6 @@ import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import { RootState } from '../../store/types'
 import { selectSettings } from './selectors'
-import { initField } from '../Field/actions'
 
 const mapState = (state: RootState) => ({
   fieldSettings: selectSettings(state),

@@ -16,9 +16,9 @@ export type FieldActions = ActionType<typeof fieldActions>
 
 export default (state = new FieldReduserStateRecord(), action: FieldActions): FieldReduserStateRecord => {
   switch (action.type) {
-    case getType(fieldActions.setCurrentField):
+    case getType(fieldActions.setCurrentFieldAction):
       return state.set('current', action.payload)
-    case getType(fieldActions.setPreviousField):
+    case getType(fieldActions.setPreviousFieldAction):
       return state.set('previous', action.payload)
     default:
       return state

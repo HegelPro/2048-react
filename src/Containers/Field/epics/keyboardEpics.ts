@@ -3,11 +3,16 @@ import {
   map,
   filter,
 } from 'rxjs/operators'
-import { DIRACTIONS } from '../models/vector/constants'
-import { moveCells } from '../Containers/Field/actions'
-import { Epic } from '../store/types'
+import { DIRACTIONS } from '../../../models/vector/constants'
+import {
+  moveCellsAction,
+  returnPrevFieldAction,
+} from '../actions'
+import { Epic } from '../../../store/types'
 
-export const moveDiractionFromKeyboardEventEpic: Epic = () => fromEvent<KeyboardEvent>(window, 'keydown').pipe(
+const keyboard$ = fromEvent<KeyboardEvent>(window, 'keydown')
+
+export const moveDiractionFromKeyboardEventEpic: Epic = () => keyboard$.pipe(
   map((event: KeyboardEvent) => {
     if (event.key === 'w' || event.key === 'ц' || event.key === 'ArrowUp') {
       return DIRACTIONS.UP
@@ -21,5 +26,16 @@ export const moveDiractionFromKeyboardEventEpic: Epic = () => fromEvent<Keyboard
     return DIRACTIONS.NULL
   }),
   filter((diraction) => !diraction.equals(DIRACTIONS.NULL)),
-  map((diraction) => moveCells(diraction)),
+  map((diraction) => moveCellsAction(diraction)),
+)
+
+export const returnPrevFieldFromKeyboardEventEpic: Epic = () => keyboard$.pipe(
+  map((event: KeyboardEvent) => {
+    if (event.key === 'Backspace') {
+      return true
+    }
+    return false
+  }),
+  filter((diraction) => diraction),
+  map(() => returnPrevFieldAction()),
 )

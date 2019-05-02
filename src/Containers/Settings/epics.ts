@@ -13,7 +13,7 @@ export const moveFieldEpic: Epic = (action$) =>
         return of(
           actions.settings.setFieldRowsAction(payload.rows),
           actions.settings.setFieldColumnsAction(payload.columns),
-          actions.field.initField(),
+          actions.field.initFieldAction(),
         )
       }),
     )
