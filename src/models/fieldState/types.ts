@@ -1,6 +1,6 @@
 import { Map } from 'immutable'
-import { Vector } from '../vector'
+import { VectorRecord } from '../vector'
 
 export interface IFieldState {
-  records: Map<Vector, number>
+  records: Map<VectorRecord, number>
 }

@@ -7,7 +7,7 @@ import { styles } from './styles'
 import { selectCellColor } from './utils'
 
 import { CellRecord } from '../../models/cell'
-import { Vector } from '../../models/vector'
+import { VectorRecord } from '../../models/vector'
 import CellContainer from '../CellContainer'
 
 type ClassNames = WithStyles<typeof styles>
@@ -15,8 +15,8 @@ type ClassNames = WithStyles<typeof styles>
 interface IProps extends ClassNames,
 WithTheme {
   cell: CellRecord
-  currentPosition?: Vector
-  previousPosition?: Vector
+  currentPosition?: VectorRecord
+  previousPosition?: VectorRecord
 }
 
 const Cell = ({

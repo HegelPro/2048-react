@@ -1,18 +1,18 @@
 import { selectIterationStartPoint } from './iteratetion'
 
 import { FieldRecord } from '../../models/field'
-import { Vector } from '../../models/vector'
+import { VectorRecord } from '../../models/vector'
 
 export default function cellsMover(
   field: FieldRecord,
-  diraction: Vector,
+  diraction: VectorRecord,
 ): FieldRecord {
   let iterPoint = selectIterationStartPoint(field, diraction)
 
   const Deg90 = Math.PI / 2
   const turned90DegDiraction = diraction.turn(Deg90)
 
-  let postIterPoint: Vector
+  let postIterPoint: VectorRecord
   while (field.hasCell(iterPoint)) {
     postIterPoint = iterPoint
 

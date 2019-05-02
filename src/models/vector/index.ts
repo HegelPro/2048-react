@@ -5,40 +5,40 @@ interface IVectorType {
   y?: number,
 }
 
-export class Vector extends Record< Required<IVectorType> >({
+export class VectorRecord extends Record< Required<IVectorType> >({
   x: 0,
   y: 0,
 }) {
-  public image(): Vector {
-    return new Vector({
+  public image(): VectorRecord {
+    return new VectorRecord({
       x: this.y,
       y: this.x,
     })
   }
 
-  public opposed(): Vector {
-    return new Vector({
+  public opposed(): VectorRecord {
+    return new VectorRecord({
       x: -this.x,
       y: -this.y,
     })
   }
 
-  public plus(vector: Vector): Vector {
-    return new Vector({
+  public plus(vector: VectorRecord): VectorRecord {
+    return new VectorRecord({
       x: this.x + vector.x,
       y: this.y + vector.y,
     })
   }
 
-  public turn(A: number, diractionRatio = 1): Vector {
-    return new Vector({
+  public turn(A: number, diractionRatio = 1): VectorRecord {
+    return new VectorRecord({
       x: this.x * +Math.cos(A).toFixed(10) + this.y * +Math.sin(A).toFixed(10) * diractionRatio,
       y: this.x * +Math.sin(A).toFixed(10) * (-diractionRatio) + this.y * +Math.cos(A).toFixed(10),
     })
   }
 
-  public minus(vector: Vector): Vector {
-    return new Vector({
+  public minus(vector: VectorRecord): VectorRecord {
+    return new VectorRecord({
       x: this.x - vector.x,
       y: this.y - vector.y,
     })

@@ -1,14 +1,14 @@
 import React from 'react'
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 import { styles } from './styles'
-import { Vector } from '../../models/vector'
+import { VectorRecord } from '../../models/vector'
 
 type ClassNames = WithStyles<typeof styles>
 
 interface IProps extends ClassNames {
   children: React.ReactNode
-  currentPosition?: Vector
-  previousPosition?: Vector
+  currentPosition?: VectorRecord
+  previousPosition?: VectorRecord
 }
 
 const CellContainer = ({

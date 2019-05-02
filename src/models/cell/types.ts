@@ -1,11 +1,11 @@
-import { Vector } from '../vector'
+import { VectorRecord } from '../vector'
 
 export interface ICellInitParams {
   value: number
 }
 
 export interface ICellType extends ICellInitParams {
-  changedByVector: Vector
+  changedByVector: VectorRecord
   id: number
   renderId: number
 }

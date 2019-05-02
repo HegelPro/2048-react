@@ -3,7 +3,7 @@ import { FieldReduserStateRecord } from './reducer'
 import { List } from 'immutable'
 import { FieldRecord } from '../../models/field'
 import { CellRecord } from '../../models/cell'
-import { Vector } from '../../models/vector'
+import { VectorRecord } from '../../models/vector'
 import { FieldSettingsRecord } from '../../models/fieldSettings'
 
 export const loadState = (): RootState | undefined => {
@@ -21,7 +21,7 @@ export const loadState = (): RootState | undefined => {
           cells: List(parsedSerializedState.field.current.cells.map(
             (cell: any) => new CellRecord({
               ...cell,
-              changedByVector: new Vector({ ...cell.changedByVector }),
+              changedByVector: new VectorRecord({ ...cell.changedByVector }),
             })),
           ),
         }),
@@ -30,7 +30,7 @@ export const loadState = (): RootState | undefined => {
           cells: List(parsedSerializedState.field.current.cells.map(
             (cell: any) => new CellRecord({
               ...cell,
-              changedByVector: new Vector({ ...cell.changedByVector }),
+              changedByVector: new VectorRecord({ ...cell.changedByVector }),
             })),
           ),
         }),

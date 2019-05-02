@@ -7,7 +7,7 @@ import {
 } from './types'
 
 import { CellRecord } from '../cell'
-import { Vector } from '../vector'
+import { VectorRecord } from '../vector'
 
 export class FieldRecord extends Record<IFieldType>({
   rows: 0,
@@ -22,17 +22,17 @@ export class FieldRecord extends Record<IFieldType>({
     })
   }
 
-  public getCellPosition(cell: CellRecord): Vector | undefined {
+  public getCellPosition(cell: CellRecord): VectorRecord | undefined {
     const position = this.cells.findIndex((cellOne) => cellOne.id === cell.id)
     return position !== -1
-      ? new Vector({
+      ? new VectorRecord({
         x: position % this.columns,
         y: Math.floor((position / this.columns)),
       })
       : undefined
   }
 
-  public getCell(vector: Vector): CellRecord {
+  public getCell(vector: VectorRecord): CellRecord {
     const cell = this.cells.get(vector.x + vector.y * this.columns)
     if (!cell) {
       throw new Error('CellRecord isn\'t exist')
@@ -40,7 +40,7 @@ export class FieldRecord extends Record<IFieldType>({
     return cell
   }
 
-  public setCell(vector: Vector, cell: CellRecord): FieldRecord {
+  public setCell(vector: VectorRecord, cell: CellRecord): FieldRecord {
     return this
       .update(
         'cells',
@@ -48,7 +48,7 @@ export class FieldRecord extends Record<IFieldType>({
           .set('renderId', Math.random())))
   }
 
-  public swapeCells(vectorOne: Vector, vectorTwo: Vector): FieldRecord {
+  public swapeCells(vectorOne: VectorRecord, vectorTwo: VectorRecord): FieldRecord {
     const savedCellForSwape = this.getCell(vectorOne)
     const field = this.setCell(
       vectorOne,
@@ -60,7 +60,7 @@ export class FieldRecord extends Record<IFieldType>({
     )
   }
 
-  public coalitionCells(vectorOne: Vector, vectorTwo: Vector): FieldRecord {
+  public coalitionCells(vectorOne: VectorRecord, vectorTwo: VectorRecord): FieldRecord {
     const field = this.setCell(
       vectorTwo,
       this.getCell(vectorTwo)
@@ -72,7 +72,7 @@ export class FieldRecord extends Record<IFieldType>({
     )
   }
 
-  public hasCell(vector: Vector): boolean {
+  public hasCell(vector: VectorRecord): boolean {
     if (
       vector.x >= 0
       && vector.y >= 0

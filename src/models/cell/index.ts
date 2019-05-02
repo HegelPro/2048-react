@@ -2,10 +2,10 @@ import { Record } from 'immutable'
 
 import { ICellType, ICellInitParams } from './types'
 
-import { Vector } from '../vector'
+import { VectorRecord } from '../vector'
 
 export class CellRecord extends Record<ICellType>({
-  changedByVector: new Vector(),
+  changedByVector: new VectorRecord(),
   value: 0,
   id: 0,
   renderId: 0,
