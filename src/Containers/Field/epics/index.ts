@@ -40,13 +40,3 @@ export const returnPrevFieldEpic: Epic = (action$, state$) =>
         return of(actions.field.setCurrentFieldAction(prevField))
       }),
     )
-
-// TODO maybe will be in furter
-// export const setFieldMiddlewareEpic: Epic = (action$) =>
-//   action$
-//     .pipe(
-//       filter(isActionOf(actions.field.requestSetCurrentFieldAction)),
-//       switchMap(({ payload }) => {
-//         return of(actions.field.setCurrentFieldAction(payload))
-//       }),
-//     )

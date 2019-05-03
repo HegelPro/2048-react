@@ -29,12 +29,13 @@ export const loadState = (): RootState | undefined => {
             (cell: any) => CellRecord.deserialize(cell),
           )),
         }),
-        records: Map(parsedSerializedState.records),
       }),
       settings: new FieldSettingsRecord({
         ...parsedSerializedState.settings,
       }),
-      state: new FieldStateRecord(),
+      state: new FieldStateRecord({
+        records: Map(parsedSerializedState.state.records),
+      }),
     }
   } catch (err) {
     return undefined

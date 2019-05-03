@@ -10,7 +10,6 @@ import {
 import {
   selectCurrentField,
   selectPreviousField,
-  selectFieldRecords,
 } from './selectors'
 import FieldHeader from '../../Components/FieldHeader'
 import { selectSettings } from '../Settings/selectors'
@@ -19,13 +18,11 @@ const mapState = (state: RootState) => ({
   field: selectCurrentField(state),
   prevField: selectPreviousField(state),
   fieldSettings: selectSettings(state),
-  records: selectFieldRecords(state),
 })
 
 const Field = () => {
   const dispatch = useDispatch()
   const {
-    records,
     field,
     prevField,
     fieldSettings,
@@ -41,7 +38,6 @@ const Field = () => {
     <>
       <FieldHeader
         field={field}
-        records={records}
         prevField={prevField}
         onClickBack={() => dispatch(returnPrevFieldAction())}
         onClickRestart={() => dispatch(initFieldAction())}

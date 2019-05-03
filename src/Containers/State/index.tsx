@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useMappedState } from 'redux-react-hook'
+import { useMappedState } from 'redux-react-hook'
 
 import { RootState } from '../../store/types'
 import Records from '../../Components/Records'
