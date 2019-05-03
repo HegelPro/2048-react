@@ -19,4 +19,8 @@ export class CellRecord extends Record<ICell>(defaultCell) {
       renderId: Math.random(),
     })
   }
+
+  public getValue(): number {
+    return Math.pow(2, this.value)
+  }
 }

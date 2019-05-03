@@ -1,4 +1,4 @@
-import { List } from 'immutable'
+import { List, Map } from 'immutable'
 
 import { RootState } from '../../store/types'
 import { FieldRecord } from '../../models/field'
@@ -35,6 +35,7 @@ export const loadState = (): RootState | undefined => {
             })),
           ),
         }),
+        records: Map(parsedSerializedState.records),
       }),
       settings: new FieldSettingsRecord({
         ...parsedSerializedState.settings,

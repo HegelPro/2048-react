@@ -7,3 +7,7 @@ export function selectCurrentField(state: RootState) {
 export function selectPreviousField(state: RootState) {
   return state.field.previous
 }
+
+export function selectFieldRecords(state: RootState) {
+  return state.field.records
+}

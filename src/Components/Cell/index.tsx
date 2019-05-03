@@ -48,7 +48,7 @@ const Cell = ({
                 className={classes.value}
                 style={{ color: theme.palette.getContrastText(cellColor) }}
               >
-                {Math.pow(2, cell.value)}
+                {cell.getValue()}
               </Typography>
             </div>
           </div>

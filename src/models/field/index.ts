@@ -24,6 +24,12 @@ export class FieldRecord extends Record<IField>(defaultField) {
     })
   }
 
+  public getCellsSumValue() {
+    return this.cells.reduce((result, cell) => cell.value !== 0
+      ? result + cell.getValue()
+      : result, 0)
+  }
+
   public getCellPosition(cell: CellRecord): VectorRecord | undefined {
     const position = this.cells.findIndex((cellOne) => cellOne.id === cell.id)
     return position !== -1

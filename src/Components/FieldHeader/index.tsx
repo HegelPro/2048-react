@@ -1,18 +1,23 @@
 import React from 'react'
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
+import { Map } from 'immutable'
 import Fab from '@material-ui/core/Fab'
-import { styles } from './styles'
-import { FieldRecord } from '../../models/field'
-import history from '../../setup/history'
 import Cached from '@material-ui/icons/Cached'
 import Settings from '@material-ui/icons/Settings'
 import Reply from '@material-ui/icons/Reply'
 import { Grid, Typography } from '@material-ui/core'
+import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
+
+import { FieldRecord } from '../../models/field'
+import { VectorRecord } from '../../models/vector'
+import history from '../../setup/history'
+
+import { styles } from './styles'
 
 type ClassNames = WithStyles<typeof styles>
 
 interface IProps extends ClassNames {
   field: FieldRecord
+  records: Map<VectorRecord, number>
   prevField: FieldRecord
   onClickBack: () => void
   onClickRestart: () => void
@@ -20,6 +25,7 @@ interface IProps extends ClassNames {
 
 const Field = ({
   field,
+  records,
   prevField,
   onClickBack,
   onClickRestart,
@@ -27,9 +33,13 @@ const Field = ({
   <Grid container justify='space-between'>
     <Grid item>
       <Typography>
-        {field.cells.reduce((result, cell) => cell.value !== 0
-          ? result + Math.pow(2, cell.value)
-          : result, 0)}
+        {field.getCellsSumValue()}
+      </Typography>
+      <Typography>
+        {records.get(new VectorRecord({
+          x: field.columns,
+          y: field.rows,
+        })) || 0}
       </Typography>
     </Grid>
     <Grid item>
