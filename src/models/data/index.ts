@@ -1,17 +1,17 @@
 import { Record, Map } from 'immutable'
 
-import { FieldRecord } from '../../models/field'
+import { FieldRecord } from '../field'
 import { VectorRecord } from '../vector'
 
-import { IFieldState } from './types'
+import { IFieldData } from './types'
 
-const defaultFieldState: IFieldState = {
+const defaultFieldState: IFieldData = {
   current: new FieldRecord(),
   previous: new FieldRecord(),
   records: Map(),
 }
 
-export class FieldStateRecord extends Record<IFieldState>(defaultFieldState) {
+export class FieldDataRecord extends Record<IFieldData>(defaultFieldState) {
   public updateRecordValue(field: FieldRecord): this {
     return this
       .update('records', (records) => {

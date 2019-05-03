@@ -3,9 +3,9 @@ import { List, Map } from 'immutable'
 import { RootState } from '../../store/types'
 import { FieldRecord } from '../../models/field'
 import { CellRecord } from '../../models/cell'
-import { VectorRecord } from '../../models/vector'
-import { FieldSettingsRecord } from '../../models/fieldSettings'
-import { FieldStateRecord } from '../../models/fieldState'
+import { FieldSettingsRecord } from '../../models/settings'
+import { FieldDataRecord } from '../../models/data'
+import { FieldStateRecord } from '../../models/state'
 
 export const loadState = (): RootState | undefined => {
   try {
@@ -16,30 +16,25 @@ export const loadState = (): RootState | undefined => {
     }
     const parsedSerializedState = JSON.parse(serializedState)
     return {
-      field: new FieldStateRecord({
+      field: new FieldDataRecord({
         current: new FieldRecord({
           ...parsedSerializedState.field.current,
           cells: List(parsedSerializedState.field.current.cells.map(
-            (cell: any) => new CellRecord({
-              ...cell,
-              changedByVector: new VectorRecord({ ...cell.changedByVector }),
-            })),
-          ),
+            (cell: any) => CellRecord.deserialize(cell),
+          )),
         }),
         previous: new FieldRecord({
           ...parsedSerializedState.field.current,
           cells: List(parsedSerializedState.field.current.cells.map(
-            (cell: any) => new CellRecord({
-              ...cell,
-              changedByVector: new VectorRecord({ ...cell.changedByVector }),
-            })),
-          ),
+            (cell: any) => CellRecord.deserialize(cell),
+          )),
         }),
         records: Map(parsedSerializedState.records),
       }),
       settings: new FieldSettingsRecord({
         ...parsedSerializedState.settings,
       }),
+      state: new FieldStateRecord(),
     }
   } catch (err) {
     return undefined

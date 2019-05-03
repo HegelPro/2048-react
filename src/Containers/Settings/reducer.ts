@@ -1,7 +1,7 @@
 import { ActionType, getType } from 'typesafe-actions'
 
 import * as fieldSettingActions from './actions'
-import { FieldSettingsRecord } from '../../models/fieldSettings'
+import { FieldSettingsRecord } from '../../models/settings'
 
 export type FieldAction = ActionType<typeof fieldSettingActions>
 

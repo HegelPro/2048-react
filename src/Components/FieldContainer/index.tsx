@@ -4,7 +4,7 @@ import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 
 import { styles } from './styles'
 import { fieldSizes } from './config'
-import { FieldSettingsRecord } from '../../models/fieldSettings'
+import { FieldSettingsRecord } from '../../models/settings'
 
 type ClassNames = WithStyles<typeof styles>
 

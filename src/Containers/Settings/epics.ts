@@ -1,7 +1,8 @@
 import { of } from 'rxjs'
-import { filter, switchMap } from 'rxjs/operators'
-import { Epic } from '../../store/types'
 import { isActionOf } from 'typesafe-actions'
+import { filter, switchMap } from 'rxjs/operators'
+
+import { Epic } from '../../store/types'
 import actions from '../../store/actions'
 
 export const moveFieldEpic: Epic = (action$) =>
@@ -13,7 +14,6 @@ export const moveFieldEpic: Epic = (action$) =>
         return of(
           actions.settings.setFieldRowsAction(payload.rows),
           actions.settings.setFieldColumnsAction(payload.columns),
-          actions.field.initFieldAction(),
         )
       }),
     )

@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField'
 
 import history from '../../setup/history'
 import { RootState } from '../../store/types'
+import { initFieldAction } from '../Field/actions'
 
 import { selectSettings } from './selectors'
 import { avaibleSizesForField } from './config'
@@ -42,6 +43,7 @@ const Settings = () => {
             rows: rowsInputValue,
             columns: columnsInputValue,
           }))
+          dispatch(initFieldAction())
           history.push('/')
         }}
       >Submit</Button>

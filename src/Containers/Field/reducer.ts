@@ -1,13 +1,12 @@
 import { ActionType, getType } from 'typesafe-actions'
 
-import { FieldStateRecord } from '../../models/fieldState'
-import { VectorRecord } from '../../models/vector'
+import { FieldDataRecord } from '../../models/data'
 
 import * as fieldActions from './actions'
 
 export type FieldActions = ActionType<typeof fieldActions>
 
-export default (state = new FieldStateRecord(), action: FieldActions): FieldStateRecord => {
+export default (state = new FieldDataRecord(), action: FieldActions): FieldDataRecord => {
   switch (action.type) {
     case getType(fieldActions.setCurrentFieldAction):
       return state

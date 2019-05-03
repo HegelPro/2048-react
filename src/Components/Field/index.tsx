@@ -4,7 +4,7 @@ import { styles } from './styles'
 import { FieldRecord } from '../../models/field'
 import FieldContainer from '../FieldContainer'
 import Cell from '../Cell'
-import { FieldSettingsRecord } from '../../models/fieldSettings'
+import { FieldSettingsRecord } from '../../models/settings'
 
 type ClassNames = WithStyles<typeof styles>
 

@@ -1,5 +1,6 @@
 import { createStandardAction } from 'typesafe-actions'
-import { IFieldSettings } from '../../models/fieldSettings/types'
+
+import { IFieldSettings } from '../../models/settings/types'
 
 export const setFieldRowsAction = createStandardAction('field/SET_ROWS')<number>()
 
