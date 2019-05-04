@@ -1,12 +1,10 @@
 import { Record } from 'immutable'
 
-import { VectorRecord } from '../vector'
 import { isObject } from '../../utils/types'
 
 import { ICell, ICellInitParams } from './types'
 
 const defaultCell: ICell = {
-  changedByVector: new VectorRecord(),
   value: 0,
   id: 0,
   renderId: 0,
@@ -14,16 +12,10 @@ const defaultCell: ICell = {
 
 export class CellRecord extends Record<ICell>(defaultCell) {
   public static deserialize(object: any): CellRecord {
-    if (
-      !isObject(object)
-      && object.changedByVector === undefined
-    ) {
+    if (!isObject(object)) {
       throw new TypeError('Wrong object type for a deserialization')
     }
-    return new CellRecord({
-      ...object,
-      changedByVector: VectorRecord.deserialize(object.changedByVector),
-    })
+    return new CellRecord(object)
   }
 
   public static init(initParams: ICellInitParams): CellRecord {

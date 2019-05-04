@@ -9,6 +9,8 @@ export default (state = new FieldStateRecord(), action: Actions): FieldStateReco
   switch (action.type) {
     case getType(actions.field.setCurrentFieldAction):
       return state.updateRecordValue(action.payload)
+    case getType(actions.state.setFieldRecordsAction):
+      return state.set('records', action.payload)
     default:
       return state
   }

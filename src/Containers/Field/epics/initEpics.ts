@@ -39,6 +39,7 @@ export const initFieldFromLocalStorageEpic: Epic = (action$) =>
                 rows: stateFromLocalStorage.settings.rows,
                 columns: stateFromLocalStorage.settings.columns,
               }),
+              actions.state.setFieldRecordsAction(stateFromLocalStorage.state.records),
             )
           : of(actions.field.initFieldAction())
       }),

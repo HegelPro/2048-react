@@ -5,7 +5,6 @@ export interface ICellInitParams {
 }
 
 export interface ICell extends ICellInitParams {
-  changedByVector: VectorRecord
   id: number
   renderId: number
 }
