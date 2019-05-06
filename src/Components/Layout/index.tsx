@@ -1,8 +1,10 @@
 import React from 'react'
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
+
 import Header from '../Header'
 import Main from '../Main'
 import Footer from '../Footer'
+
 import { styles } from './styles'
 
 type ClassNames = WithStyles<typeof styles>

@@ -1,7 +1,8 @@
 import React from 'react'
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
-import { styles } from './styles'
 import { Typography } from '@material-ui/core'
+
+import { styles } from './styles'
 
 type ClassNames = WithStyles<typeof styles>
 

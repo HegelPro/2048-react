@@ -6,6 +6,8 @@ import { CellRecord } from '../../models/cell'
 import { FieldSettingsRecord } from '../../models/settings'
 import { FieldDataRecord } from '../../models/data'
 import { FieldStateRecord } from '../../models/state'
+import { RecordElementRecord } from '../../models/recordElement'
+import { VectorRecord } from '../../models/vector'
 
 export const loadState = (): RootState | undefined => {
   try {
@@ -15,28 +17,31 @@ export const loadState = (): RootState | undefined => {
       return undefined
     }
     const parsedSerializedState = JSON.parse(serializedState)
-    return {
+
+    const deserializedState = {
       field: new FieldDataRecord({
         current: new FieldRecord({
           ...parsedSerializedState.field.current,
           cells: List(parsedSerializedState.field.current.cells.map(
-            (cell: any) => CellRecord.deserialize(cell),
+            (cell: any) => new CellRecord(cell),
           )),
         }),
         previous: new FieldRecord({
           ...parsedSerializedState.field.current,
           cells: List(parsedSerializedState.field.current.cells.map(
-            (cell: any) => CellRecord.deserialize(cell),
+            (cell: any) => new CellRecord(cell),
           )),
         }),
       }),
-      settings: new FieldSettingsRecord({
-        ...parsedSerializedState.settings,
-      }),
+      settings: new FieldSettingsRecord(parsedSerializedState.settings),
       state: new FieldStateRecord({
-        records: Map(parsedSerializedState.state.records),
+        records: List(parsedSerializedState.state.records.map((record: any) => new RecordElementRecord({
+          ...record,
+          position: new VectorRecord(record.position),
+        }))),
       }),
     }
+    return deserializedState
   } catch (err) {
     return undefined
   }

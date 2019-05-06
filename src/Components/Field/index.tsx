@@ -1,10 +1,12 @@
 import React from 'react'
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
-import { styles } from './styles'
+
 import { FieldRecord } from '../../models/field'
+import { FieldSettingsRecord } from '../../models/settings'
 import FieldContainer from '../FieldContainer'
 import Cell from '../Cell'
-import { FieldSettingsRecord } from '../../models/settings'
+
+import { styles } from './styles'
 
 type ClassNames = WithStyles<typeof styles>
 

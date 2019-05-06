@@ -1,32 +1,32 @@
 import React from 'react'
+import Typography from '@material-ui/core/Typography'
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
-import { styles } from './styles'
-import { Typography } from '@material-ui/core'
-import { VectorRecord } from '../../models/vector'
-import { Map } from 'immutable'
+
 import { FieldRecord } from '../../models/field'
+import { RecordElementRecord } from '../../models/recordElement'
+
+import { styles } from './styles'
 
 type ClassNames = WithStyles<typeof styles>
 
 interface IProps extends ClassNames {
   field: FieldRecord
-  records: Map<VectorRecord, number>
+  record?: RecordElementRecord
 }
 
 const Records = ({
   // classes,
   field,
-  records,
+  record,
 }: IProps) => (
   <div>
     <Typography>
       {field.getCellsSumValue()}
     </Typography>
     <Typography>
-      {records.get(new VectorRecord({
-        x: field.columns,
-        y: field.rows,
-      })) || 0}
+      {record
+        ? record.value
+        : 0}
     </Typography>
   </div>
 )
