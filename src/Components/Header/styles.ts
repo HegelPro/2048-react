@@ -4,6 +4,5 @@ export const styles = (theme: Theme) =>
   createStyles({
     root: {
       height: 64,
-      backgroundColor: theme.palette.primary.main,
     },
   })
