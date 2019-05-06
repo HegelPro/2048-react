@@ -1,8 +1,9 @@
 import { Record } from 'immutable'
 
-import { isObject } from '../../utils/types'
-
-import { ICell, ICellInitParams } from './types'
+import {
+  ICell,
+  ICellInitParams,
+} from './types'
 
 const defaultCell: ICell = {
   value: 0,
@@ -12,10 +13,9 @@ const defaultCell: ICell = {
 
 export class CellRecord extends Record<ICell>(defaultCell) {
   public static deserialize(object: any): CellRecord {
-    if (!isObject(object)) {
-      throw new TypeError('Wrong object type for a deserialization')
-    }
-    return new CellRecord(object)
+    return new CellRecord({
+      ...object,
+    })
   }
 
   public static init(initParams: ICellInitParams): CellRecord {

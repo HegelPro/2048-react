@@ -23,23 +23,21 @@ export const loadState = (): RootState | undefined => {
         current: new FieldRecord({
           ...parsedSerializedState.field.current,
           cells: List(parsedSerializedState.field.current.cells.map(
-            (cell: any) => CellRecord.deserialize(cell),
+            (cell: any) => new CellRecord(cell),
           )),
         }),
         previous: new FieldRecord({
           ...parsedSerializedState.field.current,
           cells: List(parsedSerializedState.field.current.cells.map(
-            (cell: any) => CellRecord.deserialize(cell),
+            (cell: any) => new CellRecord(cell),
           )),
         }),
       }),
-      settings: new FieldSettingsRecord({
-        ...parsedSerializedState.settings,
-      }),
+      settings: new FieldSettingsRecord(parsedSerializedState.settings),
       state: new FieldStateRecord({
         records: List(parsedSerializedState.state.records.map((record: any) => new RecordElementRecord({
           ...record,
-          position: new VectorRecord({...record.position}),
+          position: new VectorRecord(record.position),
         }))),
       }),
     }

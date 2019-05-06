@@ -1,19 +1,10 @@
 import { Record } from 'immutable'
 
-import { isObject } from '../../utils/types'
-
 import { IVector } from './types'
 
 const defaultVector: IVector = { x: 0, y: 0 }
 
 export class VectorRecord extends Record<IVector>(defaultVector) {
-  public static deserialize(object: unknown): VectorRecord {
-    if (!isObject(object)) {
-      throw new TypeError('Wrong object type for a deserialization')
-    }
-    return new VectorRecord(object)
-  }
-
   public image(): VectorRecord {
     return new VectorRecord({
       x: this.y,

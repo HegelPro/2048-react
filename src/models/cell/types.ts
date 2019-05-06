@@ -1,5 +1,3 @@
-import { VectorRecord } from '../vector'
-
 export interface ICellInitParams {
   value: number
 }

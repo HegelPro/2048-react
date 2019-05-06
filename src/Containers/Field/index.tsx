@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useMappedState } from 'redux-react-hook'
+
 import FieldView from '../../Components/Field'
 import { RootState } from '../../store/types'
+import FieldHeader from '../../Components/FieldHeader'
+import { selectSettings } from '../Settings/selectors'
+
 import {
   initFieldAction,
   initFieldFromLocalStorageAction,
@@ -11,8 +15,6 @@ import {
   selectCurrentField,
   selectPreviousField,
 } from './selectors'
-import FieldHeader from '../../Components/FieldHeader'
-import { selectSettings } from '../Settings/selectors'
 
 const mapState = (state: RootState) => ({
   field: selectCurrentField(state),

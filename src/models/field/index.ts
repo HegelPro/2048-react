@@ -1,13 +1,13 @@
 import { List, Record } from 'immutable'
 
-import { initCells } from './utils'
-import {
-  IFieldInitParams,
-  IField,
-} from './types'
-
 import { CellRecord } from '../cell'
 import { VectorRecord } from '../vector'
+
+import { initCells } from './utils'
+import {
+  IField,
+  IFieldInitParams,
+} from './types'
 
 const defaultField: IField = {
   rows: 0,
