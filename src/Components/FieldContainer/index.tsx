@@ -2,9 +2,10 @@ import React from 'react'
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 
+import { FieldSettingsRecord } from '../../models/settings'
+
 import { styles } from './styles'
 import { fieldSizes } from './config'
-import { FieldSettingsRecord } from '../../models/settings'
 
 type ClassNames = WithStyles<typeof styles>
 

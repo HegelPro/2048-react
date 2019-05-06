@@ -8,9 +8,9 @@ import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 
 import { FieldRecord } from '../../models/field'
 import history from '../../setup/history'
+import State from '../../Containers/State'
 
 import { styles } from './styles'
-import State from '../../Containers/State'
 
 type ClassNames = WithStyles<typeof styles>
 

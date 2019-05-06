@@ -12,12 +12,6 @@ const defaultCell: ICell = {
 }
 
 export class CellRecord extends Record<ICell>(defaultCell) {
-  public static deserialize(object: any): CellRecord {
-    return new CellRecord({
-      ...object,
-    })
-  }
-
   public static init(initParams: ICellInitParams): CellRecord {
     return new CellRecord({
       value: initParams.value,
