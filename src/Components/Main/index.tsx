@@ -3,20 +3,13 @@ import {
   Route,
   Switch,
 } from 'react-router-dom'
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 import Grid from '@material-ui/core/Grid'
 
-import Field from '../../Containers/Field'
+import Field from '../../Containers/Game'
 import Settings from '../../Containers/Settings'
 
-import { styles } from './styles'
-
-type ClassNames = WithStyles<typeof styles>
-
-interface IProps extends ClassNames {}
-
-const Main = ({ classes }: IProps) => (
-  <Grid container className={classes.root} justify='center'>
+const Main = () => (
+  <Grid container justify='center'>
     <Grid item>
       <Switch>
         <Route exact path='/'>
@@ -30,4 +23,4 @@ const Main = ({ classes }: IProps) => (
   </Grid>
 )
 
-export default withStyles(styles)(Main)
+export default Main

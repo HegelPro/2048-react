@@ -1,6 +1,6 @@
 import { combineEpics } from 'redux-observable'
 
-import * as fieldEpics from '../Containers/Field/epics'
+import * as fieldEpics from '../Containers/Game/epics'
 import * as fieldSettingsEpics from '../Containers/Settings/epics'
 
 export default combineEpics(

@@ -15,6 +15,7 @@ import {
   selectCurrentField,
   selectPreviousField,
 } from './selectors'
+import { Paper } from '@material-ui/core'
 
 const mapState = (state: RootState) => ({
   field: selectCurrentField(state),
@@ -37,7 +38,7 @@ const Field = () => {
     }
   })
   return (
-    <>
+    <Paper>
       <FieldHeader
         field={field}
         prevField={prevField}
@@ -49,7 +50,7 @@ const Field = () => {
         prevField={prevField}
         settings={fieldSettings}
       />
-    </>
+    </Paper>
   )
 }
 export default Field

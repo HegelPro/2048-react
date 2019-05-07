@@ -1,4 +1,4 @@
-import field from '../Containers/Field/reducer'
+import field from '../Containers/Game/reducer'
 import settings from '../Containers/Settings/reducer'
 import state from '../Containers/State/reducer'
 

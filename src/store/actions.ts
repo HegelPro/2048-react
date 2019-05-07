@@ -1,4 +1,4 @@
-import * as FieldActions from '../Containers/Field/actions'
+import * as FieldActions from '../Containers/Game/actions'
 import * as FieldSettingActions from '../Containers/Settings/actions'
 import * as FieldRecordsActions from '../Containers/State/actions'
 

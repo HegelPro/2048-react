@@ -5,19 +5,19 @@ export const styles = (theme: Theme) => {
   return createStyles({
     root: {
       position: 'relative',
+      backgroundColor: theme.palette.primary.dark,
+      padding: borderWidth,
+      // borderWidth,
+      // borderStyle: 'solid',
+      borderRadius: theme.shape.borderRadius * 4,
+      // borderColor: theme.palette.primary.dark,
+    },
+    background: {
+      borderRadius: theme.shape.borderRadius * 4,
+      overflow: 'hidden',
       display: 'flex',
       flexWrap: 'wrap',
-      padding: borderWidth,
-    },
-    border: {
-      width: '100%',
-      height: '100%',
-      margin: -borderWidth,
-      position: 'absolute',
-      borderWidth,
-      borderRadius: theme.shape.borderRadius * 4,
-      borderColor: theme.palette.primary.dark,
-      borderStyle: 'solid',
+      backgroundColor: theme.palette.grey[500],
     },
   })
 }

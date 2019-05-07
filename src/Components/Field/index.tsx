@@ -28,7 +28,6 @@ const Field = ({
       const previousPosition = prevField.getCellPosition(cell)
       return (
         <div
-          className={classes.spaceForCell}
           key={cell.renderId}
           style={{ width: `${100 / settings.columns}%` }}
         >

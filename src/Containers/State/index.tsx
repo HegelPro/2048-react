@@ -3,7 +3,7 @@ import { useMappedState } from 'redux-react-hook'
 
 import { RootState } from '../../store/types'
 import Records from '../../Components/Records'
-import { selectCurrentField } from '../Field/selectors'
+import { selectCurrentField } from '../Game/selectors'
 import { VectorRecord } from '../../models/vector'
 
 import { selectFieldState } from './selectors'

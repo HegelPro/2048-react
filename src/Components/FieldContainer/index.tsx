@@ -27,8 +27,9 @@ const Field = ({
   }
   return (
     <div className={classes.root} style={sizeStyle}>
-      {children}
-      <div className={classes.border} />
+      <div className={classes.background}>
+        {children}
+      </div>
     </div>
   )
 }

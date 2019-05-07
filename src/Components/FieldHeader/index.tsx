@@ -35,16 +35,19 @@ const Field = ({
       <Fab
         color='primary'
         aria-label='Previous Field'
+        size='small'
         onClick={onClickBack}
         disabled={field.cells.equals(prevField.cells)}
       ><Reply /></Fab>
       <Fab
         color='primary'
         aria-label='Restart'
+        size='small'
         onClick={onClickRestart}
       ><Cached /></Fab>
       <Fab
         aria-label='Settings'
+        size='small'
         color='primary'
         onClick={() => history.push('/settings')}
       ><Settings /></Fab>
