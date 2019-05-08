@@ -4,6 +4,7 @@ import { useDispatch, useMappedState } from 'redux-react-hook'
 import FieldView from '../../Components/Field'
 import { RootState } from '../../store/types'
 import FieldHeader from '../../Components/FieldHeader'
+import GameContainer from '../../Components/GameContainer'
 import { selectSettings } from '../Settings/selectors'
 
 import {
@@ -15,7 +16,6 @@ import {
   selectCurrentField,
   selectPreviousField,
 } from './selectors'
-import { Paper } from '@material-ui/core'
 
 const mapState = (state: RootState) => ({
   field: selectCurrentField(state),
@@ -23,7 +23,7 @@ const mapState = (state: RootState) => ({
   fieldSettings: selectSettings(state),
 })
 
-const Field = () => {
+const Game = () => {
   const dispatch = useDispatch()
   const {
     field,
@@ -38,7 +38,7 @@ const Field = () => {
     }
   })
   return (
-    <Paper>
+    <GameContainer>
       <FieldHeader
         field={field}
         prevField={prevField}
@@ -50,7 +50,8 @@ const Field = () => {
         prevField={prevField}
         settings={fieldSettings}
       />
-    </Paper>
+    </GameContainer>
   )
 }
-export default Field
+
+export default Game

@@ -1,3 +1,3 @@
-export const bestRecord = 'Best record :'
+export const bestRecord = 'Best record'
 
-export const score = 'Score :'
+export const score = 'Score'
