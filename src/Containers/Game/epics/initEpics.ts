@@ -1,11 +1,12 @@
 import { of } from 'rxjs'
 import { filter, switchMap } from 'rxjs/operators'
+
 import { Epic } from '../../../store/types'
 import actions from '../../../store/actions'
 import { isActionOf } from 'typesafe-actions'
 import { FieldRecord } from '../../../models/field'
 import selectRandomAvaibleCellPoint from '../../../engine/selectRandomAvaibleCellIndex'
-import { loadState } from '../utils'
+import { loadState } from '../../../store/utils'
 
 export const initFieldEpic: Epic = (action$, state$) =>
   action$

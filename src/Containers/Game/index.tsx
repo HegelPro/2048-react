@@ -7,11 +7,7 @@ import FieldHeader from '../../Components/FieldHeader'
 import GameContainer from '../../Components/GameContainer'
 import { selectSettings } from '../Settings/selectors'
 
-import {
-  initFieldAction,
-  initFieldFromLocalStorageAction,
-  returnPrevFieldAction,
-} from './actions'
+import { initFieldFromLocalStorageAction } from './actions'
 import {
   selectCurrentField,
   selectPreviousField,
@@ -39,12 +35,7 @@ const Game = () => {
   })
   return (
     <GameContainer>
-      <FieldHeader
-        field={field}
-        prevField={prevField}
-        onClickBack={() => dispatch(returnPrevFieldAction())}
-        onClickRestart={() => dispatch(initFieldAction())}
-      />
+      <FieldHeader />
       <FieldView
         field={field}
         prevField={prevField}

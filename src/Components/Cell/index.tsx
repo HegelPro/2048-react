@@ -34,7 +34,7 @@ const Cell = ({
     >
       {cell.value !== 0
         ? (
-          <div>
+          <>
             <span
               className={classes.side}
               style={{ backgroundColor: cellColor }}
@@ -51,7 +51,7 @@ const Cell = ({
                 {cell.getValue()}
               </Typography>
             </div>
-          </div>
+          </>
         )
         : null
       }
