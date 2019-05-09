@@ -14,7 +14,11 @@ export const styles = (theme: Theme) => {
       overflow: 'hidden',
       display: 'flex',
       flexWrap: 'wrap',
-      backgroundColor: theme.palette.grey[400],
+      background: `linear-gradient(to right, ${
+        theme.palette.common.white
+      }, ${
+        theme.palette.background.default
+      });`,
     },
   })
 }

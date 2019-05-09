@@ -28,7 +28,7 @@ const Records = ({
         variant='h6'
         className={classes.typography}
         color='primary'
-      >{`${strings.score}: ${field.getCellsSumValue()}`}</Typography>
+      >{`${strings.bestRecord}: ${record ? record.value : 0}`}</Typography>
     </Grid>
     <Grid item>
       <Typography
@@ -36,7 +36,7 @@ const Records = ({
         variant='h6'
         className={classes.typography}
         color='primary'
-      >{`${strings.bestRecord}: ${record ? record.value : 0}`}</Typography>
+      >{`${strings.score}: ${field.getCellsSumValue()}`}</Typography>
     </Grid>
   </Grid>
 )
