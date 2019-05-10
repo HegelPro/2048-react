@@ -17,6 +17,7 @@ import Cached from '@material-ui/icons/Cached'
 import Settings from '@material-ui/icons/Settings'
 import Reply from '@material-ui/icons/Reply'
 import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
 
 import history from '../../setup/history'
 
@@ -34,32 +35,45 @@ const ControlPanel = () => {
   return (
     <Grid
       container
-      spacing={8}
+      justify='flex-end'
+      spacing={1}
     >
       <Grid item>
-        <Fab
-          color='primary'
-          aria-label='Previous Field'
-          size='small'
-          onClick={() => dispatch(returnPrevFieldAction())}
-          disabled={field.cells.equals(prevField.cells)}
-        ><Reply /></Fab>
+        <Box mb={1}>
+          <Fab
+            color='primary'
+            aria-label='Previous Field'
+            size='small'
+            onClick={() => dispatch(returnPrevFieldAction())}
+            disabled={field.cells.equals(prevField.cells)}
+          >
+            <Reply />
+          </Fab>
+        </Box>
       </Grid>
       <Grid item>
-        <Fab
-          color='primary'
-          aria-label='Restart'
-          size='small'
-          onClick={() => dispatch(initFieldAction())}
-        ><Cached /></Fab>
+        <Box mb={1}>
+          <Fab
+            color='primary'
+            aria-label='Restart'
+            size='small'
+            onClick={() => dispatch(initFieldAction())}
+          >
+            <Cached />
+          </Fab>
+        </Box>
       </Grid>
       <Grid item>
-        <Fab
-          aria-label='Settings'
-          size='small'
-          color='primary'
-          onClick={() => history.push('/settings')}
-        ><Settings /></Fab>
+        <Box mb={1}>
+          <Fab
+            aria-label='Settings'
+            size='small'
+            color='primary'
+            onClick={() => history.push('/settings')}
+          >
+            <Settings />
+          </Fab>
+        </Box>
       </Grid>
     </Grid>
   )

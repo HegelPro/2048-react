@@ -59,4 +59,4 @@ const Cell = ({
   )
 }
 
-export default withTheme()(withStyles(styles)(Cell))
+export default withTheme(withStyles(styles)(Cell))

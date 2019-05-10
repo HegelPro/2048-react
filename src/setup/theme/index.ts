@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 import blue from '@material-ui/core/colors/blue'
-import { grey } from '@material-ui/core/colors';
+import grey from '@material-ui/core/colors/grey'
 
 export const theme = createMuiTheme({
   palette: {
@@ -8,8 +8,5 @@ export const theme = createMuiTheme({
     background: {
       default: grey[200],
     },
-  },
-  typography: {
-    useNextVariants: true,
   },
 })

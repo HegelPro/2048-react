@@ -1,10 +1,11 @@
 import React from 'react'
+import { Router } from 'react-router-dom'
 import { StoreContext } from 'redux-react-hook'
-import { MuiThemeProvider } from '@material-ui/core/styles'
+import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
+
 import { theme } from '../theme'
 import { store } from '../../store'
-import { Router } from 'react-router-dom'
 import history from '../history'
 
 interface IProps {
@@ -12,14 +13,14 @@ interface IProps {
 }
 
 const Providers = ({ children }: IProps) => (
-  <MuiThemeProvider theme={theme}>
+  <ThemeProvider theme={theme}>
     <StoreContext.Provider value={store}>
       <Router history={history}>
         <CssBaseline />
         {children}
       </Router>
     </StoreContext.Provider>
-  </MuiThemeProvider>
+  </ThemeProvider>
 )
 
 export default Providers

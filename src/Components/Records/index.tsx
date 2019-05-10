@@ -21,20 +21,20 @@ const Records = ({
   field,
   record,
 }: IProps) => (
-  <Grid container spacing={8}>
+  <Grid container spacing={1}>
     <Grid item>
       <Typography
-        inline
-        variant='h6'
+        gutterBottom
         className={classes.typography}
+        variant='h6'
         color='primary'
       >{`${strings.bestRecord}: ${record ? record.value : 0}`}</Typography>
     </Grid>
     <Grid item>
       <Typography
-        inline
-        variant='h6'
+        gutterBottom
         className={classes.typography}
+        variant='h6'
         color='primary'
       >{`${strings.score}: ${field.getCellsSumValue()}`}</Typography>
     </Grid>

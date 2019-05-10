@@ -5,7 +5,11 @@ import State from '../../Containers/State'
 import ControlPanel from '../../Containers/ControlPanel'
 
 const FieldHeader = () => (
-  <Grid container justify='space-between'>
+  <Grid
+    container
+    spacing={1}
+    justify='space-between'
+  >
     <Grid item>
       <State />
     </Grid>

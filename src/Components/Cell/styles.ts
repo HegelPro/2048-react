@@ -14,7 +14,7 @@ export const styles = (theme: Theme) =>
     side: {
       display: 'block',
       position: 'absolute',
-      top: theme.spacing.unit / 2,
+      top: theme.spacing(0.5),
       width: '100%',
       height: '100%',
       background: `radial-gradient(ellipse at right, ${theme.palette.common.black}, transparent)`,
