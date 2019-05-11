@@ -4,7 +4,6 @@ import Fab from '@material-ui/core/Fab'
 import Cached from '@material-ui/icons/Cached'
 import Settings from '@material-ui/icons/Settings'
 import Reply from '@material-ui/icons/Reply'
-import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 
@@ -35,49 +34,39 @@ const ControlPanel = ({ width }: IProps) => {
     prevField,
   } = useMappedState(mapState)
   return (
-    <Grid
-      container
-      justify='flex-end'
-      spacing={1}
-    >
-      <Grid item>
-        <Box mb={1}>
-          <Fab
-            color='primary'
-            aria-label='Previous Field'
-            size={fabSizes[width]}
-            onClick={() => dispatch(returnPrevFieldAction())}
-            disabled={field.cells.equals(prevField.cells)}
-          >
-            <Reply />
-          </Fab>
-        </Box>
-      </Grid>
-      <Grid item>
-        <Box mb={1}>
-          <Fab
-            color='primary'
-            aria-label='Restart'
-            size={fabSizes[width]}
-            onClick={() => dispatch(initFieldAction())}
-          >
-            <Cached />
-          </Fab>
-        </Box>
-      </Grid>
-      <Grid item>
-        <Box mb={1}>
-          <Fab
-            aria-label='Settings'
-            size={fabSizes[width]}
-            color='primary'
-            onClick={() => history.push('/settings')}
-          >
-            <Settings />
-          </Fab>
-        </Box>
-      </Grid>
-    </Grid>
+    <Box display='flex'>
+      <Box mb={1}>
+        <Fab
+          color='primary'
+          aria-label='Previous Field'
+          size={fabSizes[width]}
+          onClick={() => dispatch(returnPrevFieldAction())}
+          disabled={field.cells.equals(prevField.cells)}
+        >
+          <Reply />
+        </Fab>
+      </Box>
+      <Box mb={1} ml={1}>
+        <Fab
+          color='primary'
+          aria-label='Restart'
+          size={fabSizes[width]}
+          onClick={() => dispatch(initFieldAction())}
+        >
+          <Cached />
+        </Fab>
+      </Box>
+      <Box mb={1} ml={1}>
+        <Fab
+          aria-label='Settings'
+          size={fabSizes[width]}
+          color='primary'
+          onClick={() => history.push('/settings')}
+        >
+          <Settings />
+        </Fab>
+      </Box>
+    </Box>
   )
 }
 
