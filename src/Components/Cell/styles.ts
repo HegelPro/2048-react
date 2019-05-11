@@ -17,7 +17,9 @@ export const styles = (theme: Theme) =>
       top: theme.spacing(0.5),
       width: '100%',
       height: '100%',
-      background: `radial-gradient(ellipse at right, ${theme.palette.common.black}, transparent)`,
+      background: `radial-gradient(ellipse at right, ${
+        theme.palette.common.black
+      }, transparent)`,
       borderRadius: theme.shape.borderRadius * 4,
     },
     circle: {
@@ -25,7 +27,9 @@ export const styles = (theme: Theme) =>
       borderRadius: '50%',
       width: '80%',
       height: '80%',
-      background: `radial-gradient(ellipse at right, ${theme.palette.common.black}, transparent)`,
+      background: `radial-gradient(ellipse at right, ${
+        theme.palette.common.black
+      }, transparent)`,
       opacity: 0.1,
       top: '50%',
       left: '50%',

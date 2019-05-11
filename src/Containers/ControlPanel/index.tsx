@@ -1,7 +1,12 @@
 import React from 'react'
 import { useDispatch, useMappedState } from 'redux-react-hook'
-
-import { RootState } from '../../store/types'
+import Fab from '@material-ui/core/Fab'
+import Cached from '@material-ui/icons/Cached'
+import Settings from '@material-ui/icons/Settings'
+import Reply from '@material-ui/icons/Reply'
+import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
+import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 
 import {
   initFieldAction,
@@ -11,22 +16,19 @@ import {
   selectCurrentField,
   selectPreviousField,
 } from '../Game/selectors'
-
-import Fab from '@material-ui/core/Fab'
-import Cached from '@material-ui/icons/Cached'
-import Settings from '@material-ui/icons/Settings'
-import Reply from '@material-ui/icons/Reply'
-import Grid from '@material-ui/core/Grid'
-import Box from '@material-ui/core/Box'
-
+import { RootState } from '../../store/types'
 import history from '../../setup/history'
+
+import { fabSizes } from './config'
 
 const mapState = (state: RootState) => ({
   field: selectCurrentField(state),
   prevField: selectPreviousField(state),
 })
 
-const ControlPanel = () => {
+interface IProps extends WithWidth {}
+
+const ControlPanel = ({ width }: IProps) => {
   const dispatch = useDispatch()
   const {
     field,
@@ -43,7 +45,7 @@ const ControlPanel = () => {
           <Fab
             color='primary'
             aria-label='Previous Field'
-            size='small'
+            size={fabSizes[width]}
             onClick={() => dispatch(returnPrevFieldAction())}
             disabled={field.cells.equals(prevField.cells)}
           >
@@ -56,7 +58,7 @@ const ControlPanel = () => {
           <Fab
             color='primary'
             aria-label='Restart'
-            size='small'
+            size={fabSizes[width]}
             onClick={() => dispatch(initFieldAction())}
           >
             <Cached />
@@ -67,7 +69,7 @@ const ControlPanel = () => {
         <Box mb={1}>
           <Fab
             aria-label='Settings'
-            size='small'
+            size={fabSizes[width]}
             color='primary'
             onClick={() => history.push('/settings')}
           >
@@ -79,4 +81,4 @@ const ControlPanel = () => {
   )
 }
 
-export default ControlPanel
+export default withWidth()(ControlPanel)

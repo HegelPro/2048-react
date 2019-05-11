@@ -8,7 +8,6 @@ const FieldHeader = () => (
   <Grid
     container
     spacing={1}
-    justify='space-between'
   >
     <Grid item>
       <State />
