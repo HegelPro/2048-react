@@ -8,7 +8,9 @@ const FieldHeader = () => (
   <Box
     display='flex'
     justifyContent='space-between'
+    alignItems='center'
     flexDirection='row'
+    flexWrap='wrap'
   >
     <State />
     <ControlPanel />

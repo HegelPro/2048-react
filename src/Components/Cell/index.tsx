@@ -15,12 +15,14 @@ type ClassNames = WithStyles<typeof styles>
 interface IProps extends ClassNames,
 WithTheme {
   cell: CellRecord
+  size: number
   currentPosition?: VectorRecord
   previousPosition?: VectorRecord
 }
 
 const Cell = ({
   classes,
+  size,
   cell,
   currentPosition,
   previousPosition,
@@ -29,32 +31,26 @@ const Cell = ({
   const cellColor = selectCellColor(cell.value)
   return (
     <CellContainer
+      size={size}
       currentPosition={currentPosition}
       previousPosition={previousPosition}
     >
-      {cell.value !== 0
-        ? (
-          <>
-            <span
-              className={classes.side}
-              style={{ backgroundColor: cellColor }}
-            />
-            <div
-              className={classes.root}
-              style={{ backgroundColor: cellColor }}
-            >
-              <span className={classes.circle} />
-              <Typography
-                className={classes.value}
-                style={{ color: theme.palette.getContrastText(cellColor) }}
-              >
-                {cell.getValue()}
-              </Typography>
-            </div>
-          </>
-        )
-        : null
-      }
+      <span
+        className={classes.side}
+        style={{ backgroundColor: cellColor }}
+      />
+      <div
+        className={classes.root}
+        style={{ backgroundColor: cellColor }}
+      >
+        <span className={classes.circle} />
+        <Typography
+          className={classes.value}
+          style={{ color: theme.palette.getContrastText(cellColor) }}
+        >
+          {cell.getValue()}
+        </Typography>
+      </div>
     </CellContainer>
   )
 }

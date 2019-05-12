@@ -9,31 +9,42 @@ type ClassNames = WithStyles<typeof styles>
 
 interface IProps extends ClassNames {
   children: React.ReactNode
+  size: number
   currentPosition?: VectorRecord
   previousPosition?: VectorRecord
 }
 
 const CellContainer = ({
   classes,
+  size,
   children,
   currentPosition,
   previousPosition,
 }: IProps) => {
-  let dx = 0
-  let dy = 0
-  if (previousPosition && currentPosition) {
-    dx = (previousPosition.x - currentPosition.x)
-    dy = (previousPosition.y - currentPosition.y)
+  let positionStyles: React.CSSProperties = {}
+  if (currentPosition && previousPosition) {
+    positionStyles = {
+      top: `${size * previousPosition.y}px`,
+      left: `${size * previousPosition.x}px`,
+    }
+  }
+  if (currentPosition && !previousPosition) {
+    positionStyles = {
+      top: `${size * currentPosition.y}px`,
+      left: `${size * currentPosition.x}px`,
+      transform: 'scale(0)',
+    }
   }
   return (
     <div
       ref={(el) => {
         setTimeout(() => {
           if (el) {
-            if (previousPosition) {
-              el.style.top = '0'
-              el.style.left = '0'
-            } else {
+            if (currentPosition) {
+              el.style.top = `${size * currentPosition.y}px`
+              el.style.left = `${size * currentPosition.x}px`
+            }
+            if (!previousPosition) {
               el.style.transform = 'scale(1)'
             }
           }
@@ -41,11 +52,9 @@ const CellContainer = ({
       }}
       className={classes.root}
       style={{
-        top: `${100 * dy}%`,
-        left: `${100 * dx}%`,
-        transform: previousPosition
-          ? ''
-          : 'scale(0)',
+        width: `${size}px`,
+        height: `${size}px`,
+        ...positionStyles,
       }}
     >
       {children}
