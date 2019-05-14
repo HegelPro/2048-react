@@ -22,8 +22,12 @@ const Field = ({
   width,
 }: IProps) => {
   const sizeStyle: React.CSSProperties = {
-    width: fieldSizes[width],
-    height: fieldSizes[width] / settings.columns * settings.rows,
+    width: settings.columns > settings.rows
+      ? fieldSizes[width]
+      : fieldSizes[width] / settings.rows * settings.columns,
+    height: settings.columns > settings.rows
+      ? fieldSizes[width] / settings.columns * settings.rows
+      : fieldSizes[width],
   }
   return (
     <div className={classes.root} style={sizeStyle}>

@@ -7,6 +7,7 @@ import Box from '@material-ui/core/Box'
 
 import Field from '../../Containers/Game'
 import Settings from '../../Containers/Settings'
+import GameContainer from '../GameContainer'
 
 const Main = () => (
   <Box
@@ -15,14 +16,16 @@ const Main = () => (
     p={4}
   >
     <Box>
-      <Switch>
-        <Route exact path='/'>
-          <Field />
-        </Route>
-        <Route exact path='/settings'>
-          <Settings />
-        </Route>
-      </Switch>
+      <GameContainer>
+        <Switch>
+          <Route exact path='/'>
+            <Field />
+          </Route>
+          <Route exact path='/settings'>
+            <Settings />
+          </Route>
+        </Switch>
+      </GameContainer>
     </Box>
   </Box>
 )

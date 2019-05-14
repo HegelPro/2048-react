@@ -19,7 +19,9 @@ const Field = ({
   field,
   prevField,
 }: IProps) => {
-  const cellSize = fieldSizes[width] / field.columns
+  const cellSize = settings.columns > settings.rows
+    ? fieldSizes[width] / field.columns
+    : fieldSizes[width] / settings.rows * settings.columns / field.columns
   return (
     <FieldContainer settings={settings}>
       {field.cells.map((cell) => {

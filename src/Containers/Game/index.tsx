@@ -4,7 +4,7 @@ import { useDispatch, useMappedState } from 'redux-react-hook'
 import FieldView from '../../Components/Field'
 import { RootState } from '../../store/types'
 import FieldHeader from '../../Components/FieldHeader'
-import GameContainer from '../../Components/GameContainer'
+
 import { selectSettings } from '../Settings/selectors'
 
 import { initFieldFromLocalStorageAction } from './actions'
@@ -34,14 +34,14 @@ const Game = () => {
     }
   })
   return (
-    <GameContainer>
+    <>
       <FieldHeader />
       <FieldView
         field={field}
         prevField={prevField}
         settings={fieldSettings}
       />
-    </GameContainer>
+    </>
   )
 }
 

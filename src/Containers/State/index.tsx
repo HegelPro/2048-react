@@ -18,12 +18,16 @@ const Field = () => {
     field,
     fieldState,
   } = useMappedState(mapState)
+  let recordPosition = new VectorRecord({
+    x: field.columns,
+    y: field.rows,
+  })
+  recordPosition = field.columns > field.rows
+    ? recordPosition
+    : recordPosition.image()
   return (
     <Records
-      record={fieldState.getRecordByPosition(new VectorRecord({
-        x: field.columns,
-        y: field.rows,
-      }))}
+      record={fieldState.getRecordByPosition(recordPosition)}
       field={field}
     />
   )
