@@ -33,7 +33,6 @@ const Header = ({ classes }: IProps) => (
       <Box>
         <Typography
           gutterBottom
-          className={classes.title}
           variant='caption'
           color='inherit'
         >{strings.copyright}</Typography>

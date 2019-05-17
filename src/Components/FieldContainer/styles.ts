@@ -19,11 +19,7 @@ export const styles = (theme: Theme) => {
       transform: 'translate(-50%, -50%)',
       borderRadius: theme.shape.borderRadius * 4,
       overflow: 'hidden',
-      background: `linear-gradient(to right, ${
-        theme.palette.common.white
-      }, ${
-        theme.palette.background.default
-      });`,
+      background: theme.palette.background.default,
     },
   })
 }

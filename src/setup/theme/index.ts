@@ -4,7 +4,10 @@ import grey from '@material-ui/core/colors/grey'
 
 export const theme = createMuiTheme({
   palette: {
-    primary: blue,
+    primary: {
+      ...blue,
+      main: '#3ea09f', // TODO color switched
+    },
     background: {
       default: grey[200],
     },
