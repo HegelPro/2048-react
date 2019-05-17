@@ -3,11 +3,11 @@
 * [2048](http://93.171.10.54:3000)
 
 ## Что представляет собой приложение?
-Написано на фреймворке React.
+Популярная игра 2048. Написанное с использлванием современных и актуальных Frontend технологий. Весь код типезирован. Написано по большей части в функциональном стиле. Для хранения состояния используется Redux, приложение умеет сохранять данные в localstorage. Приложение адаптивно под разные с помощью системы material-ui брейкпоинтов.
 
 ## Как запустить приложение?
-### `npm start`
 
+### `npm start`
 Запустить проект в development mode.<br>
 Открыть в браузере страницу по адресу [http://localhost:3000](http://localhost:3000).
 
@@ -15,8 +15,7 @@
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Собирает приложения в production mode в папке с названием build. Сборка будет оптимезирована.
 
 ## Инструменты используемые в написании приложения:
 * Typescript

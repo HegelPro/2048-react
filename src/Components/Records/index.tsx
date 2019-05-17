@@ -1,5 +1,5 @@
 import React from 'react'
-import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
@@ -25,29 +25,28 @@ const Records = ({
   record,
   width,
 }: IProps) => (
-  <Grid
-    container
-    spacing={1}
-  >
-    <Grid item>
+  <Box display='flex'>
+    <Box mr={1}>
       <Typography
         gutterBottom
         className={classes.typography}
         variant='h3'
         color='primary'
         style={{ fontSize: recordFontSizes[width] }}
-      >{`${strings.bestRecord}: ${record ? record.value : 0}`}</Typography>
-    </Grid>
-    <Grid item>
+      >
+        {`${strings.bestRecord}: ${record ? record.value : 0}`}
+      </Typography>
+    </Box>
+    <Box mr={1}>
       <Typography
         gutterBottom
         className={classes.typography}
         variant='h3'
         color='primary'
         style={{ fontSize: recordFontSizes[width] }}
-        >{`${strings.score}: ${field.getCellsSumValue()}`}</Typography>
-    </Grid>
-  </Grid>
+      >{`${strings.score}: ${field.getCellsSumValue()}`}</Typography>
+    </Box>
+  </Box>
 )
 
 export default withWidth()(withStyles(styles)(Records))

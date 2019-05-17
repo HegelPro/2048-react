@@ -8,7 +8,6 @@ import {
 const defaultCell: ICell = {
   value: 0,
   id: 0,
-  renderId: 0,
 }
 
 export class CellRecord extends Record<ICell>(defaultCell) {
@@ -16,7 +15,6 @@ export class CellRecord extends Record<ICell>(defaultCell) {
     return new CellRecord({
       value: initParams.value,
       id: Math.random(),
-      renderId: Math.random(),
     })
   }
 

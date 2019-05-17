@@ -1,8 +1,8 @@
 import React from 'react'
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
-import Grid from '@material-ui/core/Grid'
 import AppBar from '@material-ui/core/AppBar'
 import Typography from '@material-ui/core/Typography'
+import Box from '@material-ui/core/Box'
 
 import { styles } from './styles'
 import * as strings from './strings'
@@ -16,27 +16,29 @@ const Header = ({ classes }: IProps) => (
     color='primary'
     position='static'
   >
-    <Grid
-      container
-      justify='space-between'
+    <Box
+      display='flex'
+      justifyContent='space-between'
       alignItems='center'
-      className={classes.root}
+      p={1}
     >
-      <Grid item>
+      <Box mr={1}>
         <Typography
+          gutterBottom
           className={classes.title}
           variant='h3'
           color='inherit'
         >{strings.title}</Typography>
-      </Grid>
-      <Grid item>
+      </Box>
+      <Box>
         <Typography
+          gutterBottom
           className={classes.title}
           variant='caption'
           color='inherit'
         >{strings.copyright}</Typography>
-      </Grid>
-    </Grid>
+      </Box>
+    </Box>
   </AppBar>
 )
 

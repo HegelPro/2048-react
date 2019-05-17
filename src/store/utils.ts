@@ -1,15 +1,16 @@
 import { List } from 'immutable'
 
 import { RootState } from './types'
-import { debounce } from '../utils'
 
-import { FieldRecord } from '../models/field'
 import { CellRecord } from '../models/cell'
-import { FieldSettingsRecord } from '../models/settings'
+import { FieldRecord } from '../models/field'
+import { VectorRecord } from '../models/vector'
 import { FieldDataRecord } from '../models/data'
 import { FieldStateRecord } from '../models/state'
+import { FieldSettingsRecord } from '../models/settings'
 import { RecordElementRecord } from '../models/recordElement'
-import { VectorRecord } from '../models/vector'
+
+import { debounce } from '../utils'
 
 export const loadState = (): RootState | undefined => {
   try {

@@ -1,21 +1,20 @@
 import React from 'react'
-import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
 
 import State from '../../Containers/State'
 import ControlPanel from '../../Containers/ControlPanel'
 
 const FieldHeader = () => (
-  <Grid
-    container
-    spacing={1}
+  <Box
+    display='flex'
+    justifyContent='space-between'
+    alignItems='center'
+    flexDirection='row'
+    flexWrap='wrap'
   >
-    <Grid item>
-      <State />
-    </Grid>
-    <Grid item>
-      <ControlPanel />
-    </Grid>
-  </Grid>
+    <State />
+    <ControlPanel />
+  </Box>
 )
 
 export default FieldHeader

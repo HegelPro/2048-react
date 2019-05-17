@@ -2,5 +2,9 @@ import { createStyles } from '@material-ui/core'
 
 export const styles = () =>
   createStyles({
-    root: {},
+    root: {
+      display: 'flex',
+      minWidth: 200,
+      flexDirection: 'column',
+    },
   })

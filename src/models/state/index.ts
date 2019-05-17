@@ -14,10 +14,13 @@ export class FieldStateRecord extends Record<IFieldState>(defaultFieldState) {
   public updateRecordValue(field: FieldRecord): this {
     return this
       .update('records', (records) => {
-        const recordPosition = new VectorRecord({
+        let recordPosition = new VectorRecord({
           x: field.columns,
           y: field.rows,
         })
+        recordPosition = field.columns > field.rows
+          ? recordPosition
+          : recordPosition.image()
         const prevRecordValue = this.getRecordByPosition(recordPosition)
         const cellsValueSum = field.getCellsSumValue()
         if (prevRecordValue) {
