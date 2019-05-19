@@ -30,7 +30,15 @@ const Field = ({
       : fieldSizes[width],
   }
   return (
-    <div className={classes.root} style={sizeStyle}>
+    <div
+      ref={(el) => {
+        if (el) {
+          el.onselectstart = () => false
+        }
+      }}
+      className={classes.root}
+      style={sizeStyle}
+    >
       <div className={classes.background}>
         {children}
       </div>

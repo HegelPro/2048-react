@@ -11,6 +11,8 @@ export * from './keyboardEpics'
 
 export * from './initEpics'
 
+export * from './mouseEpics'
+
 export const moveFieldEpic: Epic = (action$, state$) =>
   action$
     .pipe(
