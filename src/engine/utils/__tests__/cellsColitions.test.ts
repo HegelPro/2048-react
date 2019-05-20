@@ -2,6 +2,8 @@ import { FieldRecord } from '../../../models/field'
 import { DIRACTIONS } from '../../../models/vector/constants'
 import cellsColitions from '../cellsColitions'
 
+import { initCellsFromArray, cellsHaveTheSameValues } from '../__utils__'
+
 const mockCellsBeforeOne = [
   0,
   1,
@@ -92,46 +94,19 @@ const mockAfterFieldThree = new FieldRecord({
   cells: initCellsFromArray(mockCellsAfterThree),
 })
 
-describe('Engine utils:', () => {
-  describe('cellsColitions()', () => {
-    test('One on a line', () => {
-      const confrontedField = cellsColitions(mockBeforeFieldOne, DIRACTIONS.LEFT)
-      expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldOne.cells)).toEqual(true)
-    })
+describe('cellsColitions()', () => {
+  test('One on a line', () => {
+    const confrontedField = cellsColitions(mockBeforeFieldOne, DIRACTIONS.LEFT)
+    expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldOne.cells)).toEqual(true)
+  })
 
-    test('Two on a line', () => {
-      const confrontedField = cellsColitions(mockBeforeFieldTwo, DIRACTIONS.LEFT)
-      expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldTwo.cells)).toEqual(true)
-    })
+  test('Two on a line', () => {
+    const confrontedField = cellsColitions(mockBeforeFieldTwo, DIRACTIONS.LEFT)
+    expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldTwo.cells)).toEqual(true)
+  })
 
-    test('Three on a line', () => {
-      const confrontedField = cellsColitions(mockBeforeFieldThree, DIRACTIONS.LEFT)
-      expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldThree.cells)).toEqual(true)
-    })
+  test('Three on a line', () => {
+    const confrontedField = cellsColitions(mockBeforeFieldThree, DIRACTIONS.LEFT)
+    expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldThree.cells)).toEqual(true)
   })
 })
-
-// TODO need put in different import file
-import { List } from 'immutable'
-
-import { CellRecord } from '../../../models/cell'
-
-export function initCellsFromArray(array: number[]): List<CellRecord> {
-  return List(array.map((cellValue) => CellRecord.init({ value: cellValue })))
-}
-
-export function cellsHaveTheSameValues(
-  fieldOneCells: List<CellRecord>,
-  fieldTwoCells: List<CellRecord>,
-): boolean {
-  return fieldOneCells.every((oneCell, cellOneIndex) => {
-    const twoCell = fieldTwoCells.get(cellOneIndex)
-    if (twoCell) {
-      if (oneCell.value === twoCell.value) {
-        return true
-      }
-      return false
-    }
-    return false
-  })
-}
