@@ -52,7 +52,9 @@ export class FieldRecord extends Record<IField>(defaultField) {
     return this
       .update(
         'cells',
-        (cells) => cells.set(vector.x + vector.y * this.columns, cell))
+        (cells) => cells
+          .set(vector.x + vector.y * this.columns, cell
+            .set('renderId', Math.random())))
   }
 
   public swapeCells(vectorOne: VectorRecord, vectorTwo: VectorRecord): FieldRecord {

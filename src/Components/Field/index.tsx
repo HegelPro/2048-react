@@ -30,7 +30,7 @@ const Field = ({
         return cell.value
           ? (
             <Cell
-              key={cell.id}
+              key={cell.renderId}
               cell={cell}
               size={cellSize}
               currentPosition={currentPosition}

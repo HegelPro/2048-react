@@ -4,4 +4,5 @@ export interface ICellInitParams {
 
 export interface ICell extends ICellInitParams {
   id: number
+  renderId: number
 }
