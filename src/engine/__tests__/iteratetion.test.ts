@@ -1,7 +1,7 @@
-import { DIRACTIONS } from '../../../models/vector/constants'
-import { initCells } from '../../../models/field/utils'
-import { FieldRecord } from '../../../models/field'
-import { VectorRecord } from '../../../models/vector'
+import { DIRACTIONS } from '../../models/vector/constants'
+import { initCells } from '../../models/field/utils'
+import { FieldRecord } from '../../models/field'
+import { VectorRecord } from '../../models/vector'
 import { selectIterationStartPoint } from '../iteratetion'
 
 const mockRows = 5

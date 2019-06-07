@@ -1,5 +1,5 @@
-import { VectorRecord } from '../../models/vector'
-import { FieldRecord } from '../../models/field'
+import { VectorRecord } from '../models/vector'
+import { FieldRecord } from '../models/field'
 
 export function selectIterationStartPoint(
   field: FieldRecord,

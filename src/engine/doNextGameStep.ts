@@ -1,5 +1,5 @@
-import cellsMover from './utils/cellsMover'
-import cellsColitions from './utils/cellsColitions'
+import cellsMover from './cellsMover'
+import cellsColitions from './cellsColitions'
 
 import { FieldRecord } from '../models/field'
 import { VectorRecord } from '../models/vector'

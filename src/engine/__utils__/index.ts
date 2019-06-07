@@ -1,6 +1,6 @@
 import { List } from 'immutable'
 
-import { CellRecord } from '../../../models/cell'
+import { CellRecord } from '../../models/cell'
 
 export function initCellsFromArray(array: number[]): List<CellRecord> {
   return List(array.map((cellValue) => CellRecord.init({ value: cellValue })))

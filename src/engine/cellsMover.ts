@@ -1,9 +1,9 @@
 import { selectIterationStartPoint } from './iteratetion'
 
-import { FieldRecord } from '../../models/field'
-import { VectorRecord } from '../../models/vector'
+import { FieldRecord } from '../models/field'
+import { VectorRecord } from '../models/vector'
 
-export default function cellsColitions(
+export default function cellsMover(
   field: FieldRecord,
   diraction: VectorRecord,
 ): FieldRecord {
@@ -19,12 +19,15 @@ export default function cellsColitions(
     if (field.hasCell(iterPoint.plus(diraction))) {
       iterPoint = iterPoint.plus(diraction)
 
-      if (
-        field.getCell(iterPoint).value > 0 &&
-        field.getCell(postIterPoint).value === field.getCell(iterPoint).value
+      while (
+        field.getCell(iterPoint).value > 0
+        && field.getCell(postIterPoint).value === 0
       ) {
-        field = field.coalitionCells(iterPoint, postIterPoint)
+        field = field.swapeCells(postIterPoint, iterPoint)
 
+        while (field.hasCell(iterPoint.minus(diraction))) {
+          iterPoint = iterPoint.minus(diraction)
+        }
       }
     } else {
       iterPoint = iterPoint.plus(turned90DegDiraction)
