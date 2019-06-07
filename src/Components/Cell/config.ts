@@ -14,15 +14,3 @@ export const SECOND_COLOR: IColor = {
   green: 206,
   red: 84,
 }
-
-// export const FIRST_COLOR: IColor = {
-//   blue: 150,
-//   green: 207,
-//   red: 255,
-// }
-
-// export const SECOND_COLOR: IColor = {
-//   blue: 68,
-//   green: 68,
-//   red: 244,
-// }
