@@ -6,7 +6,10 @@ import * as fieldSettingActions from './actions'
 
 export type FieldAction = ActionType<typeof fieldSettingActions>
 
-export default (state = new FieldSettingsRecord(), action: FieldAction): FieldSettingsRecord => {
+export default (state = FieldSettingsRecord.of({
+  rows: 4,
+  columns: 4
+}), action: FieldAction): FieldSettingsRecord => {
   switch (action.type) {
     case (getType(fieldSettingActions.setFieldRowsAction)):
       return state.set('rows', action.payload)

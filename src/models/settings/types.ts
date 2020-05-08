@@ -1,4 +1,4 @@
 export interface IFieldSettings {
-  rows: number
-  columns: number
+  readonly rows: number
+  readonly columns: number
 }

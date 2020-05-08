@@ -1,8 +1,8 @@
 export interface ICellInitParams {
-  value: number
+  readonly value: number
 }
 
 export interface ICell extends ICellInitParams {
-  id: number
-  renderId: number
+  readonly id: number
+  readonly renderId: number
 }

@@ -10,8 +10,8 @@ import selectRandomAvaibleCellPoint from '../../../engine/selectRandomAvaibleCel
 export * from './keyboardEpics'
 
 export * from './initEpics'
-
-export * from './mouseEpics'
+// TODO после удаления immutable восcтановить
+// export * from './mouseEpics'
 
 export const moveFieldEpic: Epic = (action$, state$) =>
   action$

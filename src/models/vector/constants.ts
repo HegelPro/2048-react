@@ -1,9 +1,11 @@
-import { VectorRecord } from '.'
+import { Vector, VectorHelpers } from '.'
 
-export const DIRACTIONS = {
-  RIGHT: new VectorRecord({ x: 1, y: 0 }),
-  LEFT: new VectorRecord({ x: -1, y: 0 }),
-  UP: new VectorRecord({ x: 0, y: 1 }),
-  DOWN: new VectorRecord({ x: 0, y: -1 }),
-  NULL: new VectorRecord({ x: 0, y: 0 }),
+type Diractions = 'RIGHT' | 'LEFT' | 'UP' | 'DOWN' | 'NULL'
+
+export const DIRACTIONS: Record<Diractions, Vector> = {
+  RIGHT: { x: 1, y: 0 },
+  LEFT: { x: -1, y: 0 },
+  UP: { x: 0, y: 1 },
+  DOWN: { x: 0, y: -1 },
+  NULL: VectorHelpers.zero,
 }

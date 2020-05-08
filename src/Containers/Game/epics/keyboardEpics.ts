@@ -4,6 +4,7 @@ import {
   filter,
 } from 'rxjs/operators'
 import { DIRACTIONS } from '../../../models/vector/constants'
+import { VectorHelpers } from '../../../models/vector'
 import {
   moveCellsAction,
   returnPrevFieldAction,
@@ -25,7 +26,7 @@ export const moveDiractionFromKeyboardEventEpic: Epic = () => keyboard$.pipe(
     }
     return DIRACTIONS.NULL
   }),
-  filter((diraction) => !diraction.equals(DIRACTIONS.NULL)),
+  filter((diraction) => !VectorHelpers.equals(diraction)(DIRACTIONS.NULL)),
   map((diraction) => moveCellsAction(diraction)),
 )
 

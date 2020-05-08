@@ -11,7 +11,7 @@ export function debounce<F extends Procedure>(
     isImmediate: false,
   },
 ): F {
-  let timeoutId: NodeJS.Timeout | undefined
+  let timeoutId: number | undefined
 
   return function(this: any, ...args: any[]) {
     const context = this
@@ -29,10 +29,10 @@ export function debounce<F extends Procedure>(
       clearTimeout(timeoutId)
     }
 
-    timeoutId = setTimeout(doLater, waitMilliseconds)
+    timeoutId = window.setTimeout(doLater, waitMilliseconds)
 
     if (shouldCallNow) {
       func.apply(context, args)
     }
-  } as any
+  } as F
 }

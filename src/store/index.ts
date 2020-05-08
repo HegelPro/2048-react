@@ -4,7 +4,7 @@ import { createEpicMiddleware } from 'redux-observable'
 import rootReducer from './reducers'
 import rootEpic from './epics'
 import { RootActions, RootState } from './types'
-import { debouncedSaveState } from './utils'
+// import { debouncedSaveState } from './utils'
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -21,8 +21,9 @@ export const store = createStore(
     applyMiddleware(...middleware),
   ),
 )
+
 epicMiddleware.run(rootEpic)
 
-store.subscribe(() => {
-  debouncedSaveState(store.getState())
-})
+// store.subscribe(() => {
+  // debouncedSaveState(store.getState())
+// })

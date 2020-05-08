@@ -4,7 +4,7 @@ import { useMappedState } from 'redux-react-hook'
 import { RootState } from '../../store/types'
 import Records from '../../Components/Records'
 import { selectCurrentField } from '../Game/selectors'
-import { VectorRecord } from '../../models/vector'
+import { Vector, VectorHelpers } from '../../models/vector'
 
 import { selectFieldState } from './selectors'
 
@@ -18,13 +18,13 @@ const Field = () => {
     field,
     fieldState,
   } = useMappedState(mapState)
-  let recordPosition = new VectorRecord({
+  let recordPosition: Vector = {
     x: field.columns,
     y: field.rows,
-  })
+  }
   recordPosition = field.columns > field.rows
     ? recordPosition
-    : recordPosition.image()
+    : VectorHelpers.image(recordPosition)
   return (
     <Records
       record={fieldState.getRecordByPosition(recordPosition)}
