@@ -1,20 +1,16 @@
 import React from 'react'
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 import Box from '@material-ui/core/Box'
 import Paper from '@material-ui/core/Paper'
 
-import { styles } from './styles'
+import { useStyles } from './styles'
 
-type ClassNames = WithStyles<typeof styles>
 
-interface IProps extends ClassNames {
+interface IProps {
   children: React.ReactNode
 }
 
-const GameContainer = ({
-  classes,
-  children,
-}: IProps) => {
+const GameContainer = ({ children }: IProps) => {
+  const classes = useStyles()
   return (
     <Paper className={classes.root}>
       <Box
@@ -28,4 +24,4 @@ const GameContainer = ({
   )
 }
 
-export default withStyles(styles)(GameContainer)
+export default GameContainer

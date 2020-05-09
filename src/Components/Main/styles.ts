@@ -1,7 +1,7 @@
-import { createStyles, Theme } from '@material-ui/core'
+import { makeStyles, Theme } from '@material-ui/core'
 
-export const styles = (theme: Theme) => createStyles({
+export const useStyles = makeStyles((theme: Theme) => ({
   root: {
     padding: theme.spacing(4),
   },
-})
+}))

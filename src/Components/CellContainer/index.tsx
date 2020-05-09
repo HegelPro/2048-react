@@ -1,13 +1,11 @@
 import React from 'react'
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 
 import { Vector } from '../../models/vector'
 
-import { styles } from './styles'
+import { useStyles } from './styles'
 
-type ClassNames = WithStyles<typeof styles>
 
-interface IProps extends ClassNames {
+interface IProps {
   children: React.ReactNode
   size: number
   currentPosition?: Vector
@@ -15,12 +13,13 @@ interface IProps extends ClassNames {
 }
 
 const CellContainer = ({
-  classes,
   size,
   children,
   currentPosition,
   previousPosition,
 }: IProps) => {
+  const classes = useStyles()
+
   let positionStyles: React.CSSProperties = {}
   if (currentPosition && previousPosition) {
     positionStyles = {
@@ -62,4 +61,4 @@ const CellContainer = ({
   )
 }
 
-export default withStyles(styles)(CellContainer)
+export default CellContainer

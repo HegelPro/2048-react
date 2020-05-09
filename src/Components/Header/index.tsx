@@ -4,41 +4,41 @@ import AppBar from '@material-ui/core/AppBar'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 
-import { styles } from './styles'
+import { useStyles } from './styles'
 import * as strings from './strings'
 
-type ClassNames = WithStyles<typeof styles>
 
-interface IProps extends ClassNames {}
-
-const Header = ({ classes }: IProps) => (
-  <AppBar
-    color='primary'
-    position='static'
-  >
-    <Box
-      display='flex'
-      justifyContent='space-between'
-      alignItems='center'
-      p={1}
+const Header = () => {
+  const classes = useStyles()
+  return (
+    <AppBar
+      color='primary'
+      position='static'
     >
-      <Box mr={1}>
-        <Typography
-          gutterBottom
-          className={classes.title}
-          variant='h3'
-          color='inherit'
-        >{strings.title}</Typography>
+      <Box
+        display='flex'
+        justifyContent='space-between'
+        alignItems='center'
+        p={1}
+      >
+        <Box mr={1}>
+          <Typography
+            gutterBottom
+            className={classes.title}
+            variant='h3'
+            color='inherit'
+          >{strings.title}</Typography>
+        </Box>
+        <Box>
+          <Typography
+            gutterBottom
+            variant='caption'
+            color='inherit'
+          >{strings.copyright}</Typography>
+        </Box>
       </Box>
-      <Box>
-        <Typography
-          gutterBottom
-          variant='caption'
-          color='inherit'
-        >{strings.copyright}</Typography>
-      </Box>
-    </Box>
-  </AppBar>
-)
+    </AppBar>
+  )
+}
 
-export default withStyles(styles)(Header)
+export default Header
