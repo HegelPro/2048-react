@@ -1,12 +1,12 @@
-import { VectorRecord } from '../models/vector'
+import { VectorHelpers, Vector } from '../models/vector'
 import { FieldRecord } from '../models/field'
 
 export function selectIterationStartPoint(
   field: FieldRecord,
-  diraction: VectorRecord,
-): VectorRecord {
+  diraction: Vector,
+): Vector {
   const Deg90 = Math.PI / 2
-  const turned90DegDiraction = diraction.turn(Deg90)
+  const turned90DegDiraction = VectorHelpers.turn(Deg90, 1)(diraction)
   const x: number = turned90DegDiraction.x > 0 || diraction.x > 0
     ? 0
     : field.columns - 1
@@ -14,5 +14,5 @@ export function selectIterationStartPoint(
     ? 0
     : field.rows - 1
 
-  return new VectorRecord({ x, y })
+  return { x, y }
 }

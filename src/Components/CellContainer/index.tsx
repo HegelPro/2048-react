@@ -1,7 +1,7 @@
 import React from 'react'
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 
-import { VectorRecord } from '../../models/vector'
+import { Vector } from '../../models/vector'
 
 import { styles } from './styles'
 
@@ -10,8 +10,8 @@ type ClassNames = WithStyles<typeof styles>
 interface IProps extends ClassNames {
   children: React.ReactNode
   size: number
-  currentPosition?: VectorRecord
-  previousPosition?: VectorRecord
+  currentPosition?: Vector
+  previousPosition?: Vector
 }
 
 const CellContainer = ({

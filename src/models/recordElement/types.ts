@@ -1,6 +1,6 @@
-import { VectorRecord } from '../vector'
+import { Vector } from '../vector'
 
 export interface IRecordElement {
-  position: VectorRecord
-  value: number
+  readonly position: Vector
+  readonly value: number
 }

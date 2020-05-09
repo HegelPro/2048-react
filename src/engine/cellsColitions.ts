@@ -1,23 +1,23 @@
 import { selectIterationStartPoint } from './iteratetion'
 
 import { FieldRecord } from '../models/field'
-import { VectorRecord } from '../models/vector'
+import { Vector, VectorHelpers } from '../models/vector'
 
 export default function cellsColitions(
   field: FieldRecord,
-  diraction: VectorRecord,
+  diraction: Vector,
 ): FieldRecord {
   let iterPoint = selectIterationStartPoint(field, diraction)
 
   const Deg90 = Math.PI / 2
-  const turned90DegDiraction = diraction.turn(Deg90)
+  const turned90DegDiraction = VectorHelpers.turn(Deg90, 1)(diraction)
 
-  let postIterPoint: VectorRecord
+  let postIterPoint: Vector
   while (field.hasCell(iterPoint)) {
     postIterPoint = iterPoint
 
-    if (field.hasCell(iterPoint.plus(diraction))) {
-      iterPoint = iterPoint.plus(diraction)
+    if (field.hasCell(VectorHelpers.plus(diraction)(iterPoint))) {
+      iterPoint = VectorHelpers.plus(diraction)(iterPoint)
 
       if (
         field.getCell(iterPoint).value > 0 &&
@@ -27,10 +27,10 @@ export default function cellsColitions(
 
       }
     } else {
-      iterPoint = iterPoint.plus(turned90DegDiraction)
+      iterPoint = VectorHelpers.plus(turned90DegDiraction)(iterPoint)
 
-      while (field.hasCell(iterPoint.minus(diraction))) {
-        iterPoint = iterPoint.minus(diraction)
+      while (field.hasCell(VectorHelpers.minus(diraction)(iterPoint))) {
+        iterPoint = VectorHelpers.minus(diraction)(iterPoint)
       }
     }
   }

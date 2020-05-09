@@ -1,7 +1,7 @@
 import { List, Record } from 'immutable'
 
 import { CellRecord } from '../cell'
-import { VectorRecord } from '../vector'
+import { Vector } from '../vector'
 
 import { initCells } from './utils'
 import {
@@ -24,23 +24,23 @@ export class FieldRecord extends Record<IField>(defaultField) {
     })
   }
 
-  public getCellsSumValue() {
+  getCellsSumValue() {
     return this.cells.reduce((result, cell) => cell.value !== 0
       ? result + cell.getValue()
       : result, 0)
   }
 
-  public getCellPosition(cell: CellRecord): VectorRecord | undefined {
+  getCellPosition(cell: CellRecord): Vector | undefined {
     const position = this.cells.findIndex((cellOne) => cellOne.id === cell.id)
     return position !== -1
-      ? new VectorRecord({
+      ? {
         x: position % this.columns,
         y: Math.floor((position / this.columns)),
-      })
+      }
       : undefined
   }
 
-  public getCell(vector: VectorRecord): CellRecord {
+  getCell(vector: Vector): CellRecord {
     const cell = this.cells.get(vector.x + vector.y * this.columns)
     if (!cell) {
       throw new Error('CellRecord isn\'t exist')
@@ -48,7 +48,7 @@ export class FieldRecord extends Record<IField>(defaultField) {
     return cell
   }
 
-  public setCell(vector: VectorRecord, cell: CellRecord): FieldRecord {
+  setCell(vector: Vector, cell: CellRecord): FieldRecord {
     return this
       .update(
         'cells',
@@ -57,7 +57,7 @@ export class FieldRecord extends Record<IField>(defaultField) {
             .set('renderId', Math.random())))
   }
 
-  public swapeCells(vectorOne: VectorRecord, vectorTwo: VectorRecord): FieldRecord {
+  swapeCells(vectorOne: Vector, vectorTwo: Vector): FieldRecord {
     const savedCellForSwape = this.getCell(vectorOne)
     const field = this.setCell(
       vectorOne,
@@ -69,7 +69,7 @@ export class FieldRecord extends Record<IField>(defaultField) {
     )
   }
 
-  public coalitionCells(vectorOne: VectorRecord, vectorTwo: VectorRecord): FieldRecord {
+  coalitionCells(vectorOne: Vector, vectorTwo: Vector): FieldRecord {
     const field = this.setCell(
       vectorTwo,
       this.getCell(vectorTwo)
@@ -81,7 +81,7 @@ export class FieldRecord extends Record<IField>(defaultField) {
     )
   }
 
-  public hasCell(vector: VectorRecord): boolean {
+  hasCell(vector: Vector): boolean {
     if (
       vector.x >= 0
       && vector.y >= 0

@@ -16,25 +16,25 @@ const mockField = new FieldRecord({
 describe('iteratetion()', () => {
   test('One on a line', () => {
     const startIterationPointOne = selectIterationStartPoint(mockField, DIRACTIONS.LEFT)
-    expect(startIterationPointOne).toEqual(new VectorRecord({
+    expect(startIterationPointOne).toEqual(VectorRecord.of({
       x: mockColumns - 1,
       y: 0,
     }))
 
     const startIterationPointTwo = selectIterationStartPoint(mockField, DIRACTIONS.RIGHT)
-    expect(startIterationPointTwo).toEqual(new VectorRecord({
+    expect(startIterationPointTwo).toEqual(VectorRecord.of({
       x: 0,
       y: mockRows - 1,
     }))
 
     const startIterationPointThree = selectIterationStartPoint(mockField, DIRACTIONS.UP)
-    expect(startIterationPointThree).toEqual(new VectorRecord({
+    expect(startIterationPointThree).toEqual(VectorRecord.of({
       x: 0,
       y: 0,
     }))
 
     const startIterationPointFour = selectIterationStartPoint(mockField, DIRACTIONS.DOWN)
-    expect(startIterationPointFour).toEqual(new VectorRecord({
+    expect(startIterationPointFour).toEqual(VectorRecord.of({
       x: mockColumns - 1,
       y: mockRows - 1,
     }))
