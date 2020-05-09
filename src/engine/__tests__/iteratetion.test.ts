@@ -1,7 +1,6 @@
 import { DIRACTIONS } from '../../models/vector/constants'
 import { initCells } from '../../models/field/utils'
 import { FieldRecord } from '../../models/field'
-import { VectorRecord } from '../../models/vector'
 import { selectIterationStartPoint } from '../iteratetion'
 
 const mockRows = 5
@@ -16,27 +15,27 @@ const mockField = new FieldRecord({
 describe('iteratetion()', () => {
   test('One on a line', () => {
     const startIterationPointOne = selectIterationStartPoint(mockField, DIRACTIONS.LEFT)
-    expect(startIterationPointOne).toEqual(VectorRecord.of({
+    expect(startIterationPointOne).toEqual({
       x: mockColumns - 1,
       y: 0,
-    }))
+    })
 
     const startIterationPointTwo = selectIterationStartPoint(mockField, DIRACTIONS.RIGHT)
-    expect(startIterationPointTwo).toEqual(VectorRecord.of({
+    expect(startIterationPointTwo).toEqual({
       x: 0,
       y: mockRows - 1,
-    }))
+    })
 
     const startIterationPointThree = selectIterationStartPoint(mockField, DIRACTIONS.UP)
-    expect(startIterationPointThree).toEqual(VectorRecord.of({
+    expect(startIterationPointThree).toEqual({
       x: 0,
       y: 0,
-    }))
+    })
 
     const startIterationPointFour = selectIterationStartPoint(mockField, DIRACTIONS.DOWN)
-    expect(startIterationPointFour).toEqual(VectorRecord.of({
+    expect(startIterationPointFour).toEqual({
       x: mockColumns - 1,
       y: mockRows - 1,
-    }))
+    })
   })
 })

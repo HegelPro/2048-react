@@ -33,6 +33,12 @@ const equalsVectors = (vector: Vector) =>
 
 const zeroVector: Vector = {x: 0, y: 0}
 
+const normolizeVector = (vector: Vector): Vector =>
+  vector.x > vector.y
+    ? vector
+    : imageVector(vector)
+
+
 export const VectorHelpers = {
   image: imageVector,
   opposed: opposedVector,
@@ -40,5 +46,6 @@ export const VectorHelpers = {
   plus: plusVectors,
   minus: minusVectors,
   equals: equalsVectors,
+  normolize: normolizeVector,
   zero: zeroVector,
 }

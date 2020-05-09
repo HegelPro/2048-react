@@ -4,7 +4,7 @@ import { filter, debounceTime, switchMap } from 'rxjs/operators'
 import { Epic } from '../../../store/types'
 import actions from '../../../store/actions'
 import { isActionOf } from 'typesafe-actions'
-import { doNextGameStep } from '../../../engine'
+import doNextGameStep from '../../../engine/doNextGameStep'
 import selectRandomAvaibleCellPoint from '../../../engine/selectRandomAvaibleCellIndex'
 
 export * from './keyboardEpics'
@@ -20,7 +20,7 @@ export const moveFieldEpic: Epic = (action$, state$) =>
       debounceTime(100),
       switchMap(({payload}) => {
         const savedField = state$.value.field.current
-        let changedField = doNextGameStep(savedField, payload)
+        let changedField = doNextGameStep(payload)(savedField)
         if (!changedField.cells.equals(savedField.cells)) {
           changedField = selectRandomAvaibleCellPoint(changedField)
           return of(
