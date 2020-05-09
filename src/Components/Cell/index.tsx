@@ -1,6 +1,5 @@
 import React from 'react'
 
-import withTheme, { WithTheme } from '@material-ui/core/styles/withTheme'
 import Typography from '@material-ui/core/Typography'
 import { useStyles } from './styles'
 import { selectCellColor } from './utils'
@@ -8,9 +7,9 @@ import { selectCellColor } from './utils'
 import { CellRecord } from '../../models/cell'
 import { Vector } from '../../models/vector'
 import CellContainer from '../CellContainer'
+import { useTheme } from '@material-ui/core'
 
-interface IProps extends
-WithTheme {
+interface IProps {
   cell: CellRecord
   size: number
   currentPosition?: Vector
@@ -22,10 +21,12 @@ const Cell = ({
   cell,
   currentPosition,
   previousPosition,
-  theme,
 }: IProps) => {
   const classes = useStyles()
+  const theme = useTheme()
+
   const cellColor = selectCellColor(cell.value)
+
   return (
     <CellContainer
       size={size}
@@ -52,4 +53,4 @@ const Cell = ({
   )
 }
 
-export default withTheme(Cell)
+export default Cell
