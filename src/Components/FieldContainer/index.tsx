@@ -1,26 +1,24 @@
 import React from 'react'
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 
 import { FieldSettingsRecord } from '../../models/settings'
 
-import { styles } from './styles'
+import { useStyles } from './styles'
 import { fieldSizes } from './config'
 
-type ClassNames = WithStyles<typeof styles>
 
-interface IProps extends ClassNames,
-  WithWidth {
+interface IProps extends
+WithWidth {
   children: React.ReactNode
   settings: FieldSettingsRecord
 }
 
 const Field = ({
-  classes,
   children,
   settings,
   width,
 }: IProps) => {
+  const classes = useStyles()
   const sizeStyle: React.CSSProperties = {
     width: settings.columns > settings.rows
       ? fieldSizes[width]
@@ -46,4 +44,4 @@ const Field = ({
   )
 }
 
-export default withWidth()(withStyles(styles)(Field))
+export default withWidth()(Field)

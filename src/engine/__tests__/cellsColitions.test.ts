@@ -13,17 +13,17 @@ import {
 
 describe('cellsColitions()', () => {
   test('One on a line', () => {
-    const confrontedField = cellsColitions(mockBeforeFieldOne, DIRACTIONS.LEFT)
+    const confrontedField = cellsColitions(DIRACTIONS.LEFT)(mockBeforeFieldOne)
     expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldOne.cells)).toEqual(true)
   })
 
   test('Two on a line', () => {
-    const confrontedField = cellsColitions(mockBeforeFieldTwo, DIRACTIONS.LEFT)
+    const confrontedField = cellsColitions(DIRACTIONS.LEFT)(mockBeforeFieldTwo)
     expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldTwo.cells)).toEqual(true)
   })
 
   test('Three on a line', () => {
-    const confrontedField = cellsColitions(mockBeforeFieldThree, DIRACTIONS.LEFT)
+    const confrontedField = cellsColitions(DIRACTIONS.LEFT)(mockBeforeFieldThree)
     expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldThree.cells)).toEqual(true)
   })
 })

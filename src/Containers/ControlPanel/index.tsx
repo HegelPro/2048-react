@@ -1,41 +1,32 @@
 import React from 'react'
-import { useDispatch, useMappedState } from 'redux-react-hook'
+import { useDispatch, useSelector } from 'react-redux'
 import Fab from '@material-ui/core/Fab'
 import Cached from '@material-ui/icons/Cached'
 import Settings from '@material-ui/icons/Settings'
 import Reply from '@material-ui/icons/Reply'
-import Box from '@material-ui/core/Box'
+import Grid from '@material-ui/core/Grid'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 
 import {
   initFieldAction,
   returnPrevFieldAction,
 } from '../Game/actions'
-import {
-  selectCurrentField,
-  selectPreviousField,
-} from '../Game/selectors'
 import { RootState } from '../../store/types'
 import history from '../../setup/history'
 
 import { fabSizes } from './config'
 
-const mapState = (state: RootState) => ({
-  field: selectCurrentField(state),
-  prevField: selectPreviousField(state),
-})
-
 interface IProps extends WithWidth {}
 
 const ControlPanel = ({ width }: IProps) => {
   const dispatch = useDispatch()
-  const {
-    field,
-    prevField,
-  } = useMappedState(mapState)
+
+  const field = useSelector((state: RootState) => state.field.get('current'))
+  const prevField = useSelector((state: RootState) => state.field.get('previous'))
+
   return (
-    <Box display='flex'>
-      <Box mb={1}>
+    <Grid container spacing={1}>
+      <Grid item>
         <Fab
           color='primary'
           aria-label='Previous Field'
@@ -45,8 +36,8 @@ const ControlPanel = ({ width }: IProps) => {
         >
           <Reply />
         </Fab>
-      </Box>
-      <Box mb={1} ml={1}>
+      </Grid>
+      <Grid item>
         <Fab
           color='primary'
           aria-label='Restart'
@@ -55,8 +46,8 @@ const ControlPanel = ({ width }: IProps) => {
         >
           <Cached />
         </Fab>
-      </Box>
-      <Box mb={1} ml={1}>
+      </Grid>
+      <Grid item>
         <Fab
           aria-label='Settings'
           size={fabSizes[width]}
@@ -65,8 +56,8 @@ const ControlPanel = ({ width }: IProps) => {
         >
           <Settings />
         </Fab>
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   )
 }
 

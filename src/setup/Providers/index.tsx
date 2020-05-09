@@ -1,6 +1,6 @@
 import React from 'react'
 import { Router } from 'react-router-dom'
-import { StoreContext } from 'redux-react-hook'
+import { Provider } from 'react-redux'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
@@ -14,12 +14,12 @@ interface IProps {
 
 const Providers = ({ children }: IProps) => (
   <ThemeProvider theme={theme}>
-    <StoreContext.Provider value={store}>
+    <Provider store={store}>
       <Router history={history}>
         <CssBaseline />
         {children}
       </Router>
-    </StoreContext.Provider>
+    </Provider>
   </ThemeProvider>
 )
 

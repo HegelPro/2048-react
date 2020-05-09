@@ -14,17 +14,17 @@ import {
 
 describe('cellsMover()', () => {
   test('One on a line', () => {
-    const confrontedField = doNextGameStep(mockBeforeFieldOne, DIRACTIONS.LEFT)
+    const confrontedField = doNextGameStep(DIRACTIONS.LEFT)(mockBeforeFieldOne)
     expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldOne.cells)).toEqual(true)
   })
 
   test('Two on a line', () => {
-    const confrontedField = doNextGameStep(mockBeforeFieldTwo, DIRACTIONS.LEFT)
+    const confrontedField = doNextGameStep(DIRACTIONS.LEFT)(mockBeforeFieldTwo)
     expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldTwo.cells)).toEqual(true)
   })
 
   test('Three on a line', () => {
-    const confrontedField = doNextGameStep(mockBeforeFieldThree, DIRACTIONS.LEFT)
+    const confrontedField = doNextGameStep(DIRACTIONS.LEFT)(mockBeforeFieldThree)
     expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldThree.cells)).toEqual(true)
   })
 })

@@ -1,8 +1,8 @@
-import { createStyles, Theme } from '@material-ui/core'
+import { Theme, makeStyles } from '@material-ui/core'
 
-export const styles = (theme: Theme) => {
+export const useStyles = makeStyles((theme: Theme) => {
   const borderWidth = 4
-  return createStyles({
+  return ({
     root: {
       position: 'relative',
       backgroundColor: theme.palette.primary.main,
@@ -22,4 +22,4 @@ export const styles = (theme: Theme) => {
       background: theme.palette.background.default,
     },
   })
-}
+})

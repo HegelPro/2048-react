@@ -10,24 +10,26 @@ import {
   returnPrevFieldAction,
 } from '../actions'
 import { Epic } from '../../../store/types'
+import { equals, not } from 'ramda'
+import { compose } from 'redux'
 
 const keyboard$ = fromEvent<KeyboardEvent>(window, 'keydown')
 
 export const moveDiractionFromKeyboardEventEpic: Epic = () => keyboard$.pipe(
   map((event: KeyboardEvent) => {
-    if (event.key === 'w' || event.key === 'ц' || event.key === 'ArrowUp') {
+    if (['w', 'ц', 'ArrowUp'].some(equals(event.key))) {
       return DIRACTIONS.UP
-    } else if (event.key === 'd' || event.key === 'в' || event.key === 'ArrowRight') {
+    } else if (['d', 'в', 'ArrowRight'].some(equals(event.key))) {
       return DIRACTIONS.LEFT
-    } else if (event.key === 's' || event.key === 'ы' || event.key === 'ArrowDown') {
+    } else if (['s', 'ы', 'ArrowDown'].some(equals(event.key))) {
       return DIRACTIONS.DOWN
-    } else if (event.key === 'a' || event.key === 'ф' || event.key === 'ArrowLeft') {
+    } else if (['a', 'ф', 'ArrowLeft'].some(equals(event.key))) {
       return DIRACTIONS.RIGHT
     }
     return DIRACTIONS.NULL
   }),
-  filter((diraction) => !VectorHelpers.equals(diraction)(DIRACTIONS.NULL)),
-  map((diraction) => moveCellsAction(diraction)),
+  filter(compose(not, VectorHelpers.equals(DIRACTIONS.NULL))),
+  map(moveCellsAction),
 )
 
 export const returnPrevFieldFromKeyboardEventEpic: Epic = () => keyboard$.pipe(
@@ -37,6 +39,6 @@ export const returnPrevFieldFromKeyboardEventEpic: Epic = () => keyboard$.pipe(
     }
     return false
   }),
-  filter((diraction) => diraction),
+  filter(Boolean),
   map(() => returnPrevFieldAction()),
 )

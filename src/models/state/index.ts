@@ -14,13 +14,10 @@ export class FieldStateRecord extends Record<IFieldState>(defaultFieldState) {
   public updateRecordValue(field: FieldRecord): this {
     return this
       .update('records', (records) => {
-        let recordPosition: Vector = {
+        const recordPosition: Vector = VectorHelpers.normolize({
           x: field.columns,
           y: field.rows,
-        }
-        recordPosition = field.columns > field.rows
-          ? recordPosition
-          : VectorHelpers.image(recordPosition)
+        })
         const prevRecordValue = this.getRecordByPosition(recordPosition)
         const cellsValueSum = field.getCellsSumValue()
         if (prevRecordValue) {

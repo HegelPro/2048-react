@@ -1,8 +1,7 @@
-import { createStyles } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 
-export const styles = () =>
-  createStyles({
-    typography: {
-      fontFamily: '\'Teko\', sans-serif;',
-    },
-  })
+export const useStyles = makeStyles(() => ({
+  typography: {
+    fontFamily: '\'Teko\', sans-serif;',
+  },
+}))

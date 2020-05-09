@@ -1,10 +1,9 @@
-import { createStyles } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 
-export const styles = () =>
-  createStyles({
-    root: {
-      display: 'flex',
-      minWidth: 200,
-      flexDirection: 'column',
-    },
-  })
+export const useStyles = makeStyles({
+  root: {
+    display: 'flex',
+    minWidth: 200,
+    flexDirection: 'column',
+  },
+})
