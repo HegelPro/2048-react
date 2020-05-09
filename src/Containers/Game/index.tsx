@@ -21,7 +21,7 @@ const Game = () => {
       dispatch(initFieldFromLocalStorageAction())
       setIsInitField(true)
     }
-  })
+  }, [isInitField, dispatch])
   return (
     <>
       <FieldHeader />
