@@ -10,15 +10,13 @@ import { RecordElementRecord } from '../../models/recordElement'
 import * as strings from './strings'
 import { recordFontSizes } from './config'
 
-
-
 const useStyles = makeStyles(() => ({
   typography: {
     fontFamily: '\'Teko\', sans-serif;',
   },
 }))
 
-interface IProps extends
+interface RecordsProps extends
 WithWidth {
   field: FieldRecord
   record?: RecordElementRecord
@@ -28,7 +26,7 @@ const Records = ({
   field,
   record,
   width,
-}: IProps) => {
+}: RecordsProps) => {
   const classes = useStyles()
   return (
     <Grid container spacing={1}>

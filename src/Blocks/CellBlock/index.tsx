@@ -3,14 +3,14 @@ import React, { useRef, useEffect } from 'react'
 
 import { Vector } from '../../models/vector'
 
-interface IProps {
+interface CellBlockProps {
   children: React.ReactNode
   size: number
   currentPosition?: Vector
   previousPosition?: Vector
 }
 
-const useStyles = makeStyles<Theme, IProps>(() => ({
+const useStyles = makeStyles<Theme, CellBlockProps>(() => ({
   root: ({size}) => ({
     width: `${size}px`,
     height: `${size}px`,
@@ -19,7 +19,7 @@ const useStyles = makeStyles<Theme, IProps>(() => ({
   }),
 }))
 
-const CellContainer = (props: IProps) => {
+const CellBlock = (props: CellBlockProps) => {
   const {
     size,
     children,
@@ -70,4 +70,4 @@ const CellContainer = (props: IProps) => {
   )
 }
 
-export default CellContainer
+export default CellBlock

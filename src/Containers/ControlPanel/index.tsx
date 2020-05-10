@@ -16,9 +16,9 @@ import history from '../../setup/history'
 
 import { fabSizes } from './config'
 
-interface IProps extends WithWidth {}
+interface ControlPanelProps extends WithWidth {}
 
-const ControlPanel = ({ width }: IProps) => {
+const ControlPanel = ({ width }: ControlPanelProps) => {
   const dispatch = useDispatch()
 
   const field = useSelector((state: RootState) => state.field.get('current'))
