@@ -6,7 +6,7 @@ interface IProps {
   children: React.ReactNode
 }
 
-const CellContainer = ({ children }: IProps) => {
+const Records = ({ children }: IProps) => {
   const classes = useStyles()
   return (
     <form className={classes.root}>
@@ -15,4 +15,4 @@ const CellContainer = ({ children }: IProps) => {
   )
 }
 
-export default CellContainer
+export default Records
