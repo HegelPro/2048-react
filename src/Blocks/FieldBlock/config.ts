@@ -1,8 +1,6 @@
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 
-export const fieldSizes: {
-  [K in Breakpoint]: number
-} = {
+export const fieldSizes: Record<Breakpoint, number> = {
   xs: 200,
   sm: 300,
   md: 400,

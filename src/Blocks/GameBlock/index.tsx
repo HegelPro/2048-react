@@ -3,11 +3,11 @@ import Box from '@material-ui/core/Box'
 import Paper from '@material-ui/core/Paper'
 
 
-interface IProps {
+interface GameBlockProps {
   children: React.ReactNode
 }
 
-const GameContainer = ({ children }: IProps) => (
+const GameBlock = ({ children }: GameBlockProps) => (
   <Paper>
     <Box
       display='flex'
@@ -20,4 +20,4 @@ const GameContainer = ({ children }: IProps) => (
   </Paper>
 )
 
-export default GameContainer
+export default GameBlock

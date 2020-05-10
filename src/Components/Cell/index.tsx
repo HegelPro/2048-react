@@ -3,7 +3,7 @@ import React from 'react'
 
 import { CellRecord } from '../../models/cell'
 import { Vector } from '../../models/vector'
-import CellContainer from '../CellContainer'
+import CellBlock from '../../Blocks/CellBlock'
 
 import { useStyles } from './styles'
 
@@ -23,7 +23,7 @@ const Cell = (props: CellProps) => {
     previousPosition,
   } = props
   return (
-    <CellContainer
+    <CellBlock
       size={size}
       currentPosition={currentPosition}
       previousPosition={previousPosition}
@@ -35,7 +35,7 @@ const Cell = (props: CellProps) => {
           {cell.getValue()}
         </Typography>
       </div>
-    </CellContainer>
+    </CellBlock>
   )
 }
 
