@@ -1,7 +1,10 @@
 import { makeStyles, Theme } from '@material-ui/core'
+import {CellProps} from '.'
+import { selectCellColor } from './utils'
 
-export const useStyles = makeStyles((theme: Theme) => ({
-    root: {
+export const useStyles = makeStyles<Theme, CellProps>((theme) => ({
+    root: ({cell}) => ({
+      backgroundColor: selectCellColor(cell.value),
       display: 'flex',
       position: 'absolute',
       alignItems: 'center',
@@ -9,8 +12,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
       width: '100%',
       justifyContent: 'center',
       borderRadius: theme.shape.borderRadius * 4,
-    },
-    side: {
+    }),
+    side: ({cell}) => ({
+      backgroundColor: selectCellColor(cell.value),
       display: 'block',
       position: 'absolute',
       top: theme.spacing(0.5),
@@ -20,7 +24,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
         theme.palette.common.black
       }, transparent)`,
       borderRadius: theme.shape.borderRadius * 4,
-    },
+    }),
     circle: {
       position: 'absolute',
       borderRadius: '50%',
@@ -34,6 +38,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
       left: '50%',
       transform: 'translate(-50%, -50%)',
     },
-    value: {},
+    value: ({cell}) => ({
+      color: theme.palette.getContrastText(selectCellColor(cell.value))
+    }),
   })
 )

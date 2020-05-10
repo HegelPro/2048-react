@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 
 import { FieldSettingsRecord } from '../../models/settings'
@@ -18,6 +18,7 @@ const Field = ({
   settings,
   width,
 }: IProps) => {
+  const ref = useRef<HTMLDivElement>(null)
   const classes = useStyles()
   const sizeStyle: React.CSSProperties = {
     width: settings.columns > settings.rows
@@ -27,13 +28,16 @@ const Field = ({
       ? fieldSizes[width] / settings.columns * settings.rows
       : fieldSizes[width],
   }
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.onselectstart = () => false
+    }
+  })
+
   return (
     <div
-      ref={(el) => {
-        if (el) {
-          el.onselectstart = () => false
-        }
-      }}
+      ref={ref}
       className={classes.root}
       style={sizeStyle}
     >

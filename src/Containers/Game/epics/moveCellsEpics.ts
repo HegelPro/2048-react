@@ -7,12 +7,6 @@ import { isActionOf } from 'typesafe-actions'
 import doNextGameStep from '../../../engine/doNextGameStep'
 import selectRandomAvaibleCellPoint from '../../../engine/selectRandomAvaibleCellIndex'
 
-export * from './keyboardEpics'
-
-export * from './initEpics'
-// TODO после удаления immutable восcтановить
-// export * from './mouseEpics'
-
 export const moveFieldEpic: Epic = (action$, state$) =>
   action$
     .pipe(
@@ -32,13 +26,3 @@ export const moveFieldEpic: Epic = (action$, state$) =>
       }),
     )
 
-export const returnPrevFieldEpic: Epic = (action$, state$) =>
-  action$
-    .pipe(
-      filter(isActionOf(actions.field.returnPrevFieldAction)),
-      switchMap(() => {
-        const fieldState = state$.value.field
-        const prevField = fieldState.previous
-        return of(actions.field.setCurrentFieldAction(prevField))
-      }),
-    )

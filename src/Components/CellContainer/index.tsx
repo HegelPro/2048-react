@@ -1,9 +1,7 @@
-import React from 'react'
+import { makeStyles, Theme } from '@material-ui/core'
+import React, { useRef, useEffect } from 'react'
 
 import { Vector } from '../../models/vector'
-
-import { useStyles } from './styles'
-
 
 interface IProps {
   children: React.ReactNode
@@ -12,52 +10,63 @@ interface IProps {
   previousPosition?: Vector
 }
 
-const CellContainer = ({
-  size,
-  children,
-  currentPosition,
-  previousPosition,
-}: IProps) => {
-  const classes = useStyles()
+const useStyles = makeStyles<Theme, IProps>(() => ({
+  root: ({size}) => ({
+    width: `${size}px`,
+    height: `${size}px`,
+    position: 'absolute',
+    transition: '0.2s top, 0.2s left, 0.3s transform',
+  }),
+}))
+
+const CellContainer = (props: IProps) => {
+  const {
+    size,
+    children,
+    currentPosition,
+    previousPosition,
+  } = props
+
+  const classes = useStyles(props)
+  const ref = useRef<HTMLDivElement>(null)
 
   let positionStyles: React.CSSProperties = {}
-  if (currentPosition && previousPosition) {
-    positionStyles = {
-      top: `${size * previousPosition.y}px`,
-      left: `${size * previousPosition.x}px`,
+  if (currentPosition) {
+    if (previousPosition) {
+      positionStyles = ({
+        top: `${size * previousPosition.y}px`,
+        left: `${size * previousPosition.x}px`,
+      })
+    } else {
+      positionStyles = ({
+        top: `${size * currentPosition.y}px`,
+        left: `${size * currentPosition.x}px`,
+        transform: 'scale(0)',
+      })
     }
   }
-  if (currentPosition && !previousPosition) {
-    positionStyles = {
-      top: `${size * currentPosition.y}px`,
-      left: `${size * currentPosition.x}px`,
-      transform: 'scale(0)',
-    }
-  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (currentPosition && ref.current) {
+        if (previousPosition) {
+          ref.current.style.top = `${size * currentPosition.y}px`
+          ref.current.style.left = `${size * currentPosition.x}px`
+        } else {
+          ref.current.style.transform = 'scale(1)'
+        }
+      }
+    }, 0)
+  })
+
   return (
-    <div
-      ref={(el) => {
-        setTimeout(() => {
-          if (el) {
-            if (currentPosition) {
-              el.style.top = `${size * currentPosition.y}px`
-              el.style.left = `${size * currentPosition.x}px`
-            }
-            if (!previousPosition) {
-              el.style.transform = 'scale(1)'
-            }
-          }
-        }, 0)
-      }}
-      className={classes.root}
-      style={{
-        width: `${size}px`,
-        height: `${size}px`,
-        ...positionStyles,
-      }}
-    >
-      {children}
-    </div>
+      <div
+        ref={ref}
+        style={positionStyles}
+        className={classes.root}
+      >
+        {children}
+      </div>
   )
 }
 

@@ -3,49 +3,52 @@ import {useDispatch, useSelector} from 'react-redux'
 import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
-import Box from '@material-ui/core/Box'
 
 import history from '../../setup/history'
 import { RootState } from '../../store/types'
 import { initFieldAction } from '../Game/actions'
-import TextFieldGroup from '../../Components/TextFieldGroup'
 
 import { avaibleSizesForField } from './config'
 import { setFieldSettingsAction } from './actions'
+import { Grid } from '@material-ui/core'
 
 const Settings = () => {
   const dispatch = useDispatch()
   const fieldSettings = useSelector((state: RootState) => state.settings)
   const [rowsInputValue, setRowsInputValue] = useState(fieldSettings.rows)
   const [columnsInputValue, setColumnsInputValue] = useState(fieldSettings.columns)
+
   const menuItemsForSelectors = avaibleSizesForField.map((elem) => <MenuItem key={elem} value={elem}>{elem}</MenuItem>)
+
   return (
-    <TextFieldGroup>
-      <Box mb={1}>
+    <Grid container spacing={1} direction="column">
+      <Grid item>
         <TextField
           select
           fullWidth
-          label='Rows amout:'
+          label='Rows'
           title='Rows'
           value={rowsInputValue}
           onChange={({ target: { value } }) => setRowsInputValue(+value)}
         >{menuItemsForSelectors}</TextField>
-      </Box>
-      <Box mb={1}>
+      </Grid>
+      <Grid item>
         <TextField
           select
           fullWidth
-          label='Columns amout:'
+          label='Columns'
           title='Columns'
           value={columnsInputValue}
           onChange={({ target: { value } }) => setColumnsInputValue(+value)}
         >{menuItemsForSelectors}</TextField>
-      </Box>
-      <Box mb={1}>
+      </Grid>
+      <Grid item>
         <Button
           color='primary'
           variant='contained'
           onClick={() => {
+            // Не помню почему
+            localStorage.clear()
             dispatch(setFieldSettingsAction({
               rows: rowsInputValue,
               columns: columnsInputValue,
@@ -54,8 +57,8 @@ const Settings = () => {
             history.push('/')
           }}
         >Submit</Button>
-      </Box>
-    </TextFieldGroup>
+      </Grid>
+    </Grid>
   )
 }
 

@@ -6,7 +6,6 @@ import actions from '../../../store/actions'
 import { isActionOf } from 'typesafe-actions'
 import { FieldRecord } from '../../../models/field'
 import selectRandomAvaibleCellPoint from '../../../engine/selectRandomAvaibleCellIndex'
-// import { loadState } from '../../../store/utils'
 
 export const initFieldEpic: Epic = (action$, state$) =>
   action$
@@ -25,23 +24,3 @@ export const initFieldEpic: Epic = (action$, state$) =>
         )
       }),
     )
-
-// export const initFieldFromLocalStorageEpic: Epic = (action$) =>
-//   action$
-//     .pipe(
-//       filter(isActionOf(actions.field.initFieldFromLocalStorageAction)),
-//       switchMap(() => {
-//         const stateFromLocalStorage = loadState()
-//         return stateFromLocalStorage
-//           ? of(
-//               actions.field.setCurrentFieldAction(stateFromLocalStorage.field.current),
-//               actions.field.setPreviousFieldAction(stateFromLocalStorage.field.previous),
-//               actions.settings.setFieldSettingsAction({
-//                 rows: stateFromLocalStorage.settings.rows,
-//                 columns: stateFromLocalStorage.settings.columns,
-//               }),
-//               actions.state.setFieldRecordsAction(stateFromLocalStorage.state.records),
-//             )
-//           : of(actions.field.initFieldAction())
-//       }),
-//     )

@@ -1,51 +1,37 @@
-import React from 'react'
-
 import Typography from '@material-ui/core/Typography'
-import { useStyles } from './styles'
-import { selectCellColor } from './utils'
+import React from 'react'
 
 import { CellRecord } from '../../models/cell'
 import { Vector } from '../../models/vector'
 import CellContainer from '../CellContainer'
-import { useTheme } from '@material-ui/core'
 
-interface IProps {
+import { useStyles } from './styles'
+
+export interface CellProps {
   cell: CellRecord
   size: number
   currentPosition?: Vector
   previousPosition?: Vector
 }
 
-const Cell = ({
-  size,
-  cell,
-  currentPosition,
-  previousPosition,
-}: IProps) => {
-  const classes = useStyles()
-  const theme = useTheme()
-
-  const cellColor = selectCellColor(cell.value)
-
+const Cell = (props: CellProps) => {
+  const classes = useStyles(props)
+  const {
+    size,
+    cell,
+    currentPosition,
+    previousPosition,
+  } = props
   return (
     <CellContainer
       size={size}
       currentPosition={currentPosition}
       previousPosition={previousPosition}
     >
-      <span
-        className={classes.side}
-        style={{ backgroundColor: cellColor }}
-      />
-      <div
-        className={classes.root}
-        style={{ backgroundColor: cellColor }}
-      >
+      <span className={classes.side} />
+      <div className={classes.root}>
         <span className={classes.circle} />
-        <Typography
-          className={classes.value}
-          style={{ color: theme.palette.getContrastText(cellColor) }}
-        >
+        <Typography className={classes.value}>
           {cell.getValue()}
         </Typography>
       </div>

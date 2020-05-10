@@ -14,5 +14,3 @@ export const setCurrentFieldAction = createAction('field/SET_CURRENT_FIELD')<Fie
 export const setPreviousFieldAction = createAction('field/SET_PREVIOUS_FIELD')<FieldRecord>()
 
 export const moveCellsAction = createAction('field/MOVE_CELLS')<Vector>()
-
-export const returnPrevFieldAction = createAction('field/RETURN_PREVIOUS_FIELD')()

@@ -1,9 +1,11 @@
 import { combineEpics } from 'redux-observable'
 
-import * as fieldEpics from '../Containers/Game/epics'
-import * as fieldSettingsEpics from '../Containers/Settings/epics'
+import {moveDiractionFromKeyboardEventEpic} from '../Containers/Game/epics/keyboardEpics'
+import {initFieldEpic} from '../Containers/Game/epics/initEpics'
+import { moveFieldEpic } from '../Containers/Game/epics/moveCellsEpics'
 
 export default combineEpics(
-  ...Object.values(fieldEpics),
-  ...Object.values(fieldSettingsEpics),
+  moveDiractionFromKeyboardEventEpic,
+  initFieldEpic,
+  moveFieldEpic,
 )
