@@ -9,7 +9,7 @@ import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 
 import {
   initFieldAction,
-  returnPrevFieldAction,
+  setCurrentFieldAction,
 } from '../Game/actions'
 import { RootState } from '../../store/types'
 import history from '../../setup/history'
@@ -31,7 +31,7 @@ const ControlPanel = ({ width }: IProps) => {
           color='primary'
           aria-label='Previous Field'
           size={fabSizes[width]}
-          onClick={() => dispatch(returnPrevFieldAction())}
+          onClick={() => dispatch(setCurrentFieldAction(prevField))}
           disabled={field.cells.equals(prevField.cells)}
         >
           <Reply />

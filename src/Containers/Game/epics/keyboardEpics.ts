@@ -5,10 +5,7 @@ import {
 } from 'rxjs/operators'
 import { DIRACTIONS } from '../../../models/vector/constants'
 import { VectorHelpers } from '../../../models/vector'
-import {
-  moveCellsAction,
-  returnPrevFieldAction,
-} from '../actions'
+import { moveCellsAction } from '../actions'
 import { Epic } from '../../../store/types'
 import { equals, not } from 'ramda'
 import { compose } from 'redux'
@@ -32,13 +29,14 @@ export const moveDiractionFromKeyboardEventEpic: Epic = () => keyboard$.pipe(
   map(moveCellsAction),
 )
 
-export const returnPrevFieldFromKeyboardEventEpic: Epic = () => keyboard$.pipe(
-  map((event: KeyboardEvent) => {
-    if (event.key === 'Backspace') {
-      return true
-    }
-    return false
-  }),
-  filter(Boolean),
-  map(() => returnPrevFieldAction()),
-)
+// TODO сделать setCurrentFeald
+// export const returnPrevFieldFromKeyboardEventEpic: Epic = () => keyboard$.pipe(
+//   map((event: KeyboardEvent) => {
+//     if (event.key === 'Backspace') {
+//       return true
+//     }
+//     return false
+//   }),
+//   filter(Boolean),
+//   map(() => returnPrevFieldAction()),
+// )

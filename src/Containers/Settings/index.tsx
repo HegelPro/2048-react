@@ -46,6 +46,8 @@ const Settings = () => {
           color='primary'
           variant='contained'
           onClick={() => {
+            // Не помню почему
+            localStorage.clear()
             dispatch(setFieldSettingsAction({
               rows: rowsInputValue,
               columns: columnsInputValue,
