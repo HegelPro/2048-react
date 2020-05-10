@@ -1,5 +1,6 @@
 import React from 'react'
-import Box from '@material-ui/core/Box'
+import { Grid } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 
@@ -7,8 +8,15 @@ import { FieldRecord } from '../../models/field'
 import { RecordElementRecord } from '../../models/recordElement'
 
 import * as strings from './strings'
-import { useStyles } from './styles'
 import { recordFontSizes } from './config'
+
+
+
+const useStyles = makeStyles(() => ({
+  typography: {
+    fontFamily: '\'Teko\', sans-serif;',
+  },
+}))
 
 interface IProps extends
 WithWidth {
@@ -23,8 +31,8 @@ const Records = ({
 }: IProps) => {
   const classes = useStyles()
   return (
-    <Box display='flex'>
-      <Box mr={1}>
+    <Grid container spacing={1}>
+      <Grid item>
         <Typography
           gutterBottom
           className={classes.typography}
@@ -34,8 +42,8 @@ const Records = ({
         >
           {`${strings.bestRecord}: ${record ? record.value : 0}`}
         </Typography>
-      </Box>
-      <Box mr={1}>
+      </Grid>
+      <Grid item>
         <Typography
           gutterBottom
           className={classes.typography}
@@ -43,8 +51,8 @@ const Records = ({
           color='primary'
           style={{ fontSize: recordFontSizes[width] }}
         >{`${strings.score}: ${field.getCellsSumValue()}`}</Typography>
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   )
 }
 

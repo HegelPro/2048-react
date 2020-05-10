@@ -1,13 +1,16 @@
 import React from 'react'
 
 import Header from '../Header'
-import Main from '../Main'
 
-const Layout = () => (
-  <div>
+interface LayoutProps {
+  children: JSX.Element
+}
+
+const Layout = ({children}: LayoutProps) => (
+  <>
     <Header />
-    <Main />
-  </div>
+    {children}
+  </>
 )
 
 export default Layout

@@ -1,4 +1,8 @@
-import { IColor } from './types'
+interface IColor {
+  red: number,
+  blue: number,
+  green: number,
+}
 
 export const MIN_VALUE = 0
 export const MAX_VALUE = 15

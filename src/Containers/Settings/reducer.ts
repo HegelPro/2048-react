@@ -11,5 +11,3 @@ export default createReducer<FieldSettingsRecord, FieldAction>(FieldSettingsReco
   columns: 4
 }))
   .handleAction(fieldSettingActions.setFieldSettingsAction, (_, action) => FieldSettingsRecord.of(action.payload))
-  // .handleAction(fieldSettingActions.setFieldRowsAction, (state, action) => state.set('rows', action.payload))
-  // .handleAction(fieldSettingActions.setFieldColumnsAction, (state, action) => state.set('columns', action.payload))
