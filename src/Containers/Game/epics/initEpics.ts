@@ -4,7 +4,7 @@ import { filter, switchMap } from 'rxjs/operators'
 import { Epic } from '../../../store/types'
 import actions from '../../../store/actions'
 import { isActionOf } from 'typesafe-actions'
-import { FieldRecord } from '../../../models/field'
+import { FieldRecordHelper } from '../../../models/field'
 import selectRandomAvaibleCellPoint from '../../../engine/selectRandomAvaibleCellIndex'
 
 export const initFieldEpic: Epic = (action$, state$) =>
@@ -16,7 +16,7 @@ export const initFieldEpic: Epic = (action$, state$) =>
           columns,
           rows,
         } = state$.value.settings
-        let field = FieldRecord.init({columns, rows})
+        let field = FieldRecordHelper.init({columns, rows})
         field = selectRandomAvaibleCellPoint(field)
         return of(
           actions.field.setCurrentFieldAction(field),

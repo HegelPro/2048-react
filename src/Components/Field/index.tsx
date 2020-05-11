@@ -1,7 +1,7 @@
 import React from 'react'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 
-import { FieldRecord } from '../../models/field'
+import { FieldRecord, FieldRecordHelper } from '../../models/field'
 import { FieldSettingsRecord } from '../../models/settings'
 import FieldBlock from '../../Blocks/FieldBlock'
 import { fieldSizes } from '../../Blocks/FieldBlock/config'
@@ -25,16 +25,16 @@ const Field = ({
   return (
     <FieldBlock settings={settings}>
       {field.cells.map((cell) => {
-        const currentPosition = field.getCellPosition(cell)
-        const previousPosition = prevField.getCellPosition(cell)
+        const currentPosition = FieldRecordHelper.getCellPosition(field, cell)
+        const previousPosition = FieldRecordHelper.getCellPosition(prevField, cell)
         return cell.value
           ? (
             <Cell
               key={cell.renderId}
               cell={cell}
               size={cellSize}
-              currentPosition={currentPosition}
-              previousPosition={previousPosition}
+              currentPosition={currentPosition.extract()}
+              previousPosition={previousPosition.extract()}
             />
           )
           : null

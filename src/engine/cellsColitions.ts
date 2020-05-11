@@ -1,6 +1,6 @@
 import { selectIterationStartPoint } from './iteratetion'
 
-import { FieldRecord } from '../models/field'
+import { FieldRecord, FieldRecordHelper } from '../models/field'
 import { Vector, VectorHelpers } from '../models/vector'
 
 const cellsColitions = (diraction: Vector) =>
@@ -16,23 +16,23 @@ const cellsColitions = (diraction: Vector) =>
         let iterPoint = selectIterationStartPoint(diraction)(field)
 
         let postIterPoint: Vector
-        while (field.hasCell(iterPoint)) {
+        while (FieldRecordHelper.hasCell(field, iterPoint)) {
           postIterPoint = iterPoint
 
-          if (field.hasCell(moveRight(iterPoint))) {
+          if (FieldRecordHelper.hasCell(field, moveRight(iterPoint))) {
             iterPoint = moveRight(iterPoint)
 
             if (
-              field.getCell(iterPoint).value > 0 &&
-              field.getCell(postIterPoint).value === field.getCell(iterPoint).value
+              FieldRecordHelper.getCell(field, iterPoint).value > 0 &&
+              FieldRecordHelper.getCell(field, postIterPoint).value === FieldRecordHelper.getCell(field, iterPoint).value
             ) {
-              field = field.coalitionCells(iterPoint, postIterPoint)
+              field = FieldRecordHelper.coalitionCells(field, iterPoint, postIterPoint)
 
             }
           } else {
             iterPoint = moveTop(iterPoint)
 
-            while (field.hasCell(moveLeft(iterPoint))) {
+            while (FieldRecordHelper.hasCell(field, moveLeft(iterPoint))) {
               iterPoint = moveLeft(iterPoint)
             }
           }

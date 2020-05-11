@@ -1,4 +1,3 @@
-import { List } from 'immutable'
 
 import { RootState } from './types'
 

@@ -1,7 +1,7 @@
 import Typography from '@material-ui/core/Typography'
 import React from 'react'
 
-import { CellRecord } from '../../models/cell'
+import { CellRecord, CellRecordHelper } from '../../models/cell'
 import { Vector } from '../../models/vector'
 import CellBlock from '../../Blocks/CellBlock'
 
@@ -32,7 +32,7 @@ const Cell = (props: CellProps) => {
       <div className={classes.root}>
         <span className={classes.circle} />
         <Typography className={classes.value}>
-          {cell.getValue()}
+          {CellRecordHelper.getViewValue(cell)}
         </Typography>
       </div>
     </CellBlock>

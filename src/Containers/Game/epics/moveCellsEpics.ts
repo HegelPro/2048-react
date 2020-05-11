@@ -15,7 +15,8 @@ export const moveFieldEpic: Epic = (action$, state$) =>
       switchMap(({payload}) => {
         const savedField = state$.value.field.current
         let changedField = doNextGameStep(payload)(savedField)
-        if (!changedField.cells.equals(savedField.cells)) {
+        // TODO поправить потом выкинута equal от IM.LIST
+        if (changedField.cells !== savedField.cells) {
           changedField = selectRandomAvaibleCellPoint(changedField)
           return of(
             actions.field.setCurrentFieldAction(changedField),

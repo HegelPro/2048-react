@@ -6,8 +6,8 @@ import * as fieldSettingActions from './actions'
 
 export type FieldAction = ActionType<typeof fieldSettingActions>
 
-export default createReducer<FieldSettingsRecord, FieldAction>(FieldSettingsRecord.of({
+export default createReducer<FieldSettingsRecord, FieldAction>({
   rows: 4,
   columns: 4
-}))
-  .handleAction(fieldSettingActions.setFieldSettingsAction, (_, action) => FieldSettingsRecord.of(action.payload))
+})
+  .handleAction(fieldSettingActions.setFieldSettingsAction, (_, action) => action.payload)
