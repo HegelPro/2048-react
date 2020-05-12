@@ -21,8 +21,8 @@ interface ControlPanelProps extends WithWidth {}
 const ControlPanel = ({ width }: ControlPanelProps) => {
   const dispatch = useDispatch()
 
-  const field = useSelector((state: RootState) => state.field.get('current'))
-  const prevField = useSelector((state: RootState) => state.field.get('previous'))
+  const field = useSelector((state: RootState) => state.field.current)
+  const prevField = useSelector((state: RootState) => state.field.previous)
 
   return (
     <Grid container spacing={1}>
@@ -32,7 +32,8 @@ const ControlPanel = ({ width }: ControlPanelProps) => {
           aria-label='Previous Field'
           size={fabSizes[width]}
           onClick={() => dispatch(setCurrentFieldAction(prevField))}
-          disabled={field.cells.equals(prevField.cells)}
+          // TODO поправить потом выкинута equal от IM.LIST
+          disabled={field.cells === prevField.cells}
         >
           <Reply />
         </Fab>

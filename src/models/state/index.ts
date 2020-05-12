@@ -1,44 +1,39 @@
-import { Record, List } from 'immutable'
-
-import { FieldRecord } from '../field'
+import { FieldRecord, FieldRecordHelper } from '../field'
 import { Vector, VectorHelpers } from '../vector'
-
-import { IFieldState } from './types'
 import { RecordElementRecord } from '../recordElement'
+import {List, Maybe} from 'purify-ts'
 
-const defaultFieldState: IFieldState = {
-  records: List(),
+export type FieldStateRecord = RecordElementRecord[]
+
+export const getRecordByPosition = (records: RecordElementRecord[]) => (position: Vector): Maybe<RecordElementRecord> => {
+  return List.find((record) => VectorHelpers.equals(position)(record.position), records);
 }
 
-export class FieldStateRecord extends Record<IFieldState>(defaultFieldState) {
-  public updateRecordValue(field: FieldRecord): this {
-    return this
-      .update('records', (records) => {
-        const recordPosition: Vector = VectorHelpers.normolize({
-          x: field.columns,
-          y: field.rows,
-        })
-        const prevRecordValue = this.getRecordByPosition(recordPosition)
-        const cellsValueSum = field.getCellsSumValue()
-        if (prevRecordValue) {
-          if (cellsValueSum > prevRecordValue.value) {
-            return records.update(
-              records.findIndex((record) => record.position === recordPosition),
-              (record) => record.set('value', cellsValueSum),
-            )
-          }
-          return records
+const updateRecordValue = (records: RecordElementRecord[], field: FieldRecord): RecordElementRecord[] => {
+  const recordPosition: Vector = VectorHelpers.normolize({
+    x: field.columns,
+    y: field.rows,
+  })
+  const prevRecordValue = getRecordByPosition(records)(recordPosition).extract()
+  const cellsValueSum = FieldRecordHelper.getCellsSumValue(field)
+  if (prevRecordValue) {
+    if (cellsValueSum > prevRecordValue.value) {
+      return records.reduce<RecordElementRecord[]>((res, cur) => {
+        if (cur.position === recordPosition) {
+          return [...res, {...cur, value: cellsValueSum}]
         }
-        return records.push(
-          RecordElementRecord.of({
-            value: 0,
-            position: recordPosition,
-          }),
-        )
-      })
+        return [...res, cur]
+      }, [])
+    }
+    return records
   }
+  return [...records, {
+    value: 0,
+    position: recordPosition,
+  }];
+}
 
-  public getRecordByPosition(position: Vector): RecordElementRecord | undefined {
-    return this.records.find((record) => VectorHelpers.equals(position)(record.position))
-  }
+export const FieldStateRecordHelper = {
+  updateRecordValue,
+  getRecordByPosition,
 }

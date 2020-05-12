@@ -1,14 +1,14 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-
 import { RootState } from '../../store/types'
+import { FieldStateRecordHelper } from '../../models/state'
 import Records from '../../Components/Records'
 import { Vector, VectorHelpers } from '../../models/vector'
 
 
 const Field = () => {
+  const records = useSelector((state: RootState) => state.state)
   const field = useSelector((state: RootState) => state.field.current)
-  const fieldState = useSelector((state: RootState) => state.state)
 
   const recordPosition: Vector = VectorHelpers.normolize({
     x: field.columns,
@@ -17,7 +17,7 @@ const Field = () => {
 
   return (
     <Records
-      record={fieldState.getRecordByPosition(recordPosition)}
+      record={FieldStateRecordHelper.getRecordByPosition(records)(recordPosition).extract()}
       field={field}
     />
   )

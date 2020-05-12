@@ -1,5 +1,5 @@
 import { createAction } from 'typesafe-actions'
 
-import { IFieldSettings } from '../../models/settings/types'
+import { FieldSettingsRecord } from '../../models/settings'
 
-export const setFieldSettingsAction = createAction('field/SET_FIELD_SETTINGS')<IFieldSettings>()
+export const setFieldSettingsAction = createAction('field/SET_FIELD_SETTINGS')<FieldSettingsRecord>()

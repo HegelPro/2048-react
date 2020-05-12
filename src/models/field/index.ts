@@ -1,95 +1,117 @@
-import { List, Record } from 'immutable'
-
-import { CellRecord } from '../cell'
+import { CellRecord, CellRecordHelper } from '../cell'
 import { Vector } from '../vector'
 
 import { initCells } from './utils'
-import {
-  IField,
-  IFieldInitParams,
-} from './types'
+import { Maybe, List } from 'purify-ts'
+import { update } from 'ramda'
 
-const defaultField: IField = {
-  rows: 0,
-  columns: 0,
-  cells: List(),
+export interface FieldRecord {
+  columns: number,
+  rows: number,
+  cells: CellRecord[],
 }
 
-export class FieldRecord extends Record<IField>(defaultField) {
-  public static init({ columns, rows }: IFieldInitParams): FieldRecord {
-    return new FieldRecord({
-      rows,
-      columns,
-      cells: initCells(columns, rows),
-    })
+const init = ({ columns, rows }: {columns: number, rows: number}): FieldRecord => {
+  return {
+    rows,
+    columns,
+    cells: initCells(columns, rows),
   }
+};
 
-  getCellsSumValue() {
-    return this.cells.reduce((result, cell) => cell.value !== 0
-      ? result + cell.getValue()
-      : result, 0)
-  }
+const getCellsSumValue = (field: FieldRecord) => {
+  return field.cells.reduce((result, cell) => cell.value !== 0
+    ? result + CellRecordHelper.getViewValue(cell)
+    : result, 0)
+};
 
-  getCellPosition(cell: CellRecord): Vector | undefined {
-    const position = this.cells.findIndex((cellOne) => cellOne.id === cell.id)
-    return position !== -1
-      ? {
-        x: position % this.columns,
-        y: Math.floor((position / this.columns)),
-      }
-      : undefined
-  }
-
-  getCell(vector: Vector): CellRecord {
-    const cell = this.cells.get(vector.x + vector.y * this.columns)
-    if (!cell) {
-      throw new Error('CellRecord isn\'t exist')
+const getCellPosition = (field: FieldRecord, cell: CellRecord): Maybe<Vector> => {
+  const position = List.findIndex((cellOne) => cellOne.id === cell.id, field.cells)
+  return position.map(position => {
+    return {
+      x: position % field.columns,
+      y: Math.floor((position / field.columns)),
     }
-    return cell
-  }
+  })
+};
 
-  setCell(vector: Vector, cell: CellRecord): FieldRecord {
-    return this
-      .update(
-        'cells',
-        (cells) => cells
-          .set(vector.x + vector.y * this.columns, cell
-            .set('renderId', Math.random())))
+const getCell = (field: FieldRecord, vector: Vector): CellRecord => {
+  const cell = field.cells[vector.x + vector.y * field.columns]
+  if (!cell) {
+    throw new Error('CellRecord isn\'t exist')
   }
+  return cell
+}
+const setCell = (field: FieldRecord, vector: Vector, cell: CellRecord): FieldRecord => {
+  return {
+    columns: field.columns,
+    rows: field.rows,
+    cells: update(vector.x + vector.y * field.columns, {...cell, renderId: Math.random()}, field.cells)
+  }
+}
 
-  swapeCells(vectorOne: Vector, vectorTwo: Vector): FieldRecord {
-    const savedCellForSwape = this.getCell(vectorOne)
-    const field = this.setCell(
-      vectorOne,
-      this.getCell(vectorTwo),
-    )
-    return field.setCell(
-      vectorTwo,
-      savedCellForSwape,
-    )
-  }
 
-  coalitionCells(vectorOne: Vector, vectorTwo: Vector): FieldRecord {
-    const field = this.setCell(
-      vectorTwo,
-      this.getCell(vectorTwo)
-        .set('id', this.getCell(vectorOne).id)
-        .update('value', (value) => ++value))
-    return field.setCell(
-      vectorOne,
-      CellRecord.init({ value: 0 }),
-    )
-  }
+const swapeCells = (fieldThis: FieldRecord, vectorOne: Vector, vectorTwo: Vector): FieldRecord => {
+  // TODO fieldThis - bad calling 
+  const savedCellForSwape = getCell(fieldThis, vectorOne)
+  const field = setCell(
+    fieldThis,
+    vectorOne,
+    getCell(fieldThis, vectorTwo),
+  )
+  return setCell(
+    field,
+    vectorTwo,
+    savedCellForSwape,
+  )
+}
 
-  hasCell(vector: Vector): boolean {
-    if (
-      vector.x >= 0
-      && vector.y >= 0
-      && vector.x < this.columns
-      && vector.y < this.rows
-    ) {
-      return true
-    }
-    return false
+const coalitionCells = (fieldThis: FieldRecord, vectorOne: Vector, vectorTwo: Vector): FieldRecord => {
+  // TODO fieldThis - bad calling 
+  const field = setCell(
+    fieldThis,
+    vectorTwo,
+    {
+      ...getCell(fieldThis, vectorTwo),
+      id: getCell(fieldThis, vectorOne).id,
+      value: getCell(fieldThis, vectorTwo).value + 1,
+    },
+  )
+  return setCell(
+    field,
+    vectorOne,
+    CellRecordHelper.init({ value: 0 }),
+  )
+}
+
+const hasCell = (field: FieldRecord, vector: Vector): boolean => {
+  if (
+    vector.x >= 0
+    && vector.y >= 0
+    && vector.x < field.columns
+    && vector.y < field.rows
+  ) {
+    return true
   }
+  return false
+}
+
+const zero: FieldRecord = {rows: 0, columns: 0, cells: []}
+
+export const FieldRecordHelper = {
+  init,
+
+  getCellsSumValue,
+  getCellPosition,
+
+  getCell,
+  setCell,
+
+  hasCell,
+
+
+  swapeCells,
+  coalitionCells,
+
+  zero,
 }

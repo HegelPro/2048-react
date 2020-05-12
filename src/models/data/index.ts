@@ -1,12 +1,6 @@
-import { Record } from 'immutable'
-
 import { FieldRecord } from '../field'
 
-import { IFieldData } from './types'
-
-const defaultFieldState: IFieldData = {
-  current: new FieldRecord(),
-  previous: new FieldRecord(),
+export interface FieldDataRecord {
+  readonly current: FieldRecord
+  readonly previous: FieldRecord
 }
-
-export class FieldDataRecord extends Record<IFieldData>(defaultFieldState) {}
