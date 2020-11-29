@@ -28,6 +28,7 @@ const Records = ({
   width,
 }: RecordsProps) => {
   const classes = useStyles()
+
   return (
     <Grid container spacing={1}>
       <Grid item>

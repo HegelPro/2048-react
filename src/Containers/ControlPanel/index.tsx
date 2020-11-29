@@ -7,10 +7,8 @@ import Reply from '@material-ui/icons/Reply'
 import Grid from '@material-ui/core/Grid'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 
-import {
-  initFieldAction,
-  setCurrentFieldAction,
-} from '../Game/actions'
+import {setCurrentFieldAction} from '../Game/actions'
+import initFieldThunks from '../Game/thunks/initField'
 import { RootState } from '../../store/types'
 import history from '../../setup/history'
 
@@ -43,7 +41,7 @@ const ControlPanel = ({ width }: ControlPanelProps) => {
           color='primary'
           aria-label='Restart'
           size={fabSizes[width]}
-          onClick={() => dispatch(initFieldAction())}
+          onClick={() => dispatch(initFieldThunks())}
         >
           <Cached />
         </Fab>

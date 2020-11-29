@@ -15,6 +15,7 @@ const useStyles = makeStyles({
 
 const Header = () => {
   const classes = useStyles()
+
   return (
     <AppBar
       color='primary'

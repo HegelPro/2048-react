@@ -31,6 +31,7 @@ const CellBlock = (props: CellBlockProps) => {
   const ref = useRef<HTMLDivElement>(null)
 
   let positionStyles: React.CSSProperties = {}
+
   if (currentPosition) {
     if (previousPosition) {
       positionStyles = ({

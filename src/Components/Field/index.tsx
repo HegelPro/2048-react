@@ -22,11 +22,13 @@ const Field = ({
   const cellSize = settings.columns > settings.rows
     ? fieldSizes[width] / field.columns
     : fieldSizes[width] / settings.rows * settings.columns / field.columns
+
   return (
     <FieldBlock settings={settings}>
       {field.cells.map((cell) => {
         const currentPosition = FieldRecordHelper.getCellPosition(field, cell)
         const previousPosition = FieldRecordHelper.getCellPosition(prevField, cell)
+
         return cell.value
           ? (
             <Cell
