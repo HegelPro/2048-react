@@ -22,6 +22,7 @@ const Cell = (props: CellProps) => {
     currentPosition,
     previousPosition,
   } = props
+
   return (
     <CellBlock
       size={size}

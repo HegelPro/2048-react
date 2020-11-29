@@ -18,6 +18,7 @@ export const initFieldEpic: Epic = (action$, state$) =>
         } = state$.value.settings
         let field = FieldRecordHelper.init({columns, rows})
         field = selectRandomAvaibleCellPoint(field)
+
         return of(
           actions.field.setCurrentFieldAction(field),
           actions.field.setPreviousFieldAction(field),
