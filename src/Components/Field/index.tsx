@@ -1,6 +1,5 @@
-import React from 'react'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
-
+import React from 'react'
 import { FieldRecord, FieldRecordHelper } from '../../models/field'
 import { FieldSettingsRecord } from '../../models/settings'
 import FieldBlock from '../../Blocks/FieldBlock'

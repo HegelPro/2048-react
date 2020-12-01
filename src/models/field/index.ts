@@ -1,9 +1,8 @@
-import { CellRecord, CellRecordHelper } from '../cell'
-import { Vector } from '../vector'
-
-import { initCells } from './utils'
-import { Maybe, List } from 'purify-ts'
-import { update } from 'ramda'
+import {CellRecord, CellRecordHelper} from '../cell'
+import {Vector} from '../vector'
+import {initCells} from './utils'
+import {Maybe, List} from 'purify-ts'
+import {update} from 'ramda'
 
 export interface FieldRecord {
   columns: number,
@@ -108,7 +107,6 @@ export const FieldRecordHelper = {
   setCell,
 
   hasCell,
-
 
   swapeCells,
   coalitionCells,

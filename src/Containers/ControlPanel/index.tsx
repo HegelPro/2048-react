@@ -6,13 +6,11 @@ import Settings from '@material-ui/icons/Settings'
 import Reply from '@material-ui/icons/Reply'
 import Grid from '@material-ui/core/Grid'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
-
 import {setCurrentFieldAction} from '../Game/actions'
 import initFieldThunks from '../Game/thunks/initField'
 import { RootState } from '../../store/types'
 import history from '../../setup/history'
-
-import { fabSizes } from './config'
+import {fabSizes} from './config'
 
 interface ControlPanelProps extends WithWidth {}
 

@@ -16,19 +16,24 @@ const updateRecordValue = (records: RecordElementRecord[], field: FieldRecord): 
   })
   const prevRecordValue = getRecordByPosition(records)(recordPosition).extract()
   const cellsValueSum = FieldRecordHelper.getCellsSumValue(field)
+
   if (prevRecordValue) {
     if (cellsValueSum > prevRecordValue.value) {
-      return records.reduce<RecordElementRecord[]>((res, cur) => {
-        if (cur.position === recordPosition) {
+      const newRecords = records.reduce<RecordElementRecord[]>((res, cur) => {
+        if (VectorHelpers.equals(cur.position)(recordPosition)) {
           return [...res, {...cur, value: cellsValueSum}]
         }
         return [...res, cur]
       }, [])
+      
+      return newRecords
     }
+
     return records
   }
+
   return [...records, {
-    value: 0,
+    value: cellsValueSum,
     position: recordPosition,
   }];
 }

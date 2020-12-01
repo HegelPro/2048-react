@@ -1,14 +1,13 @@
-import React from 'react'
-import { Grid } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core'
+import React, { useMemo } from 'react'
+import Grid from '@material-ui/core/Grid'
+import makeStyles from '@material-ui/core/styles/makeStyles'
 import Typography from '@material-ui/core/Typography'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
-
 import { FieldRecord, FieldRecordHelper } from '../../models/field'
 import { RecordElementRecord } from '../../models/recordElement'
-
-import * as strings from './strings'
 import { recordFontSizes } from './config'
+import * as strings from './strings'
+
 
 const useStyles = makeStyles(() => ({
   typography: {
@@ -28,6 +27,7 @@ const Records = ({
   width,
 }: RecordsProps) => {
   const classes = useStyles()
+  const labelStyle = useMemo(() => ({fontSize:  recordFontSizes[width]}), [width])
 
   return (
     <Grid container spacing={1}>
@@ -37,7 +37,7 @@ const Records = ({
           className={classes.typography}
           variant='h3'
           color='primary'
-          style={{ fontSize: recordFontSizes[width] }}
+          style={labelStyle}
         >
           {`${strings.bestRecord}: ${record ? record.value : 0}`}
         </Typography>
@@ -48,8 +48,10 @@ const Records = ({
           className={classes.typography}
           variant='h3'
           color='primary'
-          style={{ fontSize: recordFontSizes[width] }}
-        >{`${strings.score}: ${FieldRecordHelper.getCellsSumValue(field)}`}</Typography>
+          style={labelStyle}
+        >
+          {`${strings.score}: ${FieldRecordHelper.getCellsSumValue(field)}`}
+        </Typography>
       </Grid>
     </Grid>
   )

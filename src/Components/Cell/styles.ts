@@ -1,6 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core'
 import {CellProps} from '.'
-import { selectCellColor } from './utils'
+import selectCellColor from './utils/selectCellColor'
 
 export const useStyles = makeStyles<Theme, CellProps>((theme) => ({
     root: ({cell}) => ({

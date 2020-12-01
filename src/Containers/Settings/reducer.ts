@@ -1,13 +1,10 @@
-import { ActionType, createReducer } from 'typesafe-actions'
+import {createReducer} from 'typesafe-actions'
+import {FieldSettingsRecord} from '../../models/settings'
+import {RootActions} from '../../store/types'
+import { setFieldSettingsAction } from './actions'
 
-import { FieldSettingsRecord } from '../../models/settings'
-
-import * as fieldSettingActions from './actions'
-
-export type FieldAction = ActionType<typeof fieldSettingActions>
-
-export default createReducer<FieldSettingsRecord, FieldAction>({
+export default createReducer<FieldSettingsRecord, RootActions>({
   rows: 4,
   columns: 4
 })
-  .handleAction(fieldSettingActions.setFieldSettingsAction, (_, action) => action.payload)
+  .handleAction(setFieldSettingsAction, (_, action) => action.payload)

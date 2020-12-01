@@ -1,4 +1,4 @@
-import { fromEvent } from 'rxjs'
+import {fromEvent} from 'rxjs'
 import {
   map,
   filter,
