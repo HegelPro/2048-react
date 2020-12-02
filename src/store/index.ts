@@ -3,21 +3,21 @@ import {
   compose,
   createStore,
 } from 'redux'
-import {createEpicMiddleware} from 'redux-observable'
-import rootReducer from './reducers'
-import rootEpic from './epics'
-import {RootActions, RootState} from './types'
-import {debouncedSaveState, loadState} from '../utils/localStorage'
-
 import thunk from 'redux-thunk';
+import rootReducer from './reducers'
+import {debouncedSaveState, loadState} from '../utils/localStorage'
+import { equals } from 'ramda';
+import { DIRACTIONS } from '../models/vector/constants';
+import { setCurrentFieldAction } from '../Containers/Game/actions';
+import moveCellsThunk from '../Containers/Game/thunks/moveCells';
+import debounce from '../utils/debounce';
+import { Vector } from '../models/vector';
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-export const epicMiddleware = createEpicMiddleware<RootActions, RootActions, RootState>()
-
 const initialState = loadState() || {}
 
-const middleware = [epicMiddleware, thunk]
+const middleware = [thunk]
 
 export const store = createStore(
   rootReducer,
@@ -27,8 +27,31 @@ export const store = createStore(
   ),
 )
 
-epicMiddleware.run(rootEpic)
+store.subscribe(() => debouncedSaveState(store.getState()))
 
-store.subscribe(() => {
-  debouncedSaveState(store.getState())
+const debouncedMoveCells = debounce(
+  (vector: Vector) => (moveCellsThunk(vector) as any)(store.dispatch, store.getState),
+  100,
+)
+
+window.addEventListener('keydown', (event) => {
+  if (['w', 'ц', 'ArrowUp'].some(equals(event.key))) {
+    debouncedMoveCells(DIRACTIONS.UP)
+  }
+  
+  else if (['d', 'в', 'ArrowRight'].some(equals(event.key))) {
+    debouncedMoveCells(DIRACTIONS.LEFT)
+  }
+  
+  else if (['s', 'ы', 'ArrowDown'].some(equals(event.key))) {
+    debouncedMoveCells(DIRACTIONS.DOWN)
+  }
+  
+  else if (['a', 'ф', 'ArrowLeft'].some(equals(event.key))) {
+    debouncedMoveCells(DIRACTIONS.RIGHT)
+  }
+  
+  else if (['Backspace'].some(equals(event.key))) {
+    store.dispatch(setCurrentFieldAction(store.getState().field.previous))
+  }
 })

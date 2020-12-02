@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField'
 
 import history from '../../setup/history'
 import { RootState } from '../../store/types'
-import initFieldThunks from '../Game/thunks/initField'
+import initFieldThunk from '../Game/thunks/initField'
 
 import { avaibleSizesForField } from './config'
 import { setFieldSettingsAction } from './actions'
@@ -53,7 +53,7 @@ const Settings = () => {
               rows: rowsInputValue,
               columns: columnsInputValue,
             }))
-            dispatch(initFieldThunks())
+            dispatch(initFieldThunk())
             history.push('/')
           }}
         >Submit</Button>

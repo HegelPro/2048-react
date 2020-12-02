@@ -7,7 +7,7 @@ import Reply from '@material-ui/icons/Reply'
 import Grid from '@material-ui/core/Grid'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 import {setCurrentFieldAction} from '../Game/actions'
-import initFieldThunks from '../Game/thunks/initField'
+import initFieldThunk from '../Game/thunks/initField'
 import { RootState } from '../../store/types'
 import history from '../../setup/history'
 import {fabSizes} from './config'
@@ -29,6 +29,7 @@ const ControlPanel = ({ width }: ControlPanelProps) => {
           size={fabSizes[width]}
           onClick={() => dispatch(setCurrentFieldAction(prevField))}
           // TODO поправить потом выкинута equal от IM.LIST
+          // сейчас проверяется ссылка
           disabled={field.cells === prevField.cells}
         >
           <Reply />
@@ -39,7 +40,7 @@ const ControlPanel = ({ width }: ControlPanelProps) => {
           color='primary'
           aria-label='Restart'
           size={fabSizes[width]}
-          onClick={() => dispatch(initFieldThunks())}
+          onClick={() => dispatch(initFieldThunk())}
         >
           <Cached />
         </Fab>
