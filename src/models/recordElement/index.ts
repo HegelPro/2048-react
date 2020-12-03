@@ -1,6 +1,9 @@
-import { Vector } from '../vector'
+import { Codec, GetType, number } from 'purify-ts'
+import { VectorSchema } from '../vector'
 
-export interface RecordElementRecord {
-  readonly position: Vector
-  readonly value: number
-}
+export type RecordElementRecord = GetType<typeof RecordElementSchema>
+
+export const RecordElementSchema = Codec.interface({
+  position: VectorSchema,
+  value: number,
+})

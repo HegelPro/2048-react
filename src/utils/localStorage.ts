@@ -1,42 +1,30 @@
-import {RootState} from '../store/types'
-import debounce from '../utils/debounce'
-import { Either, Right } from 'purify-ts'
+import { Either, Left, Right } from 'purify-ts'
 
-export const loadState = (): RootState | undefined => {
-  try {
-    const serializedState = localStorage.getItem('state')
-
-    if (serializedState === null) {
-      return undefined
+class LocalStorageService {
+  static get<Value>(key: string, decode: (value: unknown) => Either<string, Value>): Either<string, Value> {    
+    try {
+      const serializedState = localStorage.getItem(key)
+  
+      if (serializedState === null) {
+        return Left(`Local storage get key: ${key} is null`)
+      }
+      const parsedSerializedState = JSON.parse(serializedState)
+  
+      return decode(parsedSerializedState)
+    } catch (err) {
+      return Left(`Local storage get key: ${key} error`)
     }
-    const parsedSerializedState = JSON.parse(serializedState)
-
-    return parsedSerializedState
-  } catch (err) {
-    return undefined
-  }
-}
-
-export const saveState = (state: RootState) => {
-  try {
-    const serializedState = JSON.stringify(state)
-    localStorage.setItem('state', serializedState)
-  } catch {
-    // ignore write errors
-  }
-}
-
-export const debouncedSaveState = debounce(saveState, 1000)
-
-// TODO реализовать позже
-class LocalStorageService<State extends object> {
-  get<Key extends keyof State>(key: Key): Either<never, State[Key]> {
-    const state = {} as State
-    return Right(state[key])
   }
 
-  set<Key extends keyof State>(key: Key, state: State): Either<never, State[Key]> {
-    return Right(state[key])
+  static set<Value>(key: string, value: Value, encode: (value: Value) => unknown): Either<string, Value> {
+    try {
+      const serializedState = JSON.stringify(encode(value))
+      localStorage.setItem(key, serializedState)
+      
+      return Right(value)
+    } catch {
+      return Left(`Local storage set key: ${key} error`)
+    }
   }
 }
 

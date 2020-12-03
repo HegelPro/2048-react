@@ -1,7 +1,11 @@
-export interface Vector {
-  readonly x: number,
-  readonly y: number,
-}
+import { Codec, GetType, number } from "purify-ts"
+
+export type Vector = GetType<typeof VectorSchema>
+
+export const VectorSchema = Codec.interface({
+  x: number,
+  y: number,
+})
 
 const imageVector = ({x, y}: Vector): Vector =>
   ({x: y, y: x})

@@ -1,13 +1,15 @@
 import { FieldRecord, FieldRecordHelper } from '../field'
 import { Vector, VectorHelpers } from '../vector'
-import { RecordElementRecord } from '../recordElement'
-import {List, Maybe} from 'purify-ts'
+import { RecordElementRecord, RecordElementSchema } from '../recordElement'
+import {array, GetType, List, Maybe} from 'purify-ts'
 
-export type FieldStateRecord = RecordElementRecord[]
+export type FieldStateRecord = GetType<typeof FieldStateSchema>
 
-export const getRecordByPosition = (records: RecordElementRecord[]) => (position: Vector): Maybe<RecordElementRecord> => {
-  return List.find((record) => VectorHelpers.equals(position)(record.position), records);
-}
+export const FieldStateSchema = array(RecordElementSchema)
+
+const getRecordByPosition = (records: RecordElementRecord[]) =>
+  (position: Vector): Maybe<RecordElementRecord> =>
+    List.find((record) => VectorHelpers.equals(position)(record.position), records);
 
 const updateRecordValue = (records: RecordElementRecord[], field: FieldRecord): RecordElementRecord[] => {
   const recordPosition: Vector = VectorHelpers.normolize({
