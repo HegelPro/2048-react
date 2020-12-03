@@ -20,7 +20,7 @@ function selectColor(startColor: number, endColor: number, ratio: number) {
   return startColor + Math.floor(selectBetween * ratio)
 }
 
-export function selectCellColor(value: number) {
+function selectCellColor(value: number) {
   const colorRatio = selectColorRatio(value)
   return `rgb(${
     selectColor(FIRST_COLOR.red, SECOND_COLOR.red, colorRatio)
@@ -30,3 +30,5 @@ export function selectCellColor(value: number) {
     selectColor(FIRST_COLOR.blue, SECOND_COLOR.blue, colorRatio)
   })`
 }
+
+export default selectCellColor

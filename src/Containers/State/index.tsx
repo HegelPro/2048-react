@@ -15,9 +15,11 @@ const Field = () => {
     y: field.rows,
   })
 
+  const record = FieldStateRecordHelper.getRecordByPosition(records)(recordPosition).extract()
+
   return (
     <Records
-      record={FieldStateRecordHelper.getRecordByPosition(records)(recordPosition).extract()}
+      record={record}
       field={field}
     />
   )

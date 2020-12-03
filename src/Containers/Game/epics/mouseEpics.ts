@@ -7,7 +7,7 @@ import {
 
 import { DIRACTIONS } from '../../../models/vector/constants'
 import { Epic } from '../../../store/types'
-import { moveCellsAction } from '../actions'
+// import { moveCellsAction } from '../actions'
 // import { VectorRecord } from '../../../models/vector'
 
 const mouse$ = fromEvent<MouseEvent>(window, 'mousedown')

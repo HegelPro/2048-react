@@ -1,20 +1,22 @@
-import { applyMiddleware, compose, createStore } from 'redux'
-import { createEpicMiddleware } from 'redux-observable'
-
-import rootReducer from './reducers'
-import rootEpic from './epics'
-import { RootActions, RootState } from './types'
-// import { debouncedSaveState } from './utils'
-
+import {
+  applyMiddleware,
+  compose,
+  createStore,
+} from 'redux'
 import thunk from 'redux-thunk';
+import LocalStorageService from '../utils/localStorage'
+import debounce from '../utils/debounce';
+import rootReducer, { rootStateShcema } from './reducers'
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-export const epicMiddleware = createEpicMiddleware<RootActions, RootActions, RootState>()
+const initialStateFromLocalStorage = LocalStorageService.get('state', rootStateShcema.decode)
+  .toMaybe()
+  .extract()
 
-const initialState = {}
+const initialState = initialStateFromLocalStorage || {}
 
-const middleware = [epicMiddleware, thunk]
+const middleware = [thunk]
 
 export const store = createStore(
   rootReducer,
@@ -24,8 +26,9 @@ export const store = createStore(
   ),
 )
 
-epicMiddleware.run(rootEpic)
+const debouncedSaveLocalStorage = debounce(
+  () => LocalStorageService.set('state', store.getState(), rootStateShcema.encode),
+  100,
+)
 
-// store.subscribe(() => {
-  // debouncedSaveState(store.getState())
-// })
+store.subscribe(debouncedSaveLocalStorage)

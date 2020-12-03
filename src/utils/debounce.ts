@@ -1,10 +1,10 @@
-export type Procedure = (...args: any[]) => void
+type Procedure = (...args: any[]) => void
 
-export interface IOptions {
+interface IOptions {
   isImmediate: boolean,
 }
 
-export function debounce<F extends Procedure>(
+function debounce<F extends Procedure>(
   func: F,
   waitMilliseconds = 50,
   options: IOptions = {
@@ -36,3 +36,5 @@ export function debounce<F extends Procedure>(
     }
   } as F
 }
+
+export default debounce

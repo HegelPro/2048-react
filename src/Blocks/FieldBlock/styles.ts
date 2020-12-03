@@ -1,6 +1,6 @@
-import { Theme, makeStyles } from '@material-ui/core'
+import {Theme, makeStyles} from '@material-ui/core'
 import {FieldBlockProps} from '.'
-import { fieldSizes } from './config'
+import {fieldSizes} from './config'
 
 export const useStyles = makeStyles<Theme, FieldBlockProps>((theme) => {
   const borderWidth = 4

@@ -1,8 +1,12 @@
-export interface CellRecord {
-  readonly value: number
-  readonly id: number
-  readonly renderId: number
-}
+import { Codec, GetType, number } from "purify-ts"
+
+export type CellRecord = GetType<typeof CellRecordSchema>
+
+export const CellRecordSchema = Codec.interface({
+  value: number,
+  id: number,
+  renderId: number,
+})
 
 export const CellRecordHelper = {
   getViewValue: (cell: CellRecord) => Math.pow(2, cell.value),

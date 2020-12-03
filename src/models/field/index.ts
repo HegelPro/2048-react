@@ -1,15 +1,16 @@
-import { CellRecord, CellRecordHelper } from '../cell'
-import { Vector } from '../vector'
+import {CellRecord, CellRecordHelper, CellRecordSchema} from '../cell'
+import {Vector} from '../vector'
+import {initCells} from './utils'
+import {Maybe, List, Codec, GetType, number, array} from 'purify-ts'
+import {update} from 'ramda'
 
-import { initCells } from './utils'
-import { Maybe, List } from 'purify-ts'
-import { update } from 'ramda'
+export type FieldRecord = GetType<typeof FieldSchema>
 
-export interface FieldRecord {
+export const FieldSchema = Codec.interface({
   columns: number,
   rows: number,
-  cells: CellRecord[],
-}
+  cells: array(CellRecordSchema),
+})
 
 const init = ({ columns, rows }: {columns: number, rows: number}): FieldRecord => {
   return {
@@ -108,7 +109,6 @@ export const FieldRecordHelper = {
   setCell,
 
   hasCell,
-
 
   swapeCells,
   coalitionCells,
