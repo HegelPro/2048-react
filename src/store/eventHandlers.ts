@@ -1,9 +1,9 @@
-import { DIRACTIONS } from '../models/vector/constants';
-import { setCurrentFieldAction } from '../Containers/Game/actions';
-import moveCellsThunk from '../Containers/Game/thunks/moveCells';
-import debounce from '../utils/debounce';
-import { Vector } from '../models/vector';
-import { store } from '.';
+import { DIRACTIONS } from '../models/vector/constants'
+import { setCurrentFieldAction } from '../Containers/Game/actions'
+import moveCellsThunk from '../Containers/Game/thunks/moveCells'
+import debounce from '../utils/debounce'
+import { Vector } from '../models/vector'
+import { store } from '.'
 
 const debouncedMoveCells = debounce(
   (vector: Vector) => (moveCellsThunk(vector) as any)(store.dispatch, store.getState),

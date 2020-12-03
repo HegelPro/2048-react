@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/types'
 import { FieldStateRecordHelper } from '../../models/state'
-import Records from '../../Components/Records'
+import Records from '../../Components/Records/Records'
 import { Vector, VectorHelpers } from '../../models/vector'
 
 

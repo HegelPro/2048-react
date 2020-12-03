@@ -1,4 +1,4 @@
-import { FieldRecord, FieldRecordHelper } from '../field'
+import {FieldRecord, FieldRecordHelper} from '../field'
 import { Vector, VectorHelpers } from '../vector'
 import { RecordElementRecord, RecordElementSchema } from '../recordElement'
 import {array, GetType, List, Maybe} from 'purify-ts'
@@ -9,7 +9,7 @@ export const FieldStateSchema = array(RecordElementSchema)
 
 const getRecordByPosition = (records: RecordElementRecord[]) =>
   (position: Vector): Maybe<RecordElementRecord> =>
-    List.find((record) => VectorHelpers.equals(position)(record.position), records);
+    List.find((record) => VectorHelpers.equals(position)(record.position), records)
 
 const updateRecordValue = (records: RecordElementRecord[], field: FieldRecord): RecordElementRecord[] => {
   const recordPosition: Vector = VectorHelpers.normolize({
@@ -37,7 +37,7 @@ const updateRecordValue = (records: RecordElementRecord[], field: FieldRecord): 
   return [...records, {
     value: cellsValueSum,
     position: recordPosition,
-  }];
+  }]
 }
 
 export const FieldStateRecordHelper = {

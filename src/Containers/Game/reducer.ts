@@ -1,16 +1,12 @@
-import { ActionType, createReducer } from 'typesafe-actions'
-
+import { createReducer } from 'typesafe-actions'
 import { FieldDataRecord } from '../../models/data'
-
-import * as fieldActions from './actions'
 import { FieldRecordHelper } from '../../models/field'
+import { RootActions } from '../../store/types'
+import { setCurrentFieldAction, setPreviousFieldAction } from './actions'
 
-export type FieldActions = ActionType<typeof fieldActions>
-
-
-export default createReducer<FieldDataRecord, FieldActions>({
+export default createReducer<FieldDataRecord, RootActions>({
   current: FieldRecordHelper.zero,
   previous: FieldRecordHelper.zero,
 })
-  .handleAction(fieldActions.setCurrentFieldAction, (state, action) => ({...state, current: action.payload}))
-  .handleAction(fieldActions.setPreviousFieldAction, (state, action) => ({...state, previous: action.payload}))
+  .handleAction(setCurrentFieldAction, (state, action) => ({...state, current: action.payload}))
+  .handleAction(setPreviousFieldAction, (state, action) => ({...state, previous: action.payload}))

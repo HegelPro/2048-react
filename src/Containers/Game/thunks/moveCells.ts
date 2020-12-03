@@ -21,7 +21,7 @@ function moveCellsThunk(diraction: Vector): Thunk<void> {
         dispatch(setPreviousFieldAction(savedField))
         dispatch(setFieldRecordsAction(newStateRecord))
       }
-  };
+  }
 }
 
 export default moveCellsThunk

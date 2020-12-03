@@ -1,6 +1,6 @@
 import Box from '@material-ui/core/Box'
 import React from 'react'
-import Header from '../../Components/Header'
+import Header from '../../Components/Header/Header'
 
 interface LayoutProps {
   children: JSX.Element

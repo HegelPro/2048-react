@@ -3,9 +3,9 @@ import {
   compose,
   createStore,
 } from 'redux'
-import thunk from 'redux-thunk';
+import thunk from 'redux-thunk'
 import LocalStorageService from '../utils/localStorage'
-import debounce from '../utils/debounce';
+import debounce from '../utils/debounce'
 import rootReducer, { rootStateShcema } from './reducers'
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

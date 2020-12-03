@@ -18,13 +18,13 @@ const init = ({ columns, rows }: {columns: number, rows: number}): FieldRecord =
     columns,
     cells: initCells(columns, rows),
   }
-};
+}
 
 const getCellsSumValue = (field: FieldRecord) => {
   return field.cells.reduce((result, cell) => cell.value !== 0
     ? result + CellRecordHelper.getViewValue(cell)
     : result, 0)
-};
+}
 
 const getCellPosition = (field: FieldRecord, cell: CellRecord): Maybe<Vector> => {
   const position = List.findIndex((cellOne) => cellOne.id === cell.id, field.cells)
@@ -34,7 +34,7 @@ const getCellPosition = (field: FieldRecord, cell: CellRecord): Maybe<Vector> =>
       y: Math.floor((position / field.columns)),
     }
   })
-};
+}
 
 const getCell = (field: FieldRecord, vector: Vector): CellRecord => {
   const cell = field.cells[vector.x + vector.y * field.columns]

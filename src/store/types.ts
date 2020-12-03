@@ -1,5 +1,4 @@
 import {StateType, ActionType} from 'typesafe-actions'
-
 import {ThunkAction} from 'redux-thunk'
 
 export type Store = StateType<typeof import('./index').store>

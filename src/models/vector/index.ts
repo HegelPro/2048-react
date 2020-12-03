@@ -1,4 +1,4 @@
-import { Codec, GetType, number } from "purify-ts"
+import { Codec, GetType, number } from 'purify-ts'
 
 export type Vector = GetType<typeof VectorSchema>
 

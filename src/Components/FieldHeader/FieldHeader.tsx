@@ -1,8 +1,7 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
-
-import State from '../../Containers/State'
-import ControlPanel from '../../Containers/ControlPanel'
+import State from '../../Containers/State/State'
+import ControlPanel from '../../Containers/ControlPanel/ControlPanel'
 
 const FieldHeader = () => (
   <Grid

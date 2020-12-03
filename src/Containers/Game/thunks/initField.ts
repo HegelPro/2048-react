@@ -1,9 +1,9 @@
-import selectRandomAvaibleCellPoint from "../../../engine/selectRandomAvaibleCellIndex";
-import { FieldRecordHelper } from "../../../models/field";
-import { FieldStateRecordHelper } from "../../../models/state";
-import { Thunk } from "../../../store/types";
-import { setFieldRecordsAction } from "../../State/actions";
-import { setCurrentFieldAction, setPreviousFieldAction } from "../actions";
+import selectRandomAvaibleCellPoint from '../../../engine/selectRandomAvaibleCellIndex'
+import { FieldRecordHelper } from '../../../models/field'
+import { FieldStateRecordHelper } from '../../../models/state'
+import { Thunk } from '../../../store/types'
+import { setFieldRecordsAction } from '../../State/actions'
+import { setCurrentFieldAction, setPreviousFieldAction } from '../actions'
 
 function initFieldThunk(): Thunk<void> {
     return function(dispatch, getState) {
@@ -21,7 +21,7 @@ function initFieldThunk(): Thunk<void> {
 
         const stateRecords = FieldStateRecordHelper.updateRecordValue(state.state, startField)
         dispatch(setFieldRecordsAction(stateRecords))
-    };
+    }
 }
 
 export default initFieldThunk

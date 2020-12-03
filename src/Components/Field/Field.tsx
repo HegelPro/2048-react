@@ -2,9 +2,9 @@ import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 import React from 'react'
 import { FieldRecord, FieldRecordHelper } from '../../models/field'
 import { FieldSettingsRecord } from '../../models/settings'
-import FieldBlock from '../../Blocks/FieldBlock'
+import FieldBlock from '../../Blocks/FieldBlock/FieldBlock'
 import { fieldSizes } from '../../Blocks/FieldBlock/config'
-import Cell from '../Cell'
+import Cell from '../Cell/Cell'
 
 interface FieldProps extends WithWidth {
   field: FieldRecord

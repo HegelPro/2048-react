@@ -1,9 +1,9 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
-import Field from '../../Containers/Game'
-import Settings from '../../Containers/Settings'
-import GameBlock from '../../Blocks/GameBlock'
-import NotFound from '../NotFound'
+import Field from '../../Containers/Game/Game'
+import Settings from '../../Containers/Settings/Settings'
+import GameBlock from '../../Blocks/GameBlock/GameBlock'
+import NotFound from '../NotFound/NotFound'
 
 const Main = () => (
   <GameBlock>
