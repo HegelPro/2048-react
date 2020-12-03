@@ -2,7 +2,7 @@ import {CellRecord, CellRecordHelper, CellRecordSchema} from '../cell'
 import {Vector} from '../vector'
 import {initCells} from './utils'
 import {Maybe, List, Codec, GetType, number, array} from 'purify-ts'
-import {update} from 'ramda'
+import { updateArray } from '../../utils/array'
 
 export type FieldRecord = GetType<typeof FieldSchema>
 
@@ -47,7 +47,9 @@ const setCell = (field: FieldRecord, vector: Vector, cell: CellRecord): FieldRec
   return {
     columns: field.columns,
     rows: field.rows,
-    cells: update(vector.x + vector.y * field.columns, {...cell, renderId: Math.random()}, field.cells)
+    cells: updateArray(vector.x + vector.y * field.columns)
+      ({...cell, renderId: Math.random()})
+      (field.cells)
   }
 }
 

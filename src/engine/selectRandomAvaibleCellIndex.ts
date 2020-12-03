@@ -1,6 +1,6 @@
 import { FieldRecord } from '../models/field'
 import { CellRecordHelper } from '../models/cell'
-import { update } from 'ramda'
+import { updateArray } from '../utils/array'
 
 export default function selectRandomAvaibleCellPoint(field: FieldRecord): FieldRecord {
   const avaibleCells = field.cells.filter((cell) => cell.value === 0)
@@ -11,7 +11,9 @@ export default function selectRandomAvaibleCellPoint(field: FieldRecord): FieldR
   return avaibleCells.length > 0
     ? {
       ...field,
-      cells: update(cellsIndex, CellRecordHelper.init({ value: Math.random() > 0.8 ? 2 : 1 }), field.cells),
+      cells: updateArray(cellsIndex)
+        (CellRecordHelper.init({ value: Math.random() > 0.8 ? 2 : 1 }))
+        (field.cells),
     }
     : field
 }

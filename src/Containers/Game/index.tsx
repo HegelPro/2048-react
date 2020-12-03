@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-
 import FieldView from '../../Components/Field'
 import { RootState } from '../../store/types'
 import FieldHeader from '../../Components/FieldHeader'
-
 import initFieldThunk from './thunks/initField'
 import { useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid'

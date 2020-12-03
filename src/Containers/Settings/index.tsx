@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
-
 import history from '../../setup/history'
 import { RootState } from '../../store/types'
 import initFieldThunk from '../Game/thunks/initField'
-
 import { avaibleSizesForField } from './config'
 import { setFieldSettingsAction } from './actions'
-import { Grid } from '@material-ui/core'
 
 const Settings = () => {
   const dispatch = useDispatch()

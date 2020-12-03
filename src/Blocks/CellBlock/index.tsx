@@ -1,4 +1,5 @@
-import { makeStyles, Theme } from '@material-ui/core'
+import { Theme } from '@material-ui/core'
+import makeStyles from '@material-ui/core/styles/makeStyles'
 import React, { useRef, useEffect } from 'react'
 
 import { Vector } from '../../models/vector'
