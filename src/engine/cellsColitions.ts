@@ -22,9 +22,14 @@ const cellsColitions = (diraction: Vector) =>
           if (FieldRecordHelper.hasCell(field, moveRight(iterPoint))) {
             iterPoint = moveRight(iterPoint)
 
+            const cellIter = FieldRecordHelper.getCell(field, iterPoint).extract()
+            const cellPostIter = FieldRecordHelper.getCell(field, postIterPoint).extract()
+
             if (
-              FieldRecordHelper.getCell(field, iterPoint).value > 0 &&
-              FieldRecordHelper.getCell(field, postIterPoint).value === FieldRecordHelper.getCell(field, iterPoint).value
+              cellIter &&
+              cellPostIter &&
+              cellIter.value > 0 &&
+              cellIter.value === cellPostIter.value
             ) {
               field = FieldRecordHelper.coalitionCells(field, iterPoint, postIterPoint)
 

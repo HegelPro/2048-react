@@ -3,36 +3,39 @@ import { setCurrentFieldAction } from '../Containers/Game/actions'
 import moveCellsThunk from '../Containers/Game/thunks/moveCells'
 import debounce from '../utils/debounce'
 import { Vector } from '../models/vector'
-import { store } from '.'
+import { store } from '../store'
 
 const debouncedMoveCells = debounce(
   (vector: Vector) => (moveCellsThunk(vector) as any)(store.dispatch, store.getState),
   100,
 )
 
-window.addEventListener('keydown', (event) => {
-  if (['w', 'ц', 'ArrowUp'].some(key => key === event.key)) {
-    debouncedMoveCells(DIRACTIONS.UP)
-  }
-  
-  else if (['d', 'в', 'ArrowRight'].some(key => key === event.key)) {
-    debouncedMoveCells(DIRACTIONS.LEFT)
-  }
-  
-  else if (['s', 'ы', 'ArrowDown'].some(key => key === event.key)) {
-    debouncedMoveCells(DIRACTIONS.DOWN)
-  }
-  
-  else if (['a', 'ф', 'ArrowLeft'].some(key => key === event.key)) {
-    debouncedMoveCells(DIRACTIONS.RIGHT)
-  }
-})
+export const addMoveCellsEventListenerFromKeydown = () =>
+  window.addEventListener('keydown', (event) => {
+    if (['w', 'ц', 'ArrowUp'].some(key => key === event.key)) {
+      debouncedMoveCells(DIRACTIONS.UP)
+    }
+    
+    else if (['d', 'в', 'ArrowRight'].some(key => key === event.key)) {
+      debouncedMoveCells(DIRACTIONS.LEFT)
+    }
+    
+    else if (['s', 'ы', 'ArrowDown'].some(key => key === event.key)) {
+      debouncedMoveCells(DIRACTIONS.DOWN)
+    }
+    
+    else if (['a', 'ф', 'ArrowLeft'].some(key => key === event.key)) {
+      debouncedMoveCells(DIRACTIONS.RIGHT)
+    }
+  })
 
-window.addEventListener('keydown', (event) => {
-  if (['Backspace'].some(key => key === event.key)) {
-    store.dispatch(setCurrentFieldAction(store.getState().field.previous))
-  }
-})
+export const addReturnFieldEventListenerFromKeydown = () => {
+  window.addEventListener('keydown', (event) => {
+    if (['Backspace'].some(key => key === event.key)) {
+      store.dispatch(setCurrentFieldAction(store.getState().field.previous))
+    }
+  })
+}
 
 // import { DIRACTIONS } from '../../../models/vector/constants'
 // import { Epic } from '../../../store/types'

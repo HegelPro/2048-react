@@ -1,5 +1,4 @@
 import { selectIterationStartPoint } from './iteratetion'
-
 import { FieldRecord, FieldRecordHelper } from '../models/field'
 import { Vector, VectorHelpers } from '../models/vector'
 
@@ -23,8 +22,9 @@ const cellsMover = (diraction: Vector) => {
         iterPoint = moveRight(iterPoint)
 
         while (
-          FieldRecordHelper.getCell(field, iterPoint).value > 0
-          &&  FieldRecordHelper.getCell(field, postIterPoint).value === 0
+          // TODO remove default -1
+          FieldRecordHelper.getCell(field, iterPoint).map(({value}) => value).orDefault(-1) > 0 &&
+          FieldRecordHelper.getCell(field, postIterPoint).map(({value}) => value).orDefault(-1) === 0
         ) {
           field = FieldRecordHelper.swapeCells(field, postIterPoint, iterPoint)
 

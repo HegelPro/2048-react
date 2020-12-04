@@ -5,8 +5,6 @@ import Layout from './Blocks/Layout/Layout'
 import Providers from './setup/Providers'
 import Main from './Components/Main/Main'
 
-import './store/eventHandlers'
-
 const App = () => (
   <Providers>
     <Layout>

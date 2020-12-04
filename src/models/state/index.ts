@@ -9,35 +9,38 @@ export const FieldStateSchema = array(RecordElementSchema)
 
 const getRecordByPosition = (records: RecordElementRecord[]) =>
   (position: Vector): Maybe<RecordElementRecord> =>
-    List.find((record) => VectorHelpers.equals(position)(record.position), records)
+    List.find(
+      (record) => VectorHelpers.equals(position)(record.position),
+      records,
+    )
 
 const updateRecordValue = (records: RecordElementRecord[], field: FieldRecord): RecordElementRecord[] => {
   const recordPosition: Vector = VectorHelpers.normolize({
     x: field.columns,
     y: field.rows,
   })
-  const prevRecordValue = getRecordByPosition(records)(recordPosition).extract()
+
+  const prevRecordValue = getRecordByPosition(records)(recordPosition)
+
   const cellsValueSum = FieldRecordHelper.getCellsSumValue(field)
 
-  if (prevRecordValue) {
-    if (cellsValueSum > prevRecordValue.value) {
-      const newRecords = records.reduce<RecordElementRecord[]>((res, cur) => {
-        if (VectorHelpers.equals(cur.position)(recordPosition)) {
-          return [...res, {...cur, value: cellsValueSum}]
-        }
-        return [...res, cur]
-      }, [])
-      
-      return newRecords
-    }
-
-    return records
-  }
-
-  return [...records, {
-    value: cellsValueSum,
-    position: recordPosition,
-  }]
+  return prevRecordValue
+    .map(({value}) => {
+      return cellsValueSum > value
+        ? records.reduce<RecordElementRecord[]>((res, cur) =>
+            VectorHelpers.equals(cur.position)(recordPosition)
+              ? [...res, {...cur, value: cellsValueSum}]
+              : [...res, cur]
+          , [])
+        : records
+    })
+    .orDefault([
+      ...records,
+      {
+        value: cellsValueSum,
+        position: recordPosition,
+      },
+    ])
 }
 
 export const FieldStateRecordHelper = {

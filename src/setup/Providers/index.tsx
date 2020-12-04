@@ -7,6 +7,12 @@ import {theme} from '../theme'
 import {store} from '../../store'
 import history from '../history'
 
+import {addMoveCellsEventListenerFromKeydown, addReturnFieldEventListenerFromKeydown} from '../eventHandlers'
+
+// Add global event listeners
+addReturnFieldEventListenerFromKeydown()
+addMoveCellsEventListenerFromKeydown()
+
 interface IProps {
   children: React.ReactNode,
 }

@@ -30,6 +30,7 @@ const Settings = () => {
           onChange={({ target: { value } }) => setRowsInputValue(+value)}
         >{menuItemsForSelectors}</TextField>
       </Grid>
+
       <Grid item>
         <TextField
           select
@@ -40,19 +41,19 @@ const Settings = () => {
           onChange={({ target: { value } }) => setColumnsInputValue(+value)}
         >{menuItemsForSelectors}</TextField>
       </Grid>
+
       <Grid item>
         <Button
           color='primary'
           variant='contained'
           onClick={() => {
-            // Не помню почему
-            localStorage.clear()
             dispatch(setFieldSettingsAction({
               rows: rowsInputValue,
               columns: columnsInputValue,
             }))
-            dispatch(initFieldThunk())
-            history.push('/')
+            dispatch(initFieldThunk(() => {
+              history.push('/')
+            }))
           }}
         >Submit</Button>
       </Grid>
