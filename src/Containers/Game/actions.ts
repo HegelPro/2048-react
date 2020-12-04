@@ -1,5 +1,5 @@
 import { createAction } from 'typesafe-actions'
-import { FieldRecord } from '../../models/field'
+import { FieldRecord } from '../../models/field/schema'
 
 export const initFieldAction = createAction('field/INIT_FIELD')()
 

@@ -1,14 +1,15 @@
+import { FieldRecord } from '../models/field/schema'
+import FieldRecordHelper from '../models/field/helpers'
+import { Vector } from '../models/vector/schema'
+import VectorHelpers from '../models/vector/helpers'
 import { selectIterationStartPoint } from './iteratetion'
-
-import { FieldRecord, FieldRecordHelper } from '../models/field'
-import { Vector, VectorHelpers } from '../models/vector'
 
 const cellsColitions = (diraction: Vector) =>
   {
     const moveRight = VectorHelpers.plus(diraction)
     const moveLeft = VectorHelpers.minus(diraction)
     const Deg90 = Math.PI / 2
-    const topDiraction = VectorHelpers.turn(Deg90, 1)(diraction)
+    const topDiraction = VectorHelpers.turn(Deg90, 1, diraction)
     const moveTop = VectorHelpers.plus(topDiraction)
     
     return (field: FieldRecord) =>

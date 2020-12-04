@@ -1,6 +1,6 @@
 import { DIRACTIONS } from '../../models/vector/constants'
-import { initCells } from '../../models/field/utils'
-import { FieldRecord } from '../../models/field'
+import FieldRecordHelper from '../../models/field/helpers'
+import { FieldRecord } from '../../models/field/schema'
 import { selectIterationStartPoint } from '../iteratetion'
 
 const mockRows = 5
@@ -9,7 +9,7 @@ const mockColumns = 4
 const mockField: FieldRecord = {
   rows: mockRows,
   columns: mockColumns,
-  cells: initCells(mockRows, mockColumns),
+  cells: FieldRecordHelper.initCells(mockRows, mockColumns),
 }
 
 describe('iteratetion()', () => {

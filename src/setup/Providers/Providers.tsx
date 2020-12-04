@@ -4,7 +4,7 @@ import {Provider} from 'react-redux'
 import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import {theme} from '../theme'
-import {store} from '../../store'
+import {store} from '../../store/store'
 import history from '../history'
 import {
   addMoveCellsHandlersFromKeydown,

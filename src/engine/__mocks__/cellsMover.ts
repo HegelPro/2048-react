@@ -1,4 +1,4 @@
-import { FieldRecord } from '../../models/field'
+import { FieldRecord } from '../../models/field/schema'
 import { DIRACTIONS } from '../../models/vector/constants'
 import cellsMover from '../cellsMover'
 

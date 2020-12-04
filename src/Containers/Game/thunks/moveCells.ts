@@ -1,10 +1,10 @@
 import { Thunk } from '../../../store/types'
 import doNextGameStep from '../../../engine/doNextGameStep'
 import selectRandomAvaibleCellPoint from '../../../engine/selectRandomAvaibleCellIndex'
-import { FieldStateRecordHelper } from '../../../models/state'
+import FieldStateRecordHelper from '../../../models/state/helpers'
 import { setFieldRecordsAction } from '../../State/actions'
 import { setCurrentFieldAction, setPreviousFieldAction } from '../actions'
-import { Vector } from '../../../models/vector'
+import { Vector } from '../../../models/vector/schema'
 
 function moveCellsThunk(diraction: Vector): Thunk<void> {
   return function(dispatch, getState) {

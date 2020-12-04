@@ -1,6 +1,6 @@
 import selectRandomAvaibleCellPoint from '../../../engine/selectRandomAvaibleCellIndex'
-import { FieldRecordHelper } from '../../../models/field'
-import { FieldStateRecordHelper } from '../../../models/state'
+import FieldRecordHelper from '../../../models/field/helpers'
+import FieldStateRecordHelper from '../../../models/state/helpers'
 import { Thunk } from '../../../store/types'
 import { setFieldRecordsAction } from '../../State/actions'
 import { setCurrentFieldAction, setPreviousFieldAction } from '../actions'

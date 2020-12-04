@@ -1,7 +1,6 @@
 import cellsMover from './cellsMover'
 import cellsColitions from './cellsColitions'
-
-import { Vector } from '../models/vector'
+import { Vector } from '../models/vector/schema'
 import { compose } from 'redux'
 
 const doNextGameStep = (diraction: Vector) =>

@@ -1,7 +1,8 @@
 import Typography from '@material-ui/core/Typography'
 import React from 'react'
-import { CellRecord, CellRecordHelper } from '../../models/cell'
-import { Vector } from '../../models/vector'
+import { CellRecord } from '../../models/cell/schema'
+import CellRecordHelper from '../../models/cell/helpers'
+import { Vector } from '../../models/vector/schema'
 import CellBlock from '../../Blocks/CellBlock/CellBlock'
 import { useStyles } from './styles'
 

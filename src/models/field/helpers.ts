@@ -1,17 +1,23 @@
-import {CellRecord, CellRecordHelper, CellRecordSchema} from '../cell'
-import {Vector} from '../vector'
-import {initCells} from './utils'
-import {Maybe, List, Codec, GetType, number, array, Just, Nothing} from 'purify-ts'
+import {CellRecord} from '../cell/schema'
+import CellRecordHelper from '../cell/helpers'
+import {Vector} from '../vector/schema'
+import {Maybe, List, Just, Nothing} from 'purify-ts'
 import { updateArray } from '../../utils/array'
+import curry from '../../utils/curry'
+import { FieldRecord } from './schema'
 
-export type FieldRecord = GetType<typeof FieldSchema>
-
-export const FieldSchema = Codec.interface({
+const initCells = curry((
   columns: number,
   rows: number,
-  cells: array(CellRecordSchema),
+): CellRecord[] => {
+  let cellList = []
+  for (let y = 0; y < rows * columns; y++) {
+    cellList.push(
+      CellRecordHelper.init({ value: 0 }),
+    )
+  }
+  return cellList
 })
-
 const init = ({ columns, rows }: {columns: number, rows: number}): FieldRecord => {
   return {
     rows,
@@ -26,7 +32,7 @@ const getCellsSumValue = (field: FieldRecord): number => {
     : result, 0)
 }
 
-const getCellPosition = (field: FieldRecord, cell: CellRecord): Maybe<Vector> => {
+const getCellPosition = curry((field: FieldRecord, cell: CellRecord): Maybe<Vector> => {
   const position = List.findIndex((cellOne) => cellOne.id === cell.id, field.cells)
   return position.map(position => {
     return {
@@ -34,9 +40,9 @@ const getCellPosition = (field: FieldRecord, cell: CellRecord): Maybe<Vector> =>
       y: Math.floor((position / field.columns)),
     }
   })
-}
+})
 
-const getCell = (field: FieldRecord, vector: Vector): Maybe<CellRecord> => {
+const getCell = curry((field: FieldRecord, vector: Vector): Maybe<CellRecord> => {
   const cell = field.cells[vector.x + vector.y * field.columns]
   return vector.x >= 0
     && vector.y >= 0
@@ -44,8 +50,8 @@ const getCell = (field: FieldRecord, vector: Vector): Maybe<CellRecord> => {
     && vector.y < field.rows
       ? Just(cell)
       : Nothing
-}
-const setCell = (field: FieldRecord, vector: Vector, cell: CellRecord): FieldRecord => {
+})
+const setCell = curry((field: FieldRecord, vector: Vector, cell: CellRecord): FieldRecord => {
   return {
     columns: field.columns,
     rows: field.rows,
@@ -53,10 +59,10 @@ const setCell = (field: FieldRecord, vector: Vector, cell: CellRecord): FieldRec
       ({...cell, renderId: Math.random()})
       (field.cells)
   }
-}
+})
 
 
-const swapeCells = (field: FieldRecord, vectorOne: Vector, vectorTwo: Vector): FieldRecord => {
+const swapeCells = curry((field: FieldRecord, vectorOne: Vector, vectorTwo: Vector): FieldRecord => {
   return getCell(field, vectorOne)
     .chain(firstCell =>
       getCell(field, vectorTwo)
@@ -75,9 +81,9 @@ const swapeCells = (field: FieldRecord, vectorOne: Vector, vectorTwo: Vector): F
             )
     )
     .orDefault(field)
-}
+})
 
-const coalitionCells = (field: FieldRecord, vectorOne: Vector, vectorTwo: Vector): FieldRecord => {
+const coalitionCells = curry((field: FieldRecord, vectorOne: Vector, vectorTwo: Vector): FieldRecord => {
   return getCell(field, vectorOne)
     .chain(firstCell =>
       getCell(field, vectorTwo)
@@ -101,14 +107,16 @@ const coalitionCells = (field: FieldRecord, vectorOne: Vector, vectorTwo: Vector
       )
     )
     .orDefault(field)
-}
+})
 
-const hasCell = (field: FieldRecord, vector: Vector): boolean =>
+const hasCell = curry((field: FieldRecord, vector: Vector): boolean =>
   getCell(field, vector).isJust()
+)
 
 const zero: FieldRecord = {rows: 0, columns: 0, cells: []}
 
-export const FieldRecordHelper = {
+export default {
+  initCells,
   init,
 
   getCellsSumValue,

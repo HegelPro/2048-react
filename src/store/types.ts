@@ -1,7 +1,7 @@
 import {StateType, ActionType} from 'typesafe-actions'
 import {ThunkAction} from 'redux-thunk'
 
-export type Store = StateType<typeof import('./index').store>
+export type Store = StateType<typeof import('./store').store>
 
 export type RootActions = ActionType<
   typeof import('../Containers/Game/actions')

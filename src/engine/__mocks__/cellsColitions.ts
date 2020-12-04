@@ -1,4 +1,4 @@
-import { FieldRecord } from '../../models/field'
+import { FieldRecord } from '../../models/field/schema'
 import { initCellsFromArray } from '../__utils__'
 
 const mockCellsBeforeOne = [

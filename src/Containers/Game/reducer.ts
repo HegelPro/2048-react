@@ -1,6 +1,6 @@
 import { createReducer } from 'typesafe-actions'
-import { FieldDataRecord } from '../../models/data'
-import { FieldRecordHelper } from '../../models/field'
+import { FieldDataRecord } from '../../models/data/schema'
+import FieldRecordHelper from '../../models/field/helpers'
 import { RootActions } from '../../store/types'
 import { setCurrentFieldAction, setPreviousFieldAction } from './actions'
 

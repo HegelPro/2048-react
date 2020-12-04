@@ -1,10 +1,11 @@
-import { VectorHelpers, Vector } from '../models/vector'
-import { FieldRecord } from '../models/field'
+import { Vector } from '../models/vector/schema'
+import VectorHelpers from '../models/vector/helpers'
+import { FieldRecord } from '../models/field/schema'
 
 export const selectIterationStartPoint = (diraction: Vector) =>
   {
     const Deg90 = Math.PI / 2
-    const topDiraction = VectorHelpers.turn(Deg90, 1)(diraction)
+    const topDiraction = VectorHelpers.turn(Deg90, 1, diraction)
     return (field: FieldRecord): Vector =>
       {
         const x: number = topDiraction.x > 0 || diraction.x > 0

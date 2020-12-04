@@ -1,5 +1,5 @@
-import { FieldRecord } from '../models/field'
-import { CellRecordHelper } from '../models/cell'
+import { FieldRecord } from '../models/field/schema'
+import CellRecordHelper from '../models/cell/helpers'
 import { updateArray } from '../utils/array'
 
 export default function selectRandomAvaibleCellPoint(field: FieldRecord): FieldRecord {

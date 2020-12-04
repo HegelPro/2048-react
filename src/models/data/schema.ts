@@ -1,5 +1,5 @@
 import {Codec, GetType} from 'purify-ts'
-import {FieldSchema} from '../field'
+import {FieldSchema} from '../field/schema'
 
 export type FieldDataRecord = GetType<typeof FieldDataSchema>
 

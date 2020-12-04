@@ -1,5 +1,5 @@
 import {createReducer} from 'typesafe-actions'
-import {FieldSettingsRecord} from '../../models/settings'
+import {FieldSettingsRecord} from '../../models/settings/schema'
 import {RootActions} from '../../store/types'
 import { setFieldSettingsAction } from './actions'
 

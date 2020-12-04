@@ -1,4 +1,5 @@
-import { CellRecord, CellRecordHelper } from '../../models/cell'
+import { CellRecord } from '../../models/cell/schema'
+import CellRecordHelper from '../../models/cell/helpers'
 
 export function initCellsFromArray(array: number[]): CellRecord[] {
   return array.map((cellValue) => CellRecordHelper.init({ value: cellValue }))
