@@ -1,6 +1,6 @@
-import { Just, Maybe, Nothing } from "purify-ts"
-import { Vector, VectorHelpers } from "../../../models/vector"
-import { DIRACTIONS } from "../../../models/vector/constants"
+import { Just, Maybe, Nothing } from 'purify-ts'
+import { Vector, VectorHelpers } from '../../../models/vector'
+import { DIRACTIONS } from '../../../models/vector/constants'
 
 export function handleGesture(
   startPoint: Vector,

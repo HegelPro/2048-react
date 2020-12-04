@@ -1,4 +1,4 @@
-import {Vector, VectorHelpers} from '../index'
+import {VectorHelpers} from '../index'
 import {DIRACTIONS} from '../constants'
 
 describe('VectorHelpers', () => {
