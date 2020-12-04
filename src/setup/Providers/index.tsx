@@ -6,12 +6,18 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import {theme} from '../theme'
 import {store} from '../../store'
 import history from '../history'
+import {
+  addMoveCellsHandlersFromKeydown,
+  addMoveCellsHandlersFromMouse,
+  addMoveCellsHandlersFromTouch,
+  addReturnFieldHandlersFromKeydown,
+} from '../globalEvents/eventHandlers'
 
-import {addMoveCellsEventListenerFromKeydown, addReturnFieldEventListenerFromKeydown} from '../eventHandlers'
-
-// Add global event listeners
-addReturnFieldEventListenerFromKeydown()
-addMoveCellsEventListenerFromKeydown()
+// Add global event handlers
+addMoveCellsHandlersFromKeydown()
+addMoveCellsHandlersFromMouse()
+addMoveCellsHandlersFromTouch()
+addReturnFieldHandlersFromKeydown()
 
 interface IProps {
   children: React.ReactNode,
