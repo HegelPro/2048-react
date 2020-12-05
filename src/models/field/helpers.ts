@@ -5,6 +5,8 @@ import {Maybe, List, Just, Nothing} from 'purify-ts'
 import { updateArray } from '../../utils/array'
 import curry from '../../utils/curry'
 import { FieldRecord } from './schema'
+import { FieldSettingsRecord } from '../settings/schema'
+import selectRandomAvaibleCellPoint from '../../engine/selectRandomAvaibleCellIndex'
 
 const initCells = curry((
   columns: number,
@@ -24,6 +26,9 @@ const init = ({ columns, rows }: {columns: number, rows: number}): FieldRecord =
     columns,
     cells: initCells(columns, rows),
   }
+}
+const createStart = (settings: FieldSettingsRecord) => {
+  return selectRandomAvaibleCellPoint(init(settings))
 }
 
 const getCellsSumValue = (field: FieldRecord): number => {
@@ -113,11 +118,19 @@ const hasCell = curry((field: FieldRecord, vector: Vector): boolean =>
   getCell(field, vector).isJust()
 )
 
+const equals = curry((fieldOne: FieldRecord, fieldTwo: FieldRecord) => (
+  fieldOne.cells.every(({value}, index) => value === fieldTwo.cells[index].value)
+  && fieldOne.columns === fieldTwo.columns
+  && fieldOne.rows === fieldTwo.rows
+))
+
 const zero: FieldRecord = {rows: 0, columns: 0, cells: []}
 
-export default {
+const FieldHelpers = {
   initCells,
   init,
+
+  createStart,
 
   getCellsSumValue,
   getCellPosition,
@@ -130,5 +143,9 @@ export default {
   swapeCells,
   coalitionCells,
 
+  equals,
+
   zero,
 }
+
+export default FieldHelpers

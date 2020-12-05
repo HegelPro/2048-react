@@ -1,8 +1,6 @@
 import { DIRACTIONS } from '../../models/vector/constants'
 import doNextGameStep from '../doNextGameStep'
-
 import { cellsHaveTheSameValues } from '../__utils__'
-
 import {
   mockBeforeFieldOne,
   mockAfterFieldOne,

@@ -6,15 +6,24 @@ import {
 import thunk from 'redux-thunk'
 import LocalStorageService from '../utils/localStorage'
 import debounce from '../utils/debounce'
-import rootReducer, { rootStateShcema } from './reducers'
+import rootReducer, { defaultRootState } from './reducers'
+import { Nothing } from 'purify-ts'
+import {version} from '../../package.json'
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const initialStateFromLocalStorage = LocalStorageService.get('state', rootStateShcema.decode)
+const initialState = LocalStorageService.get('version')
   .toMaybe()
-  .extract()
+  .map(postVerion => postVerion === version)
+  .chain((isEqualsVersions) => isEqualsVersions
+    ? LocalStorageService.get('state').toMaybe()
+    : Nothing
+  )
+  .map(({field: {current, ...field}, ...state}) => ({...state, field: {...field, current, previous: current}}))
+  .orDefault(defaultRootState)
 
-const initialState = initialStateFromLocalStorage || {}
+LocalStorageService.set('version', version)
+
 
 const middleware = [thunk]
 
@@ -27,7 +36,7 @@ export const store = createStore(
 )
 
 const debouncedSaveLocalStorage = debounce(
-  () => LocalStorageService.set('state', store.getState(), rootStateShcema.encode),
+  () => LocalStorageService.set('state', store.getState()),
   100,
 )
 

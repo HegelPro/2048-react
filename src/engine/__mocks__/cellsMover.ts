@@ -1,8 +1,5 @@
 import { FieldRecord } from '../../models/field/schema'
-import { DIRACTIONS } from '../../models/vector/constants'
-import cellsMover from '../cellsMover'
-
-import { cellsHaveTheSameValues, initCellsFromArray } from '../__utils__'
+import { initCellsFromArray } from '../__utils__'
 
 const mockCellsBeforeOne = [
   0,

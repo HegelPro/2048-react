@@ -3,8 +3,7 @@ import {FieldSettingsRecord} from '../../models/settings/schema'
 import {RootActions} from '../../store/types'
 import { setFieldSettingsAction } from './actions'
 
-export default createReducer<FieldSettingsRecord, RootActions>({
-  rows: 4,
-  columns: 4
-})
+export const defaultSettingsState = {columns: 4, rows: 4}
+
+export default createReducer<FieldSettingsRecord, RootActions>(defaultSettingsState)
   .handleAction(setFieldSettingsAction, (_, action) => action.payload)

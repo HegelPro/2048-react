@@ -11,6 +11,7 @@ import initFieldThunk from '../Game/thunks/initField'
 import { RootState } from '../../store/types'
 import history from '../../setup/history'
 import {fabSizes} from './config'
+import FieldHelpers from '../../models/field/helpers'
 
 interface ControlPanelProps extends WithWidth {}
 
@@ -28,9 +29,7 @@ const ControlPanel = ({ width }: ControlPanelProps) => {
           aria-label='Previous Field'
           size={fabSizes[width]}
           onClick={() => dispatch(setCurrentFieldAction(prevField))}
-          // TODO поправить потом выкинута equal от IM.LIST
-          // сейчас проверяется ссылка
-          disabled={field.cells === prevField.cells}
+          disabled={FieldHelpers.equals(field, prevField)}
         >
           <Reply />
         </Fab>

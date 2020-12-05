@@ -3,20 +3,15 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../store/types'
 import FieldStateRecordHelper from '../../models/state/helpers'
 import Records from '../../Components/Records/Records'
-import { Vector } from '../../models/vector/schema'
-import VectorHelpers from '../../models/vector/helpers'
 
 const Field = () => {
   const records = useSelector((state: RootState) => state.state)
   const field = useSelector((state: RootState) => state.field.current)
 
-  // TODO закинуть в FieldStateRecordHelper.getRecordByPosition
-  const recordPosition: Vector = VectorHelpers.normolize({
+  const record = FieldStateRecordHelper.getRecordByPosition(records, {
     x: field.columns,
     y: field.rows,
-  })
-
-  const record = FieldStateRecordHelper.getRecordByPosition(records, recordPosition).extract()
+  }).extract()
 
   return (
     <Records

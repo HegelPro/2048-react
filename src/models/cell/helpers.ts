@@ -1,6 +1,6 @@
-import { CellRecord } from "./schema";
+import { CellRecord } from './schema'
 
-export default {
+const CellHelpers = {
   getViewValue: (cell: CellRecord) => Math.pow(2, cell.value),
   init: ({value}: {value: number}): CellRecord => ({
     value,
@@ -8,3 +8,5 @@ export default {
     renderId: Math.random(),
   }),
 }
+
+export default CellHelpers

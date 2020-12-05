@@ -1,6 +1,5 @@
 import { DIRACTIONS } from '../../models/vector/constants'
 import cellsColitions from '../cellsColitions'
-
 import { cellsHaveTheSameValues } from '../__utils__'
 import {
   mockBeforeFieldOne,

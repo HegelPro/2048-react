@@ -6,20 +6,22 @@ import { RecordElementRecord } from '../recordElement/schema'
 import {List, Maybe} from 'purify-ts'
 import curry from '../../utils/curry'
 
-const getRecordByPosition = curry((records: RecordElementRecord[], position: Vector): Maybe<RecordElementRecord> =>
-  List.find(
-    (record) => VectorHelpers.equals(position, record.position),
+const getRecordByPosition = curry((records: RecordElementRecord[], position: Vector): Maybe<RecordElementRecord> => {
+  const normolizedPosition: Vector = VectorHelpers.normolize(position)
+
+  return List.find(
+    (record) => VectorHelpers.equals(normolizedPosition, record.position),
     records,
   )
-)
+})
 
 const updateRecordValue = curry((records: RecordElementRecord[], field: FieldRecord): RecordElementRecord[] => {
-  const recordPosition: Vector = VectorHelpers.normolize({
+  const normolizedPosition: Vector = VectorHelpers.normolize({
     x: field.columns,
     y: field.rows,
   })
 
-  const prevRecordValue = getRecordByPosition(records, recordPosition)
+  const prevRecordValue = getRecordByPosition(records, normolizedPosition)
 
   const cellsValueSum = FieldRecordHelper.getCellsSumValue(field)
 
@@ -27,7 +29,7 @@ const updateRecordValue = curry((records: RecordElementRecord[], field: FieldRec
     .map(({value}) => {
       return cellsValueSum > value
         ? records.reduce<RecordElementRecord[]>((res, cur) =>
-            VectorHelpers.equals(cur.position, recordPosition)
+            VectorHelpers.equals(cur.position, normolizedPosition)
               ? [...res, {...cur, value: cellsValueSum}]
               : [...res, cur]
           , [])
@@ -37,12 +39,14 @@ const updateRecordValue = curry((records: RecordElementRecord[], field: FieldRec
       ...records,
       {
         value: cellsValueSum,
-        position: recordPosition,
+        position: normolizedPosition,
       },
     ])
 })
 
-export default {
+const StateHelpers = {
   updateRecordValue,
   getRecordByPosition,
 }
+
+export default StateHelpers

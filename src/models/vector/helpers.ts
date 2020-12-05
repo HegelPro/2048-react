@@ -33,7 +33,7 @@ const normolize = (vector: Vector): Vector =>
     : image(vector)
 
 
-export default {
+const VectorHelpers = {
   image,
   opposed,
   turn,
@@ -43,3 +43,5 @@ export default {
   normolize,
   zero,
 }
+
+export default VectorHelpers
