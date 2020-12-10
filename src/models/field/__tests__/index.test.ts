@@ -7,6 +7,15 @@ describe('FieldRecordHelper', () => {
   const mockFieldThree = FieldRecordHelper.init({columns: 1, rows: 2})
   const mockFieldFour = FieldRecordHelper.init({columns: 3, rows: 3})
 
+  test('initCells()', () => {
+    expect(FieldRecordHelper.initCells(1, 1).length).toEqual(1)
+    expect(FieldRecordHelper.initCells(2, 1).length).toEqual(2)
+    expect(FieldRecordHelper.initCells(1, 2).length).toEqual(2)
+    expect(FieldRecordHelper.initCells(3, 3).length).toEqual(9)
+
+    expect(FieldRecordHelper.initCells(3, 3).every(({value}) => value === 0)).toBeTruthy()
+  })
+
   test('init()', () => {
     expect(mockFieldOne.columns).toEqual(1)
     expect(mockFieldOne.rows).toEqual(1)
