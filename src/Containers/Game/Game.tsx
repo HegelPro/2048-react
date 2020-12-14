@@ -11,7 +11,7 @@ const Game = () => {
   const fieldSettings = useSelector((state: RootState) => state.settings)
 
   return (
-    <Grid container spacing={1} direction="column">
+    <Grid container spacing={1} direction="column" alignItems="center">
       <Grid item>
         <FieldHeader />
       </Grid>
