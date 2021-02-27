@@ -9,16 +9,18 @@ import { FieldSettingsRecord } from '../settings/schema'
 import selectRandomAvaibleCellPoint from '../../engine/selectRandomAvaibleCellIndex'
 
 const initCells = curry((
-  columns: number,
-  rows: number,
-): CellRecord[] => {
-  let cellList = []
-  for (let y = 0; y < rows * columns; y++) {
-    cellList.push(
-      CellRecordHelper.init({ value: 0 }),
-    )
+  columnsNumber: number,
+  rowsNumber: number,
+): CellRecord[][] => {
+  let columns: CellRecord[][] = []
+  for (let y = 0; y < columnsNumber; y++) {
+    const row: CellRecord[] = []
+    for (let x = 0; x < rowsNumber; x++) {
+      row.push(CellRecordHelper.init({ value: 0 }))
+    }
+    columns.push(row)
   }
-  return cellList
+  return columns
 })
 const init = ({ columns, rows }: {columns: number, rows: number}): FieldRecord => {
   return {
@@ -32,53 +34,63 @@ const createStart = (settings: FieldSettingsRecord) => {
 }
 
 const getCellsSumValue = (field: FieldRecord): number => {
-  return field.cells.reduce((result, cell) => cell.value !== 0
-    ? result + CellRecordHelper.getViewValue(cell)
-    : result, 0)
+  return field.cells.reduce(
+    (accRow, row)  => accRow + row.reduce(
+      (accCell, cell) => cell.value !== 0
+        ? accCell + CellRecordHelper.getViewValue(cell)
+        : accCell,
+        0,
+      ),
+    0,
+  )
 }
 
 const getCellPosition = curry((field: FieldRecord, cell: CellRecord): Maybe<Vector> => {
-  const position = List.findIndex((cellOne) => cellOne.id === cell.id, field.cells)
-  return position.map(position => {
-    return {
-      x: position % field.columns,
-      y: Math.floor((position / field.columns)),
-    }
-  })
+  const vector = field.cells.reduce<Maybe<Vector>>(
+    (accRow, row, y) => accRow.alt(
+      row.reduce<Maybe<Vector>>(
+        (accCell, cellOne, x) =>
+          accCell.alt(cellOne.id === cell.id
+            ? Just({x, y})
+            : Nothing
+          ),
+        Nothing,
+      )
+    ),
+    Nothing,
+  )
+  return vector
 })
-
-const getCell = curry((field: FieldRecord, vector: Vector): Maybe<CellRecord> => {
-  const cell = field.cells[vector.x + vector.y * field.columns]
-  return vector.x >= 0
-    && vector.y >= 0
-    && vector.x < field.columns
-    && vector.y < field.rows
-      ? Just(cell)
-      : Nothing
-})
-const setCell = curry((field: FieldRecord, vector: Vector, cell: CellRecord): FieldRecord => {
+const setCellByPosition = curry((field: FieldRecord, position: Vector, cell: CellRecord): FieldRecord => {
   return {
-    columns: field.columns,
-    rows: field.rows,
-    cells: updateArray(vector.x + vector.y * field.columns)
-      ({...cell, renderId: Math.random()})
-      (field.cells)
+    ...field,
+    cells: field.cells.map((row, y) =>
+      row.map((cellOne, x) =>
+        position.x === x && position.y === y
+          ? {...cell, renderId: Math.random()}
+          : cellOne
+      )
+    )
   }
 })
 
+const getCell = curry((field: FieldRecord, vector: Vector): Maybe<CellRecord> => {
+  return List.at(vector.y, field.cells)
+    .chain(row => List.at(vector.x, row))
+})
 
 const swapeCells = curry((field: FieldRecord, vectorOne: Vector, vectorTwo: Vector): FieldRecord => {
   return getCell(field, vectorOne)
     .chain(firstCell =>
       getCell(field, vectorTwo)
         .map(secondCell =>
-          setCell(
+          setCellByPosition(
             field,
             vectorOne,
             secondCell,
           ))
             .map(newField =>
-              setCell(
+              setCellByPosition(
                 newField,
                 vectorTwo,
                 firstCell,
@@ -93,7 +105,7 @@ const coalitionCells = curry((field: FieldRecord, vectorOne: Vector, vectorTwo: 
     .chain(firstCell =>
       getCell(field, vectorTwo)
         .map(secondCell =>
-          setCell(
+          setCellByPosition(
             field,
             vectorTwo,
             {
@@ -105,7 +117,7 @@ const coalitionCells = curry((field: FieldRecord, vectorOne: Vector, vectorTwo: 
         )
     )
     .map(newField =>
-      setCell(
+      setCellByPosition(
         newField,
         vectorOne,
         CellRecordHelper.init({ value: 0 }),
@@ -119,7 +131,11 @@ const hasCell = curry((field: FieldRecord, vector: Vector): boolean =>
 )
 
 const equals = curry((fieldOne: FieldRecord, fieldTwo: FieldRecord) => (
-  fieldOne.cells.every(({value}, index) => value === fieldTwo.cells[index].value)
+  fieldOne.cells.every(
+    (row, y) => row.every(
+      ({value}, x) => value === fieldTwo.cells[y][x].value
+    )
+  )
   && fieldOne.columns === fieldTwo.columns
   && fieldOne.rows === fieldTwo.rows
 ))
@@ -133,10 +149,11 @@ const FieldHelpers = {
   createStart,
 
   getCellsSumValue,
+
   getCellPosition,
+  setCellByPosition,
 
   getCell,
-  setCell,
 
   hasCell,
 

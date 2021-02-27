@@ -6,5 +6,5 @@ export type FieldRecord = GetType<typeof FieldSchema>
 export const FieldSchema = Codec.interface({
   columns: number,
   rows: number,
-  cells: array(CellRecordSchema),
+  cells: array(array(CellRecordSchema)),
 })

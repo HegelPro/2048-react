@@ -2,15 +2,15 @@ import { FieldRecord } from '../../models/field/schema'
 import { initCellsFromArray } from '../__utils__'
 
 const mockCellsBeforeOne = [
-  0,
-  1,
-  2,
+  [0],
+  [1],
+  [2],
 ]
 
 const mockCellsAfterOne = [
-  0,
-  1,
-  2,
+  [0],
+  [1],
+  [2],
 ]
 
 export const mockBeforeFieldOne: FieldRecord = {
@@ -26,23 +26,23 @@ export const mockAfterFieldOne: FieldRecord = {
 }
 
 const mockCellsBeforeTwo = [
-  0, 0,
-  1, 0,
-  0, 1,
-  1, 1,
-  1, 2,
-  2, 1,
-  2, 2,
+  [0, 0],
+  [1, 0],
+  [0, 1],
+  [1, 1],
+  [1, 2],
+  [2, 1],
+  [2, 2],
 ]
 
 const mockCellsAfterTwo = [
-  0, 0,
-  0, 1,
-  0, 1,
-  1, 1,
-  1, 2,
-  2, 1,
-  2, 2,
+  [0, 0],
+  [0, 1],
+  [0, 1],
+  [1, 1],
+  [1, 2],
+  [2, 1],
+  [2, 2],
 ]
 
 export const mockBeforeFieldTwo: FieldRecord = {
@@ -58,25 +58,25 @@ export const mockAfterFieldTwo: FieldRecord = {
 }
 
 const mockCellsBeforeThree = [
-  0, 0, 0,
-  1, 0, 0,
-  0, 1, 0,
-  0, 0, 1,
-  1, 1, 0,
-  0, 1, 1,
-  1, 0, 1,
-  1, 1, 1,
+  [0, 0, 0],
+  [1, 0, 0],
+  [0, 1, 0],
+  [0, 0, 1],
+  [1, 1, 0],
+  [0, 1, 1],
+  [1, 0, 1],
+  [1, 1, 1],
 ]
 
 const mockCellsAfterThree = [
-  0, 0, 0,
-  0, 0, 1,
-  0, 0, 1,
-  0, 0, 1,
-  0, 1, 1,
-  0, 1, 1,
-  0, 1, 1,
-  1, 1, 1,
+  [0, 0, 0],
+  [0, 0, 1],
+  [0, 0, 1],
+  [0, 0, 1],
+  [0, 1, 1],
+  [0, 1, 1],
+  [0, 1, 1],
+  [1, 1, 1],
 ]
 
 export const mockBeforeFieldThree: FieldRecord = {

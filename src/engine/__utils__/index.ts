@@ -1,22 +1,24 @@
 import { CellRecord } from '../../models/cell/schema'
 import CellRecordHelper from '../../models/cell/helpers'
 
-export function initCellsFromArray(array: number[]): CellRecord[] {
-  return array.map((cellValue) => CellRecordHelper.init({ value: cellValue }))
+export function initCellsFromArray(array: number[][]): CellRecord[][] {
+  return array.map((row) => row.map(value => CellRecordHelper.init({ value })))
 }
 
 export function cellsHaveTheSameValues(
-  fieldOneCells: CellRecord[],
-  fieldTwoCells: CellRecord[],
+  fieldOneCells: CellRecord[][],
+  fieldTwoCells: CellRecord[][],
 ): boolean {
-  return fieldOneCells.every((oneCell, cellOneIndex) => {
-    const twoCell = fieldTwoCells[cellOneIndex]
-    if (twoCell) {
-      if (oneCell.value === twoCell.value) {
-        return true
+  return fieldOneCells.every((row, y) => {
+    return row.every((cell, x) => {
+      const twoCell = fieldTwoCells[y][x]
+      if (twoCell) {
+        if(cell.value === twoCell.value) {
+          return true
+        }
+        return false
       }
       return false
-    }
-    return false
+    })
   })
 }

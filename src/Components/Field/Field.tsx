@@ -25,22 +25,28 @@ const Field = ({
 
   return (
     <FieldBlock settings={settings}>
-      {field.cells.map((cell) => {
-        const currentPosition = FieldRecordHelper.getCellPosition(field, cell)
-        const previousPosition = FieldRecordHelper.getCellPosition(prevField, cell)
+      {field.cells.reduce<React.ReactNodeArray>((accRow, row) => {
+        return accRow.concat(
+          row.reduce<React.ReactNodeArray>((accCell, cell) => {
+            const currentPosition = FieldRecordHelper.getCellPosition(field, cell)
+            const previousPosition = FieldRecordHelper.getCellPosition(prevField, cell)
 
-        return cell.value
-          ? (
-            <Cell
-              key={cell.renderId}
-              cell={cell}
-              size={cellSize}
-              currentPosition={currentPosition.extract()}
-              previousPosition={previousPosition.extract()}
-            />
-          )
-          : null
-      })}
+            accCell.push(cell.value
+              ? (
+                <Cell
+                  key={cell.renderId}
+                  cell={cell}
+                  size={cellSize}
+                  currentPosition={currentPosition.extract()}
+                  previousPosition={previousPosition.extract()}
+                />
+              )
+              : null
+            )
+            return accCell
+          }, [])
+        ) 
+      }, [])}
     </FieldBlock>
   )
 }
