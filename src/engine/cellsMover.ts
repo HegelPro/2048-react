@@ -14,22 +14,17 @@ const moveRow = (
   iterPoint: Vector,
 ): [FieldRecord, Vector] => {
   return FieldHelpers.getCell(field, iterPoint)
-    .map(({value}) => value  > 0)
-    .chain(flagOne => FieldHelpers.getCell(field, postIterPoint)
-      .map(({value}) => value === 0)
-      .map(flagTwo => flagOne && flagTwo)
-    )
-    .chain(flag => {
-      if (flag) {
-        // TODO убрать postIterPoint, iterPoint
-        const newfield = FieldHelpers.swapeCells(field, postIterPoint, iterPoint)
-
-        const newiterPoint = moveLeftWhileCan(iterPoint)
-        return Just(moveRow(newfield, moveLeftWhileCan, postIterPoint, newiterPoint))
-      } else {
+    .chain(cellOne => FieldHelpers.getCell(field, postIterPoint)
+      .chain(cellTwo => {
+        if (cellOne.value  > 0 && cellTwo.value === 0) {
+          const newfield = FieldHelpers.swapeCells(field, cellOne, cellTwo)
+  
+          const newiterPoint = moveLeftWhileCan(iterPoint)
+          return Just(moveRow(newfield, moveLeftWhileCan, postIterPoint, newiterPoint))
+        }
         return Nothing
-      }
-    })
+      })
+    )
     .orDefault([field, iterPoint])
 }
 

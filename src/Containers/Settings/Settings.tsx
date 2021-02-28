@@ -16,7 +16,7 @@ const Settings = () => {
   const [rowsInputValue, setRowsInputValue] = useState(fieldSettings.rows)
   const [columnsInputValue, setColumnsInputValue] = useState(fieldSettings.columns)
 
-  const menuItemsForSelectors = avaibleSizesForField.map((elem) => <MenuItem key={elem} value={elem}>{elem}</MenuItem>)
+  const menuItemsForSelectors = avaibleSizesForField.map(elem => <MenuItem key={elem} value={elem}>{elem}</MenuItem>)
 
   return (
     <Grid container spacing={1} direction="column">

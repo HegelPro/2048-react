@@ -5,12 +5,13 @@ import CellRecordHelper from '../../models/cell/helpers'
 import { Vector } from '../../models/vector/schema'
 import CellBlock from '../../Blocks/CellBlock/CellBlock'
 import { useStyles } from './styles'
+import { Maybe } from 'purify-ts'
 
 export interface CellProps {
   cell: CellRecord
   size: number
-  currentPosition?: Vector
-  previousPosition?: Vector
+  currentPosition: Maybe<Vector>
+  previousPosition: Maybe<Vector>
 }
 
 const Cell = (props: CellProps) => {

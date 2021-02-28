@@ -10,13 +10,11 @@ import { Just, Nothing } from 'purify-ts'
 const colitionIfNeed = (field: FieldRecord, postIterPoint: Vector, iterPoint: Vector) => {
   return FieldHelpers.getCell(field, iterPoint)
     .chain(cellOne => FieldHelpers.getCell(field, postIterPoint)
-      .map((cellTwo) => cellOne.value > 0 && cellOne.value === cellTwo.value)
-    )
-    .chain(flag =>
-      flag
-        // TODO убрать postIterPoint, iterPoint
-        ? Just(FieldHelpers.coalitionCells(field, iterPoint, postIterPoint))
-        : Nothing
+      .chain(cellTwo =>
+        cellOne.value > 0 && cellOne.value === cellTwo.value
+          ? Just(FieldHelpers.coalitionCells(field, cellOne, cellTwo))
+          : Nothing
+      )
     )
     .orDefault(field)
 }

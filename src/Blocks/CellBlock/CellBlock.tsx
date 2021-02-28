@@ -1,5 +1,6 @@
 import { Theme } from '@material-ui/core'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import { Maybe } from 'purify-ts'
 import React, { useRef, useEffect } from 'react'
 
 import { Vector } from '../../models/vector/schema'
@@ -7,8 +8,8 @@ import { Vector } from '../../models/vector/schema'
 interface CellBlockProps {
   children: React.ReactNode
   size: number
-  currentPosition?: Vector
-  previousPosition?: Vector
+  currentPosition: Maybe<Vector>
+  previousPosition: Maybe<Vector>
 }
 
 const useStyles = makeStyles<Theme, CellBlockProps>(() => ({
@@ -31,33 +32,34 @@ const CellBlock = (props: CellBlockProps) => {
   const classes = useStyles(props)
   const ref = useRef<HTMLDivElement>(null)
 
-  let positionStyles: React.CSSProperties = {}
-
-  if (currentPosition) {
-    if (previousPosition) {
-      positionStyles = ({
-        top: `${size * previousPosition.y}px`,
-        left: `${size * previousPosition.x}px`,
-      })
-    } else {
-      positionStyles = ({
-        top: `${size * currentPosition.y}px`,
-        left: `${size * currentPosition.x}px`,
+  const positionStyles: React.CSSProperties = previousPosition
+    .map<React.CSSProperties>(prevPosition => ({
+      top: `${size * prevPosition.y}px`,
+      left: `${size * prevPosition.x}px`,
+    }))
+    .alt(currentPosition
+      .map(curPosition => ({
+        top: `${size * curPosition.y}px`,
+        left: `${size * curPosition.x}px`,
         transform: 'scale(0)',
-      })
-    }
-  }
+      }))
+    )
+    .orDefault({})
 
   useEffect(() => {
     setTimeout(() => {
-      if (currentPosition && ref.current) {
-        if (previousPosition) {
-          ref.current.style.top = `${size * currentPosition.y}px`
-          ref.current.style.left = `${size * currentPosition.x}px`
-        } else {
-          ref.current.style.transform = 'scale(1)'
-        }
-      }
+      Maybe.fromNullable(ref.current)
+        .ifJust(cellRef => currentPosition
+          .ifJust(extCur => previousPosition
+            .ifJust(() => {
+              cellRef.style.top = `${size * extCur.y}px`
+              cellRef.style.left = `${size * extCur.x}px`
+            })
+            .ifNothing(() => {
+              cellRef.style.transform = 'scale(1)'
+            })
+          )
+        )
     }, 0)
   })
 

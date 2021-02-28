@@ -1,12 +1,11 @@
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 import React from 'react'
 import { FieldRecord } from '../../models/field/schema'
-import FieldRecordHelper from '../../models/field/helpers'
+import FieldHelpers from '../../models/field/helpers'
 import { FieldSettingsRecord } from '../../models/settings/schema'
 import FieldBlock from '../../Blocks/FieldBlock/FieldBlock'
 import { fieldSizes } from '../../Blocks/FieldBlock/config'
 import Cell from '../Cell/Cell'
-import FieldHelpers from '../../models/field/helpers'
 
 interface FieldProps extends WithWidth {
   field: FieldRecord
@@ -29,8 +28,8 @@ const Field = ({
       {field.reduce<React.ReactNodeArray>((accRow, row) => {
         return accRow.concat(
           row.reduce<React.ReactNodeArray>((accCell, cell) => {
-            const currentPosition = FieldRecordHelper.getCellPosition(field, cell)
-            const previousPosition = FieldRecordHelper.getCellPosition(prevField, cell)
+            const currentPosition = FieldHelpers.getCellPosition(field, cell)
+            const previousPosition = FieldHelpers.getCellPosition(prevField, cell)
 
             accCell.push(cell.value
               ? (
@@ -38,8 +37,8 @@ const Field = ({
                   key={cell.renderId}
                   cell={cell}
                   size={cellSize}
-                  currentPosition={currentPosition.extract()}
-                  previousPosition={previousPosition.extract()}
+                  currentPosition={currentPosition}
+                  previousPosition={previousPosition}
                 />
               )
               : null

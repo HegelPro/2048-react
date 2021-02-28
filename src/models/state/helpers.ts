@@ -1,11 +1,10 @@
 import {FieldRecord} from '../field/schema'
-import FieldRecordHelper from '../field/helpers'
+import FieldHelpers from '../field/helpers'
 import { Vector } from '../vector/schema'
 import VectorHelpers from '../vector/helpers'
 import { RecordElementRecord } from '../recordElement/schema'
 import {List, Maybe} from 'purify-ts'
 import curry from '../../utils/curry'
-import FieldHelpers from '../field/helpers'
 
 const getRecordByPosition = curry((records: RecordElementRecord[], position: Vector): Maybe<RecordElementRecord> => {
   const normolizedPosition: Vector = VectorHelpers.normolize(position)
@@ -24,7 +23,7 @@ const updateRecordValue = curry((records: RecordElementRecord[], field: FieldRec
 
   const prevRecordValue = getRecordByPosition(records, normolizedPosition)
 
-  const cellsValueSum = FieldRecordHelper.getCellsSumValue(field)
+  const cellsValueSum = FieldHelpers.getCellsSumValue(field)
 
   return prevRecordValue
     .map(({value}) => {

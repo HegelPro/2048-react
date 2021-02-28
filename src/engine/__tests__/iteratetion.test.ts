@@ -1,12 +1,16 @@
 import { DIRACTIONS } from '../../models/vector/constants'
-import FieldRecordHelper from '../../models/field/helpers'
+import FieldHelpers from '../../models/field/helpers'
 import { FieldRecord } from '../../models/field/schema'
 import { selectIterationStartPoint } from '../iteratetion'
 
 const mockRows = 5
 const mockColumns = 4
 
-const mockField: FieldRecord = FieldRecordHelper.initCells(mockRows, mockColumns)
+// TODO swap rows and colunms
+const mockField: FieldRecord = FieldHelpers.init({
+  columns: mockRows,
+  rows: mockColumns,
+})
 
 describe('iteratetion()', () => {
   test('One on a line', () => {

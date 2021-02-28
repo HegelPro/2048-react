@@ -4,7 +4,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 import Typography from '@material-ui/core/Typography'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 import { FieldRecord } from '../../models/field/schema'
-import FieldRecordHelper from '../../models/field/helpers'
+import FieldHelpers from '../../models/field/helpers'
 import { RecordElementRecord } from '../../models/recordElement/schema'
 import { recordFontSizes } from './config'
 import * as strings from './strings'
@@ -51,7 +51,7 @@ const Records = ({
           color='primary'
           style={labelStyle}
         >
-          {`${strings.score}: ${FieldRecordHelper.getCellsSumValue(field)}`}
+          {`${strings.score}: ${FieldHelpers.getCellsSumValue(field)}`}
         </Typography>
       </Grid>
     </Grid>

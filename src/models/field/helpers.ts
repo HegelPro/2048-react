@@ -7,10 +7,7 @@ import { FieldRecord } from './schema'
 import { FieldSettingsRecord } from '../settings/schema'
 import selectRandomAvaibleCellPoint from '../../engine/selectRandomAvaibleCellIndex'
 
-const initCells = curry((
-  columnsNumber: number,
-  rowsNumber: number,
-): CellRecord[][] => {
+const init = curry(({ columns: columnsNumber, rows: rowsNumber }: {columns: number, rows: number}): FieldRecord => {
   let columns: CellRecord[][] = []
   for (let y = 0; y < columnsNumber; y++) {
     const row: CellRecord[] = []
@@ -21,9 +18,6 @@ const initCells = curry((
   }
   return columns
 })
-const init = ({ columns, rows }: {columns: number, rows: number}): FieldRecord => {
-  return initCells(columns, rows)
-}
 const createStart = (settings: FieldSettingsRecord) => {
   return selectRandomAvaibleCellPoint(init(settings))
 }
@@ -81,48 +75,44 @@ const getCell = curry((field: FieldRecord, vector: Vector): Maybe<CellRecord> =>
     .chain(row => List.at(vector.x, row))
 })
 
-const swapeCells = curry((field: FieldRecord, vectorOne: Vector, vectorTwo: Vector): FieldRecord => {
-  return getCell(field, vectorOne)
-    .chain(firstCell =>
-      getCell(field, vectorTwo)
-        .map(secondCell =>
+const swapeCells = curry((field: FieldRecord, oneCell: CellRecord, twoCell: CellRecord): FieldRecord => {
+  return FieldHelpers.getCellPosition(field, oneCell)
+    .chain(vectorOne => FieldHelpers.getCellPosition(field, twoCell)
+      .map(vectorTwo =>
+        setCellByPosition(
           setCellByPosition(
             field,
             vectorOne,
-            secondCell,
-          ))
-            .map(newField =>
-              setCellByPosition(
-                newField,
-                vectorTwo,
-                firstCell,
-              )
-            )
-    )
+            twoCell,
+          ),
+          vectorTwo,
+          oneCell,
+        )
+    ))
     .orDefault(field)
 })
 
-const coalitionCells = curry((field: FieldRecord, vectorOne: Vector, vectorTwo: Vector): FieldRecord => {
-  return getCell(field, vectorOne)
-    .chain(firstCell =>
-      getCell(field, vectorTwo)
-        .map(secondCell =>
-          setCellByPosition(
-            field,
-            vectorTwo,
-            {
-              ...secondCell,
-              id: firstCell.id,
-              value: secondCell.value + 1,
-            }
-          )
+const coalitionCells = curry((field: FieldRecord, oneCell: CellRecord, twoCell: CellRecord): FieldRecord => {
+  return FieldHelpers.getCellPosition(field, oneCell)
+    .chain(vectorOne => 
+        FieldHelpers.getCellPosition(field, twoCell)
+        .map(vectorTwo => 
+            setCellByPosition(
+              field,
+              vectorTwo,
+              {
+                ...twoCell,
+                id: oneCell.id,
+                value: twoCell.value + 1,
+              }
+            )
         )
-    )
-    .map(newField =>
-      setCellByPosition(
-        newField,
-        vectorOne,
-        CellRecordHelper.init({ value: 0 }),
+      .map(newField =>
+        setCellByPosition(
+          newField,
+          vectorOne,
+          CellRecordHelper.init({ value: 0 }),
+        )
       )
     )
     .orDefault(field)
@@ -146,7 +136,6 @@ const equals = curry((fieldOne: FieldRecord, fieldTwo: FieldRecord): boolean => 
 const zero: FieldRecord = []
 
 const FieldHelpers = {
-  initCells,
   init,
 
   createStart,
