@@ -6,11 +6,7 @@ import { selectIterationStartPoint } from '../iteratetion'
 const mockRows = 5
 const mockColumns = 4
 
-const mockField: FieldRecord = {
-  rows: mockRows,
-  columns: mockColumns,
-  cells: FieldRecordHelper.initCells(mockRows, mockColumns),
-}
+const mockField: FieldRecord = FieldRecordHelper.initCells(mockRows, mockColumns)
 
 describe('iteratetion()', () => {
   test('One on a line', () => {

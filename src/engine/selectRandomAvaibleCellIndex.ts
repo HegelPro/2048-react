@@ -4,7 +4,7 @@ import { CellRecord } from '../models/cell/schema'
 import FieldHelpers from '../models/field/helpers'
 
 export default function selectRandomAvaibleCellPoint(field: FieldRecord): FieldRecord {
-  const avaibleCells: CellRecord[] = field.cells.reduce<CellRecord[]>((accRow, row) => {
+  const avaibleCells: CellRecord[] = field.reduce<CellRecord[]>((accRow, row) => {
     return accRow.concat(
       row.reduce<CellRecord[]>((accCell, cell) => {
         if(cell.value === 0) {
@@ -17,6 +17,7 @@ export default function selectRandomAvaibleCellPoint(field: FieldRecord): FieldR
   const randonAvaibleCellIndex = Math.floor(Math.random() * avaibleCells.length)
   const selectedCell = avaibleCells[randonAvaibleCellIndex]
   const cellVector = FieldHelpers.getCellPosition(field, selectedCell)
+
   return cellVector.map(
     vector => FieldHelpers.setCellByPosition(
       field,

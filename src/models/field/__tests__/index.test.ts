@@ -29,38 +29,16 @@ describe('FieldRecordHelper', () => {
     expect(FieldRecordHelper.initCells(3, 3).every(row => row.every(({value}) => value === 0))).toBeTruthy()
   })
 
-  // test('init()', () => {
-  //   expect(mockFieldOne.columns).toEqual(1)
-  //   expect(mockFieldOne.rows).toEqual(1)
-  //   expect(mockFieldOne.cells.every(({value}) => value === 0)).toBeTruthy()
-
-  //   expect(mockFieldTwo.columns).toEqual(2)
-  //   expect(mockFieldTwo.rows).toEqual(1)
-  //   expect(mockFieldTwo.cells.every(({value}) => value === 0)).toBeTruthy()
-
-  //   expect(mockFieldThree.columns).toEqual(1)
-  //   expect(mockFieldThree.rows).toEqual(2)
-  //   expect(mockFieldThree.cells.every(({value}) => value === 0)).toBeTruthy()
-
-  //   expect(mockFieldFour.columns).toEqual(3)
-  //   expect(mockFieldFour.rows).toEqual(3)
-  //   expect(mockFieldFour.cells.every(({value}) => value === 0)).toBeTruthy()
-  // })
-
   test('setCell()', () => {
     const mockLocalFieldRecordOne = FieldRecordHelper.setCellByPosition(mockFieldOne, {x: 0, y: 0}, CellRecordHelper.init({value: 1}))
-    expect(mockLocalFieldRecordOne.cells[0][0].value).toEqual(1)
-    expect(mockLocalFieldRecordOne.cells[0].length).toEqual(1)
-    expect(mockLocalFieldRecordOne.cells.length).toEqual(1)
-    expect(mockLocalFieldRecordOne.rows).toEqual(1)
-    expect(mockLocalFieldRecordOne.columns).toEqual(1)
+    expect(mockLocalFieldRecordOne[0][0].value).toEqual(1)
+    expect(mockLocalFieldRecordOne[0].length).toEqual(1)
+    expect(mockLocalFieldRecordOne.length).toEqual(1)
     expect(mockLocalFieldRecordOne).not.toBe(mockFieldOne)
 
     const mockLocalFieldRecordTwo = FieldRecordHelper.setCellByPosition(mockFieldOne, {x: 1, y: 1}, CellRecordHelper.init({value: 1}))
-    expect(mockLocalFieldRecordTwo.cells[0][0].value).toEqual(0)
-    expect(mockLocalFieldRecordTwo.cells[0].length).toEqual(1)
-    expect(mockLocalFieldRecordTwo.cells.length).toEqual(1)
-    expect(mockLocalFieldRecordTwo.rows).toEqual(1)
-    expect(mockLocalFieldRecordTwo.columns).toEqual(1)
+    expect(mockLocalFieldRecordTwo[0][0].value).toEqual(0)
+    expect(mockLocalFieldRecordTwo[0].length).toEqual(1)
+    expect(mockLocalFieldRecordTwo.length).toEqual(1)
   })
 })

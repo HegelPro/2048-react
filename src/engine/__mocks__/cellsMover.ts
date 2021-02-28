@@ -13,17 +13,9 @@ const mockCellsAfterOne = [
   [2],
 ]
 
-export const mockBeforeFieldOne: FieldRecord = {
-  rows: 3,
-  columns: 1,
-  cells: initCellsFromArray(mockCellsBeforeOne),
-}
+export const mockBeforeFieldOne: FieldRecord = initCellsFromArray(mockCellsBeforeOne)
 
-export const mockAfterFieldOne: FieldRecord = {
-  rows: 3,
-  columns: 1,
-  cells: initCellsFromArray(mockCellsAfterOne),
-}
+export const mockAfterFieldOne: FieldRecord = initCellsFromArray(mockCellsAfterOne)
 
 const mockCellsBeforeTwo = [
   [0, 0],
@@ -45,17 +37,9 @@ const mockCellsAfterTwo = [
   [2, 2],
 ]
 
-export const mockBeforeFieldTwo: FieldRecord = {
-  rows: 7,
-  columns: 2,
-  cells: initCellsFromArray(mockCellsBeforeTwo),
-}
+export const mockBeforeFieldTwo: FieldRecord = initCellsFromArray(mockCellsBeforeTwo)
 
-export const mockAfterFieldTwo: FieldRecord = {
-  rows: 7,
-  columns: 2,
-  cells: initCellsFromArray(mockCellsAfterTwo),
-}
+export const mockAfterFieldTwo: FieldRecord = initCellsFromArray(mockCellsAfterTwo)
 
 const mockCellsBeforeThree = [
   [0, 0, 0],
@@ -79,14 +63,6 @@ const mockCellsAfterThree = [
   [1, 1, 1],
 ]
 
-export const mockBeforeFieldThree: FieldRecord = {
-  rows: 8,
-  columns: 3,
-  cells: initCellsFromArray(mockCellsBeforeThree),
-}
+export const mockBeforeFieldThree: FieldRecord = initCellsFromArray(mockCellsBeforeThree)
 
-export const mockAfterFieldThree: FieldRecord = {
-  rows: 8,
-  columns: 3,
-  cells: initCellsFromArray(mockCellsAfterThree),
-}
+export const mockAfterFieldThree: FieldRecord = initCellsFromArray(mockCellsAfterThree)

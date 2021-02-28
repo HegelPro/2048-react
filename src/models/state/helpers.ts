@@ -5,6 +5,7 @@ import VectorHelpers from '../vector/helpers'
 import { RecordElementRecord } from '../recordElement/schema'
 import {List, Maybe} from 'purify-ts'
 import curry from '../../utils/curry'
+import FieldHelpers from '../field/helpers'
 
 const getRecordByPosition = curry((records: RecordElementRecord[], position: Vector): Maybe<RecordElementRecord> => {
   const normolizedPosition: Vector = VectorHelpers.normolize(position)
@@ -17,8 +18,8 @@ const getRecordByPosition = curry((records: RecordElementRecord[], position: Vec
 
 const updateRecordValue = curry((records: RecordElementRecord[], field: FieldRecord): RecordElementRecord[] => {
   const normolizedPosition: Vector = VectorHelpers.normolize({
-    x: field.columns,
-    y: field.rows,
+    x: FieldHelpers.getColumns(field),
+    y: FieldHelpers.getRows(field),
   })
 
   const prevRecordValue = getRecordByPosition(records, normolizedPosition)

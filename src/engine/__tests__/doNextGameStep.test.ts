@@ -13,16 +13,16 @@ import {
 describe('cellsMover()', () => {
   test('One on a line', () => {
     const confrontedField = doNextGameStep(DIRACTIONS.LEFT)(mockBeforeFieldOne)
-    expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldOne.cells)).toEqual(true)
+    expect(cellsHaveTheSameValues(confrontedField, mockAfterFieldOne)).toEqual(true)
   })
 
   test('Two on a line', () => {
     const confrontedField = doNextGameStep(DIRACTIONS.LEFT)(mockBeforeFieldTwo)
-    expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldTwo.cells)).toEqual(true)
+    expect(cellsHaveTheSameValues(confrontedField, mockAfterFieldTwo)).toEqual(true)
   })
 
   test('Three on a line', () => {
     const confrontedField = doNextGameStep(DIRACTIONS.LEFT)(mockBeforeFieldThree)
-    expect(cellsHaveTheSameValues(confrontedField.cells, mockAfterFieldThree.cells)).toEqual(true)
+    expect(cellsHaveTheSameValues(confrontedField, mockAfterFieldThree)).toEqual(true)
   })
 })
