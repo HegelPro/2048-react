@@ -27,13 +27,13 @@ describe('FieldHelpers', () => {
   })
 
   test('setCell()', () => {
-    const mockLocalFieldRecordOne = FieldHelpers.setCellByPosition(mockFieldOne, {x: 0, y: 0}, CellRecordHelper.init({value: 1}))
+    const mockLocalFieldRecordOne = FieldHelpers.setCellByPosition(mockFieldOne, {x: 0, y: 0}, CellRecordHelper.init(1))
     expect(mockLocalFieldRecordOne[0][0].value).toEqual(1)
     expect(mockLocalFieldRecordOne[0].length).toEqual(1)
     expect(mockLocalFieldRecordOne.length).toEqual(1)
     expect(mockLocalFieldRecordOne).not.toBe(mockFieldOne)
 
-    const mockLocalFieldRecordTwo = FieldHelpers.setCellByPosition(mockFieldOne, {x: 1, y: 1}, CellRecordHelper.init({value: 1}))
+    const mockLocalFieldRecordTwo = FieldHelpers.setCellByPosition(mockFieldOne, {x: 1, y: 1}, CellRecordHelper.init(1))
     expect(mockLocalFieldRecordTwo[0][0].value).toEqual(0)
     expect(mockLocalFieldRecordTwo[0].length).toEqual(1)
     expect(mockLocalFieldRecordTwo.length).toEqual(1)
