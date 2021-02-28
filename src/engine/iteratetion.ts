@@ -1,12 +1,12 @@
+import FieldHelpers from '../models/field/helpers'
+import { FieldRecord } from '../models/field/schema'
 import { Vector } from '../models/vector/schema'
 import VectorHelpers from '../models/vector/helpers'
-import { FieldRecord } from '../models/field/schema'
 import curry from '../utils/curry'
-import FieldHelpers from '../models/field/helpers'
+import gradToRad from '../utils/gradToRad'
 
 export const selectIterationStartPoint = curry((diraction: Vector, field: FieldRecord): Vector => {
-  const Deg90 = Math.PI / 2
-  const topDiraction = VectorHelpers.turn(Deg90, 1, diraction)
+  const topDiraction = VectorHelpers.turn(gradToRad(90), 1, diraction)
   const x: number = topDiraction.x > 0 || diraction.x > 0
     ? 0
     : FieldHelpers.getColumns(field) - 1

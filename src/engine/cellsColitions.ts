@@ -1,11 +1,12 @@
-import { FieldRecord } from '../models/field/schema'
+import { Just, Nothing } from 'purify-ts'
 import FieldHelpers from '../models/field/helpers'
+import { FieldRecord } from '../models/field/schema'
 import { Vector } from '../models/vector/schema'
 import VectorHelpers from '../models/vector/helpers'
-import { selectIterationStartPoint } from './iteratetion'
 import curry from '../utils/curry'
+import gradToRad from '../utils/gradToRad'
 import moveWhileCan from './helpers/moveWhileCan'
-import { Just, Nothing } from 'purify-ts'
+import { selectIterationStartPoint } from './iteratetion'
 
 const colitionIfNeed = (field: FieldRecord, postIterPoint: Vector, iterPoint: Vector) => {
   return FieldHelpers.getCell(field, iterPoint)
@@ -23,8 +24,7 @@ const cellsColitions = curry((diraction: Vector, field: FieldRecord): FieldRecor
   const moveRight = VectorHelpers.plus(diraction)
   const moveLeft = VectorHelpers.minus(diraction)
   const moveLeftWhileCan = moveWhileCan(FieldHelpers.hasCell(field), moveLeft)
-  const Deg90 = Math.PI / 2
-  const topDiraction = VectorHelpers.turn(Deg90, 1, diraction)
+  const topDiraction = VectorHelpers.turn(gradToRad(90), 1, diraction)
   const moveTop = VectorHelpers.plus(topDiraction)
 
   let iterPoint = selectIterationStartPoint(diraction)(field)

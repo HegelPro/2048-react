@@ -1,7 +1,7 @@
-import cellsMover from './cellsMover'
-import cellsColitions from './cellsColitions'
-import { Vector } from '../models/vector/schema'
 import { FieldRecord } from '../models/field/schema'
+import { Vector } from '../models/vector/schema'
+import cellsColitions from './cellsColitions'
+import cellsMover from './cellsMover'
 import curry from '../utils/curry'
 
 const doNextGameStep = curry((diraction: Vector, field: FieldRecord): FieldRecord =>

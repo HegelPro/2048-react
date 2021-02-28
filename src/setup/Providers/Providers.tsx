@@ -1,17 +1,17 @@
-import React from 'react'
-import {Router} from 'react-router-dom'
-import {Provider} from 'react-redux'
-import ThemeProvider from '@material-ui/styles/ThemeProvider'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import {theme} from '../theme'
-import {store} from '../../store/store'
-import history from '../history'
 import {
   addMoveCellsHandlersFromKeydown,
   addMoveCellsHandlersFromMouse,
   addMoveCellsHandlersFromTouch,
   addReturnFieldHandlersFromKeydown,
 } from '../globalEvents/eventHandlers'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import {Provider} from 'react-redux'
+import React from 'react'
+import {Router} from 'react-router-dom'
+import ThemeProvider from '@material-ui/styles/ThemeProvider'
+import history from '../history'
+import {store} from '../../store/store'
+import {theme} from '../theme'
 
 // Add global event handlers
 addMoveCellsHandlersFromKeydown()

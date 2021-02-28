@@ -1,14 +1,14 @@
+import {
+  mockAfterFieldOne,
+  mockAfterFieldThree,
+  mockAfterFieldTwo,
+  mockBeforeFieldOne,
+  mockBeforeFieldThree,
+  mockBeforeFieldTwo,
+} from '../__mocks__/cellsColitions'
 import { DIRACTIONS } from '../../models/vector/constants'
 import cellsColitions from '../cellsColitions'
 import { cellsHaveTheSameValues } from '../__utils__'
-import {
-  mockBeforeFieldOne,
-  mockAfterFieldOne,
-  mockBeforeFieldTwo,
-  mockAfterFieldTwo,
-  mockBeforeFieldThree,
-  mockAfterFieldThree,
-} from '../__mocks__/cellsColitions'
 
 describe('cellsColitions()', () => {
   test('One on a line', () => {

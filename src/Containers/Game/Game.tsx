@@ -1,9 +1,9 @@
-import React from 'react'
-import FieldView from '../../Components/Field/Field'
-import { RootState } from '../../store/types'
 import FieldHeader from '../../Components/FieldHeader/FieldHeader'
-import { useSelector } from 'react-redux'
+import FieldView from '../../Components/Field/Field'
 import Grid from '@material-ui/core/Grid'
+import React from 'react'
+import { RootState } from '../../store/types'
+import { useSelector } from 'react-redux'
 
 const Game = () => {
   const field = useSelector((state: RootState) => state.field.current)

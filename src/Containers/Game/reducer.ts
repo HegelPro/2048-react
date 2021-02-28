@@ -1,9 +1,9 @@
-import { createReducer } from 'typesafe-actions'
+import { setCurrentFieldAction, setPreviousFieldAction } from './actions'
 import { FieldDataRecord } from '../../models/data/schema'
 import FieldHelpers from '../../models/field/helpers'
 import { RootActions } from '../../store/types'
+import { createReducer } from 'typesafe-actions'
 import { defaultSettingsState } from '../Settings/reducer'
-import { setCurrentFieldAction, setPreviousFieldAction } from './actions'
 
 const defaultField = FieldHelpers.createStart(defaultSettingsState)
 

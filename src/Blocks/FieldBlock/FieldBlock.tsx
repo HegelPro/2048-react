@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 import { FieldSettingsRecord } from '../../models/settings/schema'
 import { useStyles } from './styles'

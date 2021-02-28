@@ -1,5 +1,5 @@
-import {CellRecordSchema} from '../cell/schema'
 import {GetType, array} from 'purify-ts'
+import {CellRecordSchema} from '../cell/schema'
 
 export type FieldRecord = GetType<typeof FieldSchema>
 

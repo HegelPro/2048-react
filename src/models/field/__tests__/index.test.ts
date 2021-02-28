@@ -1,5 +1,5 @@
-import FieldHelpers from '../helpers'
 import CellRecordHelper from '../../cell/helpers'
+import FieldHelpers from '../helpers'
 
 describe('FieldHelpers', () => {
   const mockFieldOne = FieldHelpers.init({columns: 1, rows: 1})

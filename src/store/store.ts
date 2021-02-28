@@ -3,11 +3,11 @@ import {
   compose,
   createStore,
 } from 'redux'
-import thunk from 'redux-thunk'
-import LocalStorageService from '../utils/localStorage'
-import debounce from '../utils/debounce'
 import rootReducer, { defaultRootState } from './reducers'
+import LocalStorageService from '../utils/localStorage'
 import { Nothing } from 'purify-ts'
+import debounce from '../utils/debounce'
+import thunk from 'redux-thunk'
 import {version} from '../../package.json'
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

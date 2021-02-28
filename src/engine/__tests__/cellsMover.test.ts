@@ -1,16 +1,14 @@
-import { DIRACTIONS } from '../../models/vector/constants'
-import cellsMover from '../cellsMover'
-
-import { cellsHaveTheSameValues } from '../__utils__'
-
 import {
-  mockBeforeFieldOne,
   mockAfterFieldOne,
-  mockBeforeFieldTwo,
-  mockAfterFieldTwo,
-  mockBeforeFieldThree,
   mockAfterFieldThree,
+  mockAfterFieldTwo,
+  mockBeforeFieldOne,
+  mockBeforeFieldThree,
+  mockBeforeFieldTwo,
 } from '../__mocks__/cellsMover'
+import { DIRACTIONS } from '../../models/vector/constants'
+import { cellsHaveTheSameValues } from '../__utils__'
+import cellsMover from '../cellsMover'
 
 describe('cellsMover()', () => {
   test('One on a line', () => {

@@ -1,10 +1,10 @@
+import {Just, List, Maybe, Nothing} from 'purify-ts'
 import {CellRecord} from '../cell/schema'
 import CellRecordHelper from '../cell/helpers'
-import {Vector} from '../vector/schema'
-import {Maybe, List, Just, Nothing} from 'purify-ts'
-import curry from '../../utils/curry'
 import { FieldRecord } from './schema'
 import { FieldSettingsRecord } from '../settings/schema'
+import {Vector} from '../vector/schema'
+import curry from '../../utils/curry'
 import selectRandomAvaibleCellPoint from '../../engine/selectRandomAvaibleCellIndex'
 
 const init = curry(({ columns: columnsNumber, rows: rowsNumber }: {columns: number, rows: number}): FieldRecord => {

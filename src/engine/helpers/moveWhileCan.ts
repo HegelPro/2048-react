@@ -1,5 +1,5 @@
-import { Vector } from "../../models/vector/schema"
-import curry from "../../utils/curry"
+import { Vector } from '../../models/vector/schema'
+import curry from '../../utils/curry'
 
 const moveWhileCan = curry((
     canMove: (Vector: Vector) => Boolean,

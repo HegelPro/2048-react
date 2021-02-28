@@ -1,14 +1,14 @@
-import { DIRACTIONS } from '../../models/vector/constants'
-import doNextGameStep from '../doNextGameStep'
-import { cellsHaveTheSameValues } from '../__utils__'
 import {
-  mockBeforeFieldOne,
   mockAfterFieldOne,
-  mockBeforeFieldTwo,
-  mockAfterFieldTwo,
-  mockBeforeFieldThree,
   mockAfterFieldThree,
+  mockAfterFieldTwo,
+  mockBeforeFieldOne,
+  mockBeforeFieldThree,
+  mockBeforeFieldTwo,
 } from '../__mocks__/doNextGameStep'
+import { DIRACTIONS } from '../../models/vector/constants'
+import { cellsHaveTheSameValues } from '../__utils__'
+import doNextGameStep from '../doNextGameStep'
 
 describe('cellsMover()', () => {
   test('One on a line', () => {

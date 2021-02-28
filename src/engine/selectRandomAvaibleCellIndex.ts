@@ -1,7 +1,7 @@
-import { FieldRecord } from '../models/field/schema'
-import CellRecordHelper from '../models/cell/helpers'
 import { CellRecord } from '../models/cell/schema'
+import CellRecordHelper from '../models/cell/helpers'
 import FieldHelpers from '../models/field/helpers'
+import { FieldRecord } from '../models/field/schema'
 
 export default function selectRandomAvaibleCellPoint(field: FieldRecord): FieldRecord {
   const avaibleCells: CellRecord[] = field.reduce<CellRecord[]>((accRow, row) => {

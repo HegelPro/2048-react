@@ -1,5 +1,5 @@
-import curry from '../../utils/curry'
 import { Vector } from './schema'
+import curry from '../../utils/curry'
 
 const image = ({x, y}: Vector): Vector => ({x: y, y: x})
 

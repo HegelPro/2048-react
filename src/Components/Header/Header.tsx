@@ -1,10 +1,10 @@
+import * as strings from './strings'
 import AppBar from '@material-ui/core/AppBar'
-import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-import makeStyles from '@material-ui/core/styles/makeStyles'
 import Grid from '@material-ui/core/Grid'
 import React from 'react'
-import * as strings from './strings'
+import Typography from '@material-ui/core/Typography'
+import makeStyles from '@material-ui/core/styles/makeStyles'
 
 const useStyles = makeStyles({
   title: {

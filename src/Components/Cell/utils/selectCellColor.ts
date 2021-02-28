@@ -1,7 +1,7 @@
 import {
-  MIN_VALUE,
-  MAX_VALUE,
   FIRST_COLOR,
+  MAX_VALUE,
+  MIN_VALUE,
   SECOND_COLOR,
 } from './config'
 

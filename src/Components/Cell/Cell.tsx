@@ -1,11 +1,11 @@
-import Typography from '@material-ui/core/Typography'
-import React from 'react'
+import CellBlock from '../../Blocks/CellBlock/CellBlock'
 import { CellRecord } from '../../models/cell/schema'
 import CellRecordHelper from '../../models/cell/helpers'
-import { Vector } from '../../models/vector/schema'
-import CellBlock from '../../Blocks/CellBlock/CellBlock'
-import { useStyles } from './styles'
 import { Maybe } from 'purify-ts'
+import React from 'react'
+import Typography from '@material-ui/core/Typography'
+import { Vector } from '../../models/vector/schema'
+import { useStyles } from './styles'
 
 export interface CellProps {
   cell: CellRecord

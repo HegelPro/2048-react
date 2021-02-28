@@ -1,9 +1,9 @@
-import {FieldRecord} from '../field/schema'
+import {List, Maybe} from 'purify-ts'
 import FieldHelpers from '../field/helpers'
+import {FieldRecord} from '../field/schema'
+import { RecordElementRecord } from '../recordElement/schema'
 import { Vector } from '../vector/schema'
 import VectorHelpers from '../vector/helpers'
-import { RecordElementRecord } from '../recordElement/schema'
-import {List, Maybe} from 'purify-ts'
 import curry from '../../utils/curry'
 
 const getRecordByPosition = curry((records: RecordElementRecord[], position: Vector): Maybe<RecordElementRecord> => {

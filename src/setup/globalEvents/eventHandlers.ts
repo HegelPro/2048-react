@@ -1,11 +1,11 @@
-import { DIRACTIONS } from '../../models/vector/constants'
-import { setCurrentFieldAction } from '../../Containers/Game/actions'
-import moveCellsThunk from '../../Containers/Game/thunks/moveCells'
-import debounce from '../../utils/debounce'
-import { Vector } from '../../models/vector/schema'
-import { store } from '../../store/store'
 import { Just, Maybe, Nothing } from 'purify-ts'
+import { DIRACTIONS } from '../../models/vector/constants'
+import { Vector } from '../../models/vector/schema'
+import debounce from '../../utils/debounce'
 import handleGesture from './helpers/handleGesture'
+import moveCellsThunk from '../../Containers/Game/thunks/moveCells'
+import { setCurrentFieldAction } from '../../Containers/Game/actions'
+import { store } from '../../store/store'
 
 const debouncedMoveCells = debounce(
   (vector: Vector) => (moveCellsThunk(vector) as any)(store.dispatch, store.getState),

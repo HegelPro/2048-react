@@ -1,11 +1,12 @@
-import { selectIterationStartPoint } from './iteratetion'
-import { FieldRecord } from '../models/field/schema'
+import { Just, Nothing } from 'purify-ts'
 import FieldHelpers from '../models/field/helpers'
+import { FieldRecord } from '../models/field/schema'
 import { Vector } from '../models/vector/schema'
 import VectorHelpers from '../models/vector/helpers'
 import curry from '../utils/curry'
+import gradToRad from '../utils/gradToRad'
 import moveWhileCan from './helpers/moveWhileCan'
-import { Just, Nothing } from 'purify-ts'
+import { selectIterationStartPoint } from './iteratetion'
 
 const moveRow = (
   field: FieldRecord,
@@ -28,12 +29,10 @@ const moveRow = (
     .orDefault([field, iterPoint])
 }
 
-const Deg90 = Math.PI / 2
-
 const cellsMover = curry((diraction: Vector, field: FieldRecord): FieldRecord => {
   const moveRight = VectorHelpers.plus(diraction)
   const moveLeft = VectorHelpers.minus(diraction)
-  const topDiraction = VectorHelpers.turn(Deg90, 1, diraction)
+  const topDiraction = VectorHelpers.turn(gradToRad(90), 1, diraction)
   const moveTop = VectorHelpers.plus(topDiraction)
 
   let iterPoint = selectIterationStartPoint(diraction)(field)

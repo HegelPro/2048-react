@@ -1,13 +1,14 @@
-import React, { useMemo } from 'react'
-import Grid from '@material-ui/core/Grid'
-import makeStyles from '@material-ui/core/styles/makeStyles'
-import Typography from '@material-ui/core/Typography'
-import withWidth, { WithWidth } from '@material-ui/core/withWidth'
-import { FieldRecord } from '../../models/field/schema'
-import FieldHelpers from '../../models/field/helpers'
-import { RecordElementRecord } from '../../models/recordElement/schema'
-import { recordFontSizes } from './config'
 import * as strings from './strings'
+import React, { useMemo } from 'react'
+import withWidth, { WithWidth } from '@material-ui/core/withWidth'
+import FieldHelpers from '../../models/field/helpers'
+import { FieldRecord } from '../../models/field/schema'
+import Grid from '@material-ui/core/Grid'
+import { Maybe } from 'purify-ts'
+import { RecordElementRecord } from '../../models/recordElement/schema'
+import Typography from '@material-ui/core/Typography'
+import makeStyles from '@material-ui/core/styles/makeStyles'
+import { recordFontSizes } from './config'
 
 
 const useStyles = makeStyles(() => ({
@@ -19,7 +20,7 @@ const useStyles = makeStyles(() => ({
 interface RecordsProps extends
 WithWidth {
   field: FieldRecord
-  record?: RecordElementRecord
+  record: Maybe<RecordElementRecord>
 }
 
 const Records = ({
@@ -29,6 +30,9 @@ const Records = ({
 }: RecordsProps) => {
   const classes = useStyles()
   const labelStyle = useMemo(() => ({fontSize:  recordFontSizes[width]}), [width])
+
+  const recordInfo = `${strings.bestRecord}: ${record.map(({value}) => value).orDefault(0)}`
+  const scoreInfo = `${strings.score}: ${FieldHelpers.getCellsSumValue(field)}`
 
   return (
     <Grid container spacing={1}>
@@ -40,7 +44,7 @@ const Records = ({
           color='primary'
           style={labelStyle}
         >
-          {`${strings.bestRecord}: ${record ? record.value : 0}`}
+          {recordInfo}
         </Typography>
       </Grid>
       <Grid item>
@@ -51,7 +55,7 @@ const Records = ({
           color='primary'
           style={labelStyle}
         >
-          {`${strings.score}: ${FieldHelpers.getCellsSumValue(field)}`}
+          {scoreInfo}
         </Typography>
       </Grid>
     </Grid>

@@ -1,16 +1,24 @@
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
-import React from 'react'
-import { FieldRecord } from '../../models/field/schema'
-import FieldHelpers from '../../models/field/helpers'
-import { FieldSettingsRecord } from '../../models/settings/schema'
-import FieldBlock from '../../Blocks/FieldBlock/FieldBlock'
-import { fieldSizes } from '../../Blocks/FieldBlock/config'
+import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import Cell from '../Cell/Cell'
+import FieldBlock from '../../Blocks/FieldBlock/FieldBlock'
+import FieldHelpers from '../../models/field/helpers'
+import { FieldRecord } from '../../models/field/schema'
+import { FieldSettingsRecord } from '../../models/settings/schema'
+import React from 'react'
+import { fieldSizes } from '../../Blocks/FieldBlock/config'
 
 interface FieldProps extends WithWidth {
   field: FieldRecord
   prevField: FieldRecord
   settings: FieldSettingsRecord
+}
+
+function selectCellSize(field: FieldRecord, settings: FieldSettingsRecord,width: Breakpoint): number {
+  const fieldColumns = FieldHelpers.getColumns(field)
+  return settings.columns > settings.rows
+    ? fieldSizes[width] / fieldColumns
+    : fieldSizes[width] / settings.rows * settings.columns / fieldColumns
 }
 
 const Field = ({
@@ -19,9 +27,7 @@ const Field = ({
   field,
   prevField,
 }: FieldProps) => {
-  const cellSize = settings.columns > settings.rows
-    ? fieldSizes[width] / FieldHelpers.getColumns(field)
-    : fieldSizes[width] / settings.rows * settings.columns / FieldHelpers.getColumns(field)
+  const cellSize = selectCellSize(field, settings, width)
 
   return (
     <FieldBlock settings={settings}>

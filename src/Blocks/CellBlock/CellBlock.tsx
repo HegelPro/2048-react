@@ -1,9 +1,8 @@
-import { Theme } from '@material-ui/core'
-import makeStyles from '@material-ui/core/styles/makeStyles'
+import React, { useEffect, useRef } from 'react'
 import { Maybe } from 'purify-ts'
-import React, { useRef, useEffect } from 'react'
-
+import { Theme } from '@material-ui/core'
 import { Vector } from '../../models/vector/schema'
+import makeStyles from '@material-ui/core/styles/makeStyles'
 
 interface CellBlockProps {
   children: React.ReactNode
@@ -21,18 +20,8 @@ const useStyles = makeStyles<Theme, CellBlockProps>(() => ({
   }),
 }))
 
-const CellBlock = (props: CellBlockProps) => {
-  const {
-    size,
-    children,
-    currentPosition,
-    previousPosition,
-  } = props
-
-  const classes = useStyles(props)
-  const ref = useRef<HTMLDivElement>(null)
-
-  const positionStyles: React.CSSProperties = previousPosition
+function createPositionStyles(size: number, previousPosition: Maybe<Vector>, currentPosition: Maybe<Vector>): React.CSSProperties  {
+  return previousPosition
     .map<React.CSSProperties>(prevPosition => ({
       top: `${size * prevPosition.y}px`,
       left: `${size * prevPosition.x}px`,
@@ -45,6 +34,20 @@ const CellBlock = (props: CellBlockProps) => {
       }))
     )
     .orDefault({})
+}
+
+const CellBlock = (props: CellBlockProps) => {
+  const {
+    size,
+    children,
+    currentPosition,
+    previousPosition,
+  } = props
+
+  const classes = useStyles(props)
+  const ref = useRef<HTMLDivElement>(null)
+
+  const positionStyles: React.CSSProperties = createPositionStyles(size, previousPosition, currentPosition)
 
   useEffect(() => {
     setTimeout(() => {

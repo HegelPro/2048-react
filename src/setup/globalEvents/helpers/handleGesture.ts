@@ -1,7 +1,7 @@
 import { Just, Maybe, Nothing } from 'purify-ts'
+import { DIRACTIONS } from '../../../models/vector/constants'
 import { Vector } from '../../../models/vector/schema'
 import VectorHelpers from '../../../models/vector/helpers'
-import { DIRACTIONS } from '../../../models/vector/constants'
 import curry from '../../../utils/curry'
 
 const handleGesture = curry(function (
