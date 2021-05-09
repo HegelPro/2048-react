@@ -32,20 +32,25 @@ const Field = ({
   return (
     <FieldBlock settings={settings}>
       {FieldHelpers.reduce<React.ReactNodeArray>([], (acc, cell) => {
-        const currentPosition = FieldHelpers.getCellPosition(field, cell)
-        const previousPosition = FieldHelpers.getCellPosition(prevField, cell)
+        if (cell) {
+          const currentPosition = FieldHelpers.getCellPosition(field, cell)
+          const previousPosition = FieldHelpers.getCellPosition(prevField, cell)
 
-        return cell.value
-          ? [...acc, (
-            <Cell
-              key={cell.renderId}
-              cell={cell}
-              size={cellSize}
-              currentPosition={currentPosition}
-              previousPosition={previousPosition}
-            />
-          )]
-          : acc
+          return [
+            ...acc,
+            (
+              <Cell
+                key={cell.renderId}
+                cell={cell}
+                size={cellSize}
+                currentPosition={currentPosition}
+                previousPosition={previousPosition}
+              />
+            )
+          ]
+        }
+
+        return acc
       }, field)}
     </FieldBlock>
   )

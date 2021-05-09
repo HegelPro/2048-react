@@ -7,25 +7,25 @@ import {Vector} from '../vector/schema'
 import curry from '../../utils/curry'
 import selectRandomAvaibleCellPoint from '../../engine/selectRandomAvaibleCellIndex'
 
-const init = curry(({ columns: columnsNumber, rows: rowsNumber }: {columns: number, rows: number}): FieldRecord => {
-  let columns: CellRecord[][] = []
+const init = ({ columns: columnsNumber, rows: rowsNumber }: {columns: number, rows: number}): FieldRecord => {
+  let columns: (CellRecord | undefined)[][] = []
   for (let y = 0; y < columnsNumber; y++) {
-    const row: CellRecord[] = []
+    let row: (CellRecord | undefined)[] = []
     for (let x = 0; x < rowsNumber; x++) {
-      row.push(CellRecordHelper.init(0))
+      row.push(undefined)
     }
     columns.push(row)
   }
   return columns
-})
-const createStart = (settings: FieldSettingsRecord) => {
+}
+const createStart = (settings: FieldSettingsRecord): FieldRecord => {
   return selectRandomAvaibleCellPoint(init(settings))
 }
 
 const getCellsSumValue = (field: FieldRecord): number => {
   return reduce(
     0,
-    (acc, cell) => cell.value !== 0
+    (acc, cell) => cell !== undefined
       ? acc + CellRecordHelper.getViewValue(cell)
       : acc,
     field
@@ -42,28 +42,32 @@ const getColumns = (field: FieldRecord): number => {
     .orDefault(0)
 }
 
-const getCellPosition = curry((field: FieldRecord, cell: CellRecord): Maybe<Vector> => {
+const getCellPosition = (field: FieldRecord, cell: CellRecord): Maybe<Vector> => {
   return reduce<Maybe<Vector>>(Nothing, (acc, cellOne, vector) => acc.alt(
-    cellOne.id === cell.id
+    (cellOne && cell &&
+    cellOne.id === cell.id)
       ? Just(vector)
       : Nothing
   ), field)
-})
+}
 const setCellByPosition = curry((field: FieldRecord, position: Vector, cell: CellRecord): FieldRecord => {
   return map(
-    (cellOne, {x, y}) => position.x === x && position.y === y
-      ? {...cell, renderId: Math.random()}
-      : cellOne,
-    field,
+    (cellOne, {x, y}) => {
+      return position.x === x && position.y === y
+        ? cell
+        : cellOne
+    },
+    field
   )
 })
 
 const getCell = curry((field: FieldRecord, vector: Vector): Maybe<CellRecord> => {
   return List.at(vector.y, field)
     .chain(row => List.at(vector.x, row))
+    .chain(Maybe.fromNullable)
 })
 
-const swapeCells = curry((field: FieldRecord, oneCell: CellRecord, twoCell: CellRecord): FieldRecord => {
+const swapeCells = curry((field: FieldRecord, oneCell: CellRecord | undefined, twoCell: CellRecord | undefined): FieldRecord => {
   return FieldHelpers.getCellPosition(field, oneCell)
     .chain(vectorOne => FieldHelpers.getCellPosition(field, twoCell)
       .map(vectorTwo =>
@@ -80,7 +84,7 @@ const swapeCells = curry((field: FieldRecord, oneCell: CellRecord, twoCell: Cell
     .orDefault(field)
 })
 
-const coalitionCells = curry((field: FieldRecord, oneCell: CellRecord, twoCell: CellRecord): FieldRecord => {
+const coalitionCells = curry((field: FieldRecord, oneCell: CellRecord | undefined, twoCell: CellRecord | undefined): FieldRecord => {
   return FieldHelpers.getCellPosition(field, oneCell)
     .chain(vectorOne => 
         FieldHelpers.getCellPosition(field, twoCell)
@@ -115,12 +119,16 @@ const equals = curry((fieldOne: FieldRecord, fieldTwo: FieldRecord): boolean => 
   && FieldHelpers.getRows(fieldOne) === FieldHelpers.getRows(fieldTwo)
   && fieldOne.every(
     (row, y) => row.every(
-      ({value}, x) => value === fieldTwo[y][x].value
+      (cellOne, x) => {
+        const cellTwo = fieldTwo[y][x]
+        return (cellOne === undefined && cellTwo === undefined)
+        || (cellOne && cellTwo && cellOne.value === cellTwo.value)
+      }
     )
   )
 ))
 
-const reduce = <T>(start: T, f: (acc: T, cell: CellRecord, vector: Vector) => T, field: FieldRecord) => {
+const reduce = <T>(start: T, f: (acc: T, cell: CellRecord | undefined, vector: Vector) => T, field: FieldRecord): T => {
   return field.reduce(
     (accRow, row, y) =>
       row.reduce(
@@ -131,8 +139,12 @@ const reduce = <T>(start: T, f: (acc: T, cell: CellRecord, vector: Vector) => T,
   )
 }
 
-const map = <T>(f: (cell: CellRecord, vector: Vector) => T, field: FieldRecord): T[][] => {
-  return field.map((row, y) => row.map((cell, x) => f(cell, {y, x})))
+const map = <T>(f: (cell: CellRecord | undefined, vector: Vector) => T, field: FieldRecord): T[][] => {
+  return field.map((row, y) =>
+    row.map(
+      (cell, x) => f(cell, {y, x})
+    )
+  )
 }
 
 const zero: FieldRecord = []

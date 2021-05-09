@@ -38,16 +38,18 @@
   "eslintConfig": {
     "extends": "react-app",
     "rules": {
-        "semi": [
-          "warn",
-          "never"
-        ],
-        "quotes": [
-          "warn",
-          "single"
-        ],
-        "sort-imports": ["error"]
-      }
+      "semi": [
+        "warn",
+        "never"
+      ],
+      "quotes": [
+        "warn",
+        "single"
+      ],
+      "sort-imports": [
+        "warn"
+      ]
+    }
   },
   "browserslist": {
     "production": [

@@ -1,6 +1,6 @@
 import { CellRecord } from './schema'
 
-const CellHelpers = {
+const CellRecordHelper = {
   getViewValue: (cell: CellRecord) => Math.pow(2, cell.value),
   init: (value: number): CellRecord => ({
     value,
@@ -9,4 +9,4 @@ const CellHelpers = {
   }),
 }
 
-export default CellHelpers
+export default CellRecordHelper
