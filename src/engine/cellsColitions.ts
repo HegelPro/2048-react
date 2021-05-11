@@ -1,50 +1,33 @@
-import { Just, Nothing } from 'purify-ts'
-import FieldHelpers from '../models/field/helpers'
+import { Just, Maybe, Nothing } from 'purify-ts'
+import { getFromIterateInDiraction, getIterateInDiraction } from '../utils/matrix'
+import { CellRecord } from '../models/cell/schema'
+import CellRecordHelper from '../models/cell/helpers'
+import { Diraction } from '../models/vector/constants'
 import { FieldRecord } from '../models/field/schema'
-import { Vector } from '../models/vector/schema'
-import VectorHelpers from '../models/vector/helpers'
-import curry from '../utils/curry'
-import gradToRad from '../utils/gradToRad'
-import moveWhileCan from './helpers/moveWhileCan'
-import { selectIterationStartPoint } from './iteratetion'
 
-const colitionIfNeed = (field: FieldRecord, postIterPoint: Vector, iterPoint: Vector) => {
-  return FieldHelpers.getCell(field, iterPoint)
-    .chain(cellOne => FieldHelpers.getCell(field, postIterPoint)
-      .chain(cellTwo =>
-        cellOne.value > 0 && cellOne.value === cellTwo.value
-          ? Just(FieldHelpers.coalitionCells(field, cellOne, cellTwo))
-          : Nothing
-      )
-    )
-    .orDefault(field)
-}
-
-const cellsColitions = curry((diraction: Vector, field: FieldRecord): FieldRecord => {
-  const moveRight = VectorHelpers.plus(diraction)
-  const moveLeft = VectorHelpers.minus(diraction)
-  const moveLeftWhileCan = moveWhileCan(FieldHelpers.hasCell(field), moveLeft)
-  const topDiraction = VectorHelpers.turn(gradToRad(90), 1, diraction)
-  const moveTop = VectorHelpers.plus(topDiraction)
-
-  let iterPoint = selectIterationStartPoint(diraction)(field)
-  let postIterPoint: Vector
-
-  while (FieldHelpers.hasCell(field, iterPoint)) {
-    postIterPoint = iterPoint
-
-    if (FieldHelpers.hasCell(field, moveRight(iterPoint))) {
-      iterPoint = moveRight(iterPoint)
-
-      field = colitionIfNeed(field, postIterPoint, iterPoint)
-    } else {
-      iterPoint = moveTop(iterPoint)
-
-      iterPoint = moveLeftWhileCan(iterPoint)
+const kek = (row: Maybe<CellRecord>[]): Maybe<CellRecord>[] => {
+  for(let i = row.length - 1; i > 0; i--) {
+    const curCell = row[i].extract()
+    const prevCell = row[i - 1].extract()
+    if (curCell && prevCell && CellRecordHelper.equals(curCell, prevCell)) {
+      row[i] = Just(CellRecordHelper.concat(curCell, prevCell))
+      row[i - 1] = Nothing
+      i--
     }
   }
+  return row
+}
 
-  return field
-})
+const cellsColitions = (
+    field: FieldRecord,
+    firstDir: Diraction,
+    secondDir: Diraction,
+): FieldRecord => {
+    return getFromIterateInDiraction(
+      getIterateInDiraction(field, firstDir, secondDir).map(row => kek(row)),
+      firstDir,
+      secondDir,
+    )
+}
 
 export default cellsColitions

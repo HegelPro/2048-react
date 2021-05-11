@@ -7,6 +7,7 @@ import { FieldRecord } from '../../models/field/schema'
 import { FieldSettingsRecord } from '../../models/settings/schema'
 import React from 'react'
 import { fieldSizes } from '../../Blocks/FieldBlock/config'
+import { Just } from 'purify-ts'
 
 interface FieldProps extends WithWidth {
   field: FieldRecord
@@ -31,10 +32,11 @@ const Field = ({
 
   return (
     <FieldBlock settings={settings}>
-      {FieldHelpers.reduce<React.ReactNodeArray>([], (acc, cell) => {
+      {FieldHelpers.reduce<React.ReactNodeArray>([], (acc, maybeCell) => {
+        const cell = maybeCell.extract()
         if (cell) {
-          const currentPosition = FieldHelpers.getCellPosition(field, cell)
-          const previousPosition = FieldHelpers.getCellPosition(prevField, cell)
+          const currentPosition = FieldHelpers.getCellPosition(field, Just(cell))
+          const previousPosition = FieldHelpers.getCellPosition(prevField, Just(cell))
 
           return [
             ...acc,

@@ -1,5 +1,5 @@
-import {DIRACTIONS} from '../constants'
-import VectorHelpers from '../helpers'
+import {DIRACTIONS} from './constants'
+import VectorHelpers from './helpers'
 
 describe('VectorHelpers', () => {
   test('plus', () => {

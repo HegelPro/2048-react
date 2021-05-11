@@ -1,89 +1,82 @@
+import { formatFieldToTestField, formatTestFieldToField } from '../models/field/helpers.test'
 import { DIRACTIONS } from '../models/vector/constants'
-import FieldHelpers from '../models/field/helpers'
 import { FieldRecord } from '../models/field/schema'
 import doNextGameStep from './doNextGameStep'
-import { formatTestFieldToField } from '../models/field/helpers.test'
 
 const mockCellsBeforeOne = [
-  [0],
-  [1],
-  [2],
+  '0',
+  '1',
+  '2',
 ]
 
 const mockCellsAfterOne = [
-  [0],
-  [1],
-  [2],
+  '0',
+  '1',
+  '2',
 ]
 
 export const mockBeforeFieldOne: FieldRecord = formatTestFieldToField(mockCellsBeforeOne)
 
-export const mockAfterFieldOne: FieldRecord = formatTestFieldToField(mockCellsAfterOne)
-
 const mockCellsBeforeTwo = [
-  [0, 0],
-  [1, 0],
-  [0, 1],
-  [1, 1],
-  [1, 2],
-  [2, 1],
-  [2, 2],
+  '00',
+  '10',
+  '01',
+  '11',
+  '12',
+  '21',
+  '22',
 ]
 
 const mockCellsAfterTwo = [
-  [0, 0],
-  [0, 1],
-  [0, 1],
-  [0, 2],
-  [1, 2],
-  [2, 1],
-  [0, 3],
+  '00',
+  '01',
+  '01',
+  '02',
+  '12',
+  '21',
+  '03',
 ]
 
 export const mockBeforeFieldTwo: FieldRecord = formatTestFieldToField(mockCellsBeforeTwo)
 
-export const mockAfterFieldTwo: FieldRecord = formatTestFieldToField(mockCellsAfterTwo)
-
 const mockCellsBeforeThree = [
-  [0, 0, 0],
-  [1, 0, 0],
-  [0, 1, 0],
-  [0, 0, 1],
-  [1, 1, 0],
-  [0, 1, 1],
-  [1, 0, 1],
-  [1, 1, 1],
+  '000',
+  '100',
+  '010',
+  '001',
+  '110',
+  '011',
+  '101',
+  '111',
 ]
 
 const mockCellsAfterThree = [
-  [0, 0, 0],
-  [0, 0, 1],
-  [0, 0, 1],
-  [0, 0, 1],
-  [0, 0, 2],
-  [0, 0, 2],
-  [0, 0, 2],
-  [0, 1, 2],
+  '000',
+  '001',
+  '001',
+  '001',
+  '002',
+  '002',
+  '002',
+  '012',
 ]
 
 export const mockBeforeFieldThree: FieldRecord = formatTestFieldToField(mockCellsBeforeThree)
 
-export const mockAfterFieldThree: FieldRecord = formatTestFieldToField(mockCellsAfterThree)
 
-
-describe('cellsMover()', () => {
+describe('doNextGameStep()', () => {
   test('One on a line', () => {
-    const confrontedField = doNextGameStep(DIRACTIONS.LEFT)(mockBeforeFieldOne)
-    expect(FieldHelpers.equals(confrontedField, mockAfterFieldOne)).toEqual(true)
+    const confrontedField = doNextGameStep(mockBeforeFieldOne, 'DOWN', 'RIGHT')
+    expect(formatFieldToTestField(confrontedField)).toEqual(mockCellsAfterOne)
   })
 
   test('Two on a line', () => {
-    const confrontedField = doNextGameStep(DIRACTIONS.LEFT)(mockBeforeFieldTwo)
-    expect(FieldHelpers.equals(confrontedField, mockAfterFieldTwo)).toEqual(true)
+      const confrontedField = doNextGameStep(mockBeforeFieldTwo, 'DOWN', 'RIGHT')
+      expect(formatFieldToTestField(confrontedField)).toEqual(mockCellsAfterTwo)
   })
 
   test('Three on a line', () => {
-    const confrontedField = doNextGameStep(DIRACTIONS.LEFT)(mockBeforeFieldThree)
-    expect(FieldHelpers.equals(confrontedField, mockAfterFieldThree)).toEqual(true)
+      const confrontedField = doNextGameStep(mockBeforeFieldThree, 'DOWN', 'RIGHT')
+      expect(formatFieldToTestField(confrontedField)).toEqual(mockCellsAfterThree)
   })
 })

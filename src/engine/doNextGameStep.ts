@@ -3,17 +3,25 @@ import { Vector } from '../models/vector/schema'
 import cellsColitions from './cellsColitions'
 import cellsMover from './cellsMover'
 import curry from '../utils/curry'
+import { Diraction } from '../models/vector/constants'
 
-const doNextGameStep = curry((diraction: Vector, field: FieldRecord): FieldRecord =>
+const doNextGameStep = curry((
+  field: FieldRecord,
+  firstDir: Diraction,
+  secondDir: Diraction,
+): FieldRecord =>
   cellsMover(
-    diraction,
     cellsColitions(
-      diraction,
       cellsMover(
-        diraction,
         field, 
-      )
+        firstDir,
+        secondDir,
+      ),
+      firstDir,
+      secondDir,
     ),
+    firstDir,
+    secondDir,
   )
 )
 

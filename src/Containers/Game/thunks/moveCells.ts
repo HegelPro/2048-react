@@ -6,11 +6,12 @@ import { Vector } from '../../../models/vector/schema'
 import doNextGameStep from '../../../engine/doNextGameStep'
 import selectRandomAvaibleCellPoint from '../../../engine/selectRandomAvaibleCellIndex'
 import { setFieldRecordsAction } from '../../State/actions'
+import { Diraction } from '../../../models/vector/constants'
 
-function moveCellsThunk(diraction: Vector): Thunk<void> {
+function moveCellsThunk(diractionOne: Diraction, diractionTwo: Diraction): Thunk<void> {
   return function(dispatch, getState) {
     const savedField = getState().field.current
-    const movedField = doNextGameStep(diraction, savedField)
+    const movedField = doNextGameStep(savedField, diractionOne, diractionTwo)
     
     if (!FieldHelpers.equals(savedField, movedField)) {
       const changedField = selectRandomAvaibleCellPoint(movedField)
