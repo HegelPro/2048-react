@@ -1,6 +1,5 @@
-import { formatFieldToTestField, formatTestFieldToField } from '../models/field/helpers.test'
-import { DIRACTIONS } from '../models/vector/constants'
-import { FieldRecord } from '../models/field/schema'
+import * as Field from '../models/field'
+import { formatFieldToTestField, formatTestFieldToField } from '../models/field.test'
 import cellsColitions from './cellsColitions'
 
 const mockCellsBeforeOne = [
@@ -15,7 +14,7 @@ const mockCellsAfterOne = [
   '2',
 ]
 
-export const mockBeforeFieldOne: FieldRecord = formatTestFieldToField(mockCellsBeforeOne)
+export const mockBeforeFieldOne: Field.Field = formatTestFieldToField(mockCellsBeforeOne)
 
 const mockCellsBeforeTwo = [
   '00',
@@ -34,10 +33,10 @@ const mockCellsAfterTwo = [
   '02',
   '12',
   '21',
-  '03',
+  '04',
 ]
 
-export const mockBeforeFieldTwo: FieldRecord = formatTestFieldToField(mockCellsBeforeTwo)
+export const mockBeforeFieldTwo: Field.Field = formatTestFieldToField(mockCellsBeforeTwo)
 
 const mockCellsBeforeThree = [
   '000',
@@ -61,29 +60,29 @@ const mockCellsAfterThree = [
   '102',
 ]
 
-export const mockBeforeFieldThree: FieldRecord = formatTestFieldToField(mockCellsBeforeThree)
+export const mockBeforeFieldThree: Field.Field = formatTestFieldToField(mockCellsBeforeThree)
 
 describe('cellsColitions()', () => {
   test('One on a line', () => {
-    const confrontedField = cellsColitions(mockBeforeFieldOne, 'DOWN', 'RIGHT')
+    const confrontedField = cellsColitions('DOWN', 'RIGHT')(mockBeforeFieldOne)
     expect(formatFieldToTestField(confrontedField)).toEqual(mockCellsAfterOne)
   })
 
   test('Two on a line', () => {
-      const confrontedField = cellsColitions(mockBeforeFieldTwo, 'DOWN', 'RIGHT')
+      const confrontedField = cellsColitions('DOWN', 'RIGHT')(mockBeforeFieldTwo)
       expect(formatFieldToTestField(confrontedField)).toEqual(mockCellsAfterTwo)
   })
 
   test('Three on a line', () => {
-      const confrontedField = cellsColitions(mockBeforeFieldThree, 'DOWN', 'RIGHT')
+      const confrontedField = cellsColitions('DOWN', 'RIGHT')(mockBeforeFieldThree)
       expect(formatFieldToTestField(confrontedField)).toEqual(mockCellsAfterThree)
   })
 
   test('Move \'DOWN\', \'RIGHT\'', () => {
-    const confrontedField = cellsColitions(formatTestFieldToField([
+    const confrontedField = cellsColitions('DOWN', 'RIGHT')(formatTestFieldToField([
       '11',
       '10',
-    ]), 'DOWN', 'RIGHT')
+    ]))
     expect(formatFieldToTestField(confrontedField)).toEqual([
       '02',
       '10',
@@ -91,10 +90,10 @@ describe('cellsColitions()', () => {
   })
 
   test('Move \'UP\', \'LEFT\'', () => {
-    const confrontedField = cellsColitions(formatTestFieldToField([
+    const confrontedField = cellsColitions('UP', 'LEFT')(formatTestFieldToField([
       '11',
       '01',
-    ]), 'UP', 'LEFT')
+    ]))
     expect(formatFieldToTestField(confrontedField)).toEqual([
       '20',
       '01',
@@ -102,10 +101,10 @@ describe('cellsColitions()', () => {
   })
 
   test('Move \'LEFT\', \'DOWN\'', () => {
-    const confrontedField = cellsColitions(formatTestFieldToField([
+    const confrontedField = cellsColitions('LEFT', 'DOWN')(formatTestFieldToField([
       '11',
       '01',
-    ]), 'LEFT', 'DOWN')
+    ]))
     expect(formatFieldToTestField(confrontedField)).toEqual([
       '10',
       '02',
@@ -113,10 +112,10 @@ describe('cellsColitions()', () => {
   })
 
   test('Move \'RIGHT\', \'UP\'', () => {
-    const confrontedField = cellsColitions(formatTestFieldToField([
+    const confrontedField = cellsColitions('RIGHT', 'UP')(formatTestFieldToField([
       '10',
       '11',
-    ]), 'RIGHT', 'UP')
+    ]))
     expect(formatFieldToTestField(confrontedField)).toEqual([
       '20',
       '01',

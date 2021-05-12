@@ -1,43 +1,51 @@
 import CellBlock from '../../Blocks/CellBlock/CellBlock'
-import { CellRecord } from '../../models/cell/schema'
-import CellRecordHelper from '../../models/cell/helpers'
-import { Maybe } from 'purify-ts'
+import * as Cell from '../../models/cell'
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
-import { Vector } from '../../models/vector/schema'
+import { Vector } from '../../models/vector'
 import { useStyles } from './styles'
 
 export interface CellProps {
-  cell: CellRecord
+  cell: Cell.Cell
   size: number
-  currentPosition: Maybe<Vector>
-  previousPosition: Maybe<Vector>
+  currentPosition: Vector
+  // previousPosition: Maybe<Vector>
 }
 
-const Cell = (props: CellProps) => {
+const CellBoard = (props: CellProps) => {
   const classes = useStyles(props)
   const {
     size,
     cell,
     currentPosition,
-    previousPosition,
+    // previousPosition,
   } = props
 
+  const [x, y] = currentPosition
+
   return (
-    <CellBlock
-      size={size}
-      currentPosition={currentPosition}
-      previousPosition={previousPosition}
-    >
+    // <CellBlock
+    //   size={size}
+    //   currentPosition={currentPosition}
+    //   previousPosition={previousPosition}
+    // >
+    <div style={{
+      top: `${size * y}px`,
+      left: `${size * x}px`,
+      width: `${size}px`,
+      height: `${size}px`,
+      position: 'absolute',
+    }}>
       <span className={classes.side} />
       <div className={classes.root}>
         <span className={classes.circle} />
         <Typography className={classes.value}>
-          {CellRecordHelper.getViewValue(cell)}
+          {cell.value}
         </Typography>
       </div>
-    </CellBlock>
+    </div>
+    // </CellBlock>
   )
 }
 
-export default Cell
+export default CellBoard

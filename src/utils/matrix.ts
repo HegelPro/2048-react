@@ -1,14 +1,13 @@
-import { Diraction } from '../models/vector/constants'
+import { Diraction } from '../models/diraction'
 
 export const copyMatrix = <T>(matrix: T[][]) => [...matrix].map(e => [...e])
 export const transposeMatrix = <T>(matrix: T[][]) => matrix[0].map((_, x) => matrix.map((_, y) => matrix[y][x]))
 
-export const getIterateInDiraction = <T>(
-    matrix: T[][],
+export const getIterateInDiraction = (
     firstDir: Diraction,
     secondDir: Diraction
-  ): T[][] => {
-    
+) => <T>(matrix: T[][]): T[][] => {
+
     const copiedMatrix = copyMatrix(matrix)
 
     if (firstDir === 'DOWN' || firstDir === 'UP') {
@@ -19,7 +18,7 @@ export const getIterateInDiraction = <T>(
     }
 
     if (firstDir === 'RIGHT' || firstDir === 'LEFT') {
-        const trastoneMatrix =  copiedMatrix[0].map((_, x) => copiedMatrix.map((_, y) => copiedMatrix[y][x]))
+        const trastoneMatrix = copiedMatrix[0].map((_, x) => copiedMatrix.map((_, y) => copiedMatrix[y][x]))
     
         if (firstDir === 'RIGHT' && secondDir === 'DOWN') return trastoneMatrix
         if (firstDir === 'RIGHT' && secondDir === 'UP') return trastoneMatrix.map(row => row.reverse())
@@ -30,11 +29,10 @@ export const getIterateInDiraction = <T>(
     throw new Error('derections must be perpendicular')
 }
 
-export const getFromIterateInDiraction = <T>(
-    matrix: T[][],
+export const getFromIterateInDiraction = (
     firstDir: Diraction,
-    secondDir: Diraction
-  ): T[][] => {
+    secondDir: Diraction,
+  ) => <T>(matrix: T[][]): T[][] => {
     
     const copiedMatrix = copyMatrix(matrix)
 

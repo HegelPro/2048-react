@@ -1,28 +1,15 @@
-import { FieldRecord } from '../models/field/schema'
-import { Vector } from '../models/vector/schema'
+import { Diraction } from '../models/diraction'
 import cellsColitions from './cellsColitions'
 import cellsMover from './cellsMover'
-import curry from '../utils/curry'
-import { Diraction } from '../models/vector/constants'
+import {flow} from 'fp-ts/function'
 
-const doNextGameStep = curry((
-  field: FieldRecord,
+const doNextGameStep = (
   firstDir: Diraction,
   secondDir: Diraction,
-): FieldRecord =>
-  cellsMover(
-    cellsColitions(
-      cellsMover(
-        field, 
-        firstDir,
-        secondDir,
-      ),
-      firstDir,
-      secondDir,
-    ),
-    firstDir,
-    secondDir,
-  )
+) => flow(
+  cellsMover(firstDir, secondDir),
+  cellsColitions(firstDir, secondDir),
+  cellsMover(firstDir, secondDir),
 )
 
 export default doNextGameStep

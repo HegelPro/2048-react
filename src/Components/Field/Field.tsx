@@ -1,61 +1,60 @@
+import * as Field from '../../models/field'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import Cell from '../Cell/Cell'
 import FieldBlock from '../../Blocks/FieldBlock/FieldBlock'
-import FieldHelpers from '../../models/field/helpers'
-import { FieldRecord } from '../../models/field/schema'
 import { FieldSettingsRecord } from '../../models/settings/schema'
 import React from 'react'
 import { fieldSizes } from '../../Blocks/FieldBlock/config'
-import { Just } from 'purify-ts'
+import {option} from 'fp-ts'
 
 interface FieldProps extends WithWidth {
-  field: FieldRecord
-  prevField: FieldRecord
+  field: Field.Field
+  // prevField: FieldRecord
   settings: FieldSettingsRecord
 }
 
-function selectCellSize(field: FieldRecord, settings: FieldSettingsRecord,width: Breakpoint): number {
-  const fieldColumns = FieldHelpers.getColumns(field)
+function selectCellSize(field: Field.Field, settings: FieldSettingsRecord,width: Breakpoint): number {
+  const fieldColumns =  field[0].length
   return settings.columns > settings.rows
     ? fieldSizes[width] / fieldColumns
     : fieldSizes[width] / settings.rows * settings.columns / fieldColumns
 }
 
-const Field = ({
+const FieldComp = ({
   width,
   settings,
   field,
-  prevField,
+  // prevField,
 }: FieldProps) => {
   const cellSize = selectCellSize(field, settings, width)
 
   return (
     <FieldBlock settings={settings}>
-      {FieldHelpers.reduce<React.ReactNodeArray>([], (acc, maybeCell) => {
-        const cell = maybeCell.extract()
+      {Field.reduceWithPosition<React.ReactNodeArray>([], (acc, maybeCell, position) => {
+        const cell = option.toUndefined(maybeCell)
         if (cell) {
-          const currentPosition = FieldHelpers.getCellPosition(field, Just(cell))
-          const previousPosition = FieldHelpers.getCellPosition(prevField, Just(cell))
+          // const currentPosition = FieldHelpers.getCellPosition(field, Just(cell))
+          // const previousPosition = FieldHelpers.getCellPosition(prevField, Just(cell))
 
           return [
             ...acc,
             (
               <Cell
-                key={cell.renderId}
+                key={cell.id}
                 cell={cell}
                 size={cellSize}
-                currentPosition={currentPosition}
-                previousPosition={previousPosition}
+                currentPosition={position}
+                // previousPosition={position}
               />
             )
           ]
         }
 
         return acc
-      }, field)}
+      })(field)}
     </FieldBlock>
   )
 }
 
-export default withWidth()(Field)
+export default withWidth()(FieldComp)
