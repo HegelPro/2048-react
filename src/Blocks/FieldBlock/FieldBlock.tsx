@@ -18,7 +18,7 @@ const FieldBlock = (props: FieldBlockProps) => {
     if (ref.current) {
       ref.current.onselectstart = () => false
     }
-  })
+  }, [])
 
   return (
     <div

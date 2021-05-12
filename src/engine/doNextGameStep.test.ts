@@ -1,6 +1,5 @@
-import { formatFieldToTestField, formatTestFieldToField } from '../models/field/helpers.test'
-import { DIRACTIONS } from '../models/vector/constants'
-import { FieldRecord } from '../models/field/schema'
+import * as Field from '../models/field'
+import { formatFieldToTestField, formatTestFieldToField } from '../models/field.test'
 import doNextGameStep from './doNextGameStep'
 
 const mockCellsBeforeOne = [
@@ -15,7 +14,7 @@ const mockCellsAfterOne = [
   '2',
 ]
 
-export const mockBeforeFieldOne: FieldRecord = formatTestFieldToField(mockCellsBeforeOne)
+export const mockBeforeFieldOne: Field.Field = formatTestFieldToField(mockCellsBeforeOne)
 
 const mockCellsBeforeTwo = [
   '00',
@@ -34,10 +33,10 @@ const mockCellsAfterTwo = [
   '02',
   '12',
   '21',
-  '03',
+  '04',
 ]
 
-export const mockBeforeFieldTwo: FieldRecord = formatTestFieldToField(mockCellsBeforeTwo)
+export const mockBeforeFieldTwo: Field.Field = formatTestFieldToField(mockCellsBeforeTwo)
 
 const mockCellsBeforeThree = [
   '000',
@@ -61,22 +60,22 @@ const mockCellsAfterThree = [
   '012',
 ]
 
-export const mockBeforeFieldThree: FieldRecord = formatTestFieldToField(mockCellsBeforeThree)
+export const mockBeforeFieldThree: Field.Field = formatTestFieldToField(mockCellsBeforeThree)
 
 
 describe('doNextGameStep()', () => {
   test('One on a line', () => {
-    const confrontedField = doNextGameStep(mockBeforeFieldOne, 'DOWN', 'RIGHT')
+    const confrontedField = doNextGameStep('DOWN', 'RIGHT')(mockBeforeFieldOne)
     expect(formatFieldToTestField(confrontedField)).toEqual(mockCellsAfterOne)
   })
 
   test('Two on a line', () => {
-      const confrontedField = doNextGameStep(mockBeforeFieldTwo, 'DOWN', 'RIGHT')
+      const confrontedField = doNextGameStep('DOWN', 'RIGHT')(mockBeforeFieldTwo)
       expect(formatFieldToTestField(confrontedField)).toEqual(mockCellsAfterTwo)
   })
 
   test('Three on a line', () => {
-      const confrontedField = doNextGameStep(mockBeforeFieldThree, 'DOWN', 'RIGHT')
+      const confrontedField = doNextGameStep('DOWN', 'RIGHT')(mockBeforeFieldThree)
       expect(formatFieldToTestField(confrontedField)).toEqual(mockCellsAfterThree)
   })
 })

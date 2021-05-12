@@ -5,7 +5,7 @@ interface IColor {
 }
 
 export const MIN_VALUE = 0
-export const MAX_VALUE = 15
+export const MAX_VALUE = 300
 
 export const FIRST_COLOR: IColor = {
   blue: 142,

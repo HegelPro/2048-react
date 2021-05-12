@@ -1,52 +1,53 @@
-import { Codec, Either, GetType, Left, Right, string } from 'purify-ts'
-import { rootStateShcema } from '../store/reducers'
+export default {}
+// import { Codec, Either, GetType, Left, Right, string } from 'purify-ts'
+// import { rootStateShcema } from '../store/reducers'
 
-type LocalStorageState = Record<string, Codec<any>>
+// type LocalStorageState = Record<string, Codec<any>>
 
-const localStorageSchema = {
-  version: string,
-  state: rootStateShcema,
-}
+// const localStorageSchema = {
+//   version: string,
+//   state: rootStateShcema,
+// }
 
-class LocalStorageService<State extends LocalStorageState> {
-  schema: State
+// class LocalStorageService<State extends LocalStorageState> {
+//   schema: State
 
-  constructor(schema: State) {
-    this.schema = schema
-  }
+//   constructor(schema: State) {
+//     this.schema = schema
+//   }
 
-  get<Key extends keyof State>(key: Key): Either<string, GetType<State[Key]>> {    
-    try {
-      const serializedState = localStorage.getItem(key as string)
+//   get<Key extends keyof State>(key: Key): Either<string, GetType<State[Key]>> {    
+//     try {
+//       const serializedState = localStorage.getItem(key as string)
   
-      if (serializedState === null) {
-        return Left(`Local storage get key: ${key} is null`)
-      }
-      const parsedSerializedState = JSON.parse(serializedState)
+//       if (serializedState === null) {
+//         return Left(`Local storage get key: ${key} is null`)
+//       }
+//       const parsedSerializedState = JSON.parse(serializedState)
 
-      const decode = this.schema[key].decode
+//       const decode = this.schema[key].decode
 
-      return decode(parsedSerializedState)
-    } catch (err) {
-      return Left(`Local storage get key: ${key} error`)
-    }
-  }
+//       return decode(parsedSerializedState)
+//     } catch (err) {
+//       return Left(`Local storage get key: ${key} error`)
+//     }
+//   }
 
-  set<
-    Key extends keyof State,
-    Value extends GetType<State[Key]>,  
-  >(key: Key, value: Value): Either<string, Value> {
-    try {
-      const encode = this.schema[key].encode
+//   set<
+//     Key extends keyof State,
+//     Value extends GetType<State[Key]>,  
+//   >(key: Key, value: Value): Either<string, Value> {
+//     try {
+//       const encode = this.schema[key].encode
 
-      const serializedState = JSON.stringify(encode(value))
-      localStorage.setItem((key as string), serializedState)
+//       const serializedState = JSON.stringify(encode(value))
+//       localStorage.setItem((key as string), serializedState)
       
-      return Right(value)
-    } catch {
-      return Left(`Local storage set key: ${key} error`)
-    }
-  }
-}
+//       return Right(value)
+//     } catch {
+//       return Left(`Local storage set key: ${key} error`)
+//     }
+//   }
+// }
 
-export default new LocalStorageService(localStorageSchema)
+// export default new LocalStorageService(localStorageSchema)

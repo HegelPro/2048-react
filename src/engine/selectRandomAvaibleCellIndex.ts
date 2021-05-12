@@ -1,21 +1,26 @@
-import CellRecordHelper from '../models/cell/helpers'
-import FieldHelpers from '../models/field/helpers'
-import { FieldRecord } from '../models/field/schema'
-import { Just } from 'purify-ts'
-import { Vector } from '../models/vector/schema'
-import { randomArrayElem } from '../utils/array'
+import * as Cell from '../models/cell'
+import * as Field from '../models/field'
+import * as O from 'fp-ts/Option'
+import * as R from 'fp-ts/Random'
+import * as Vector from '../models/vector'
+import {pipe} from 'fp-ts/function'
+import {randomArrayElem} from '../utils/array'
 
-export default function selectRandomAvaibleCellPoint(field: FieldRecord): FieldRecord {
-  const avaiblePositions = FieldHelpers.reduce<Vector[]>(
-    [],
-    (acc, cell, position) => cell === undefined ? [...acc, position] : acc,
+const selectRandomAvaibleCellPoint = (field: Field.Field): Field.Field => {
+  return pipe(
     field,
-  )
-  const selectedPosition = randomArrayElem(avaiblePositions)
-
-  return FieldHelpers.setCellByPosition(
-    field,
-    selectedPosition,
-    Just(CellRecordHelper.init(Math.random() > 0.8 ? 2 : 1)),
+    Field.reduceWithPosition<Vector.Vector[]>(
+      [],
+      (acc, cell, position) => O.isNone(cell) ? [...acc, position] : acc,
+    ),
+    randomArrayElem,
+    selectedPosition => (
+      Field.setCell(
+        selectedPosition,
+        O.some(Cell.init(R.randomBool() ? 4 : 2)),
+      )(field)
+    )
   )
 }
+
+export default selectRandomAvaibleCellPoint

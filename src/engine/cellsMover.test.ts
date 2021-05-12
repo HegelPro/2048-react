@@ -1,6 +1,6 @@
 
-import { formatFieldToTestField, formatTestFieldToField } from '../models/field/helpers.test'
-import { FieldRecord } from '../models/field/schema'
+import * as Field from '../models/field'
+import { formatFieldToTestField, formatTestFieldToField } from '../models/field.test'
 import cellsMover from './cellsMover'
 
 const mockCellsBeforeOne = [
@@ -15,7 +15,7 @@ const mockCellsAfterOne = [
   '2',
 ]
 
-export const mockBeforeFieldOne: FieldRecord = formatTestFieldToField(mockCellsBeforeOne)
+export const mockBeforeFieldOne: Field.Field = formatTestFieldToField(mockCellsBeforeOne)
 
 const mockCellsBeforeTwo = [
   '00',
@@ -37,7 +37,7 @@ const mockCellsAfterTwo = [
   '22',
 ]
 
-export const mockBeforeFieldTwo: FieldRecord = formatTestFieldToField(mockCellsBeforeTwo)
+export const mockBeforeFieldTwo: Field.Field = formatTestFieldToField(mockCellsBeforeTwo)
 
 const mockCellsBeforeThree = [
   '000',
@@ -61,29 +61,29 @@ const mockCellsAfterThree = [
   '111',
 ]
 
-export const mockBeforeFieldThree: FieldRecord = formatTestFieldToField(mockCellsBeforeThree)
+export const mockBeforeFieldThree: Field.Field = formatTestFieldToField(mockCellsBeforeThree)
 
 describe('cellsMover()', () => {
     test('One on a line', () => {
-      const confrontedField = cellsMover(mockBeforeFieldOne, 'DOWN', 'RIGHT')
+      const confrontedField = cellsMover('DOWN', 'RIGHT')(mockBeforeFieldOne)
       expect(formatFieldToTestField(confrontedField)).toEqual(mockCellsAfterOne)
     })
   
     test('Two on a line', () => {
-        const confrontedField = cellsMover(mockBeforeFieldTwo, 'DOWN', 'RIGHT')
+        const confrontedField = cellsMover('DOWN', 'RIGHT')(mockBeforeFieldTwo)
         expect(formatFieldToTestField(confrontedField)).toEqual(mockCellsAfterTwo)
     })
   
     test('Three on a line', () => {
-        const confrontedField = cellsMover(mockBeforeFieldThree, 'DOWN', 'RIGHT')
+        const confrontedField = cellsMover('DOWN', 'RIGHT')(mockBeforeFieldThree)
         expect(formatFieldToTestField(confrontedField)).toEqual(mockCellsAfterThree)
     })
 
     test('Move \'DOWN\', \'RIGHT\'', () => {
-      const confrontedField = cellsMover(formatTestFieldToField([
+      const confrontedField = cellsMover('DOWN', 'RIGHT')(formatTestFieldToField([
         '10',
         '10',
-      ]), 'DOWN', 'RIGHT')
+      ]))
       expect(formatFieldToTestField(confrontedField)).toEqual([
         '01',
         '01',
@@ -91,10 +91,10 @@ describe('cellsMover()', () => {
     })
 
     test('Move \'UP\', \'LEFT\'', () => {
-      const confrontedField = cellsMover(formatTestFieldToField([
+      const confrontedField = cellsMover('UP', 'LEFT')(formatTestFieldToField([
         '01',
         '01',
-      ]), 'UP', 'LEFT')
+      ]))
       expect(formatFieldToTestField(confrontedField)).toEqual([
         '10',
         '10',
@@ -102,10 +102,10 @@ describe('cellsMover()', () => {
     })
 
     test('Move \'LEFT\', \'DOWN\'', () => {
-      const confrontedField = cellsMover(formatTestFieldToField([
+      const confrontedField = cellsMover('LEFT', 'DOWN')(formatTestFieldToField([
         '11',
         '00',
-      ]), 'LEFT', 'DOWN')
+      ]))
       expect(formatFieldToTestField(confrontedField)).toEqual([
         '00',
         '11',
@@ -113,10 +113,10 @@ describe('cellsMover()', () => {
     })
 
     test('Move \'RIGHT\', \'UP\'', () => {
-      const confrontedField = cellsMover(formatTestFieldToField([
+      const confrontedField = cellsMover('RIGHT', 'UP')(formatTestFieldToField([
         '00',
         '11',
-      ]), 'RIGHT', 'UP')
+      ]))
       expect(formatFieldToTestField(confrontedField)).toEqual([
         '11',
         '00',

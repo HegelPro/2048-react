@@ -1,5 +1,5 @@
 import {getFromIterateInDiraction, getIterateInDiraction} from './matrix'
-import { Diraction } from '../models/vector/constants'
+import { Diraction } from '../models/diraction'
 
 const mockFieldOne = [
     [0, 1],
@@ -7,7 +7,7 @@ const mockFieldOne = [
     [4, 5],
 ]
 
-const kek: Array<{
+const iterMatrixMock: Array<{
     iterDirection: [Diraction, Diraction],
     result: number[][]
 }> = [
@@ -75,10 +75,10 @@ const kek: Array<{
 
 describe('Matrix', () => {
     test('getIterateInDiraction()', () => {
-        kek.forEach(({iterDirection: [first, second], result}) =>  expect(getIterateInDiraction(mockFieldOne, first, second)).toEqual(result))
+        iterMatrixMock.forEach(({iterDirection: [first, second], result}) =>  expect(getIterateInDiraction(first, second)(mockFieldOne)).toEqual(result))
     })
 
     test('getFromIterateInDiraction()', () => {
-        kek.forEach(({iterDirection: [first, second], result}) =>  expect(getFromIterateInDiraction(result, first, second)).toEqual(mockFieldOne))
+        iterMatrixMock.forEach(({iterDirection: [first, second], result}) =>  expect(getFromIterateInDiraction(first, second)(result)).toEqual(mockFieldOne))
     })
 })
