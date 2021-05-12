@@ -1,5 +1,5 @@
 import { Just, Maybe, Nothing } from 'purify-ts'
-import { DIRACTIONS } from '../../models/vector/constants'
+import { Diraction, DIRACTIONS } from '../../models/vector/constants'
 import { Vector } from '../../models/vector/schema'
 import debounce from '../../utils/debounce'
 import handleGesture from './helpers/handleGesture'
@@ -8,26 +8,26 @@ import { setCurrentFieldAction } from '../../Containers/Game/actions'
 import { store } from '../../store/store'
 
 const debouncedMoveCells = debounce(
-  (vector: Vector) => (moveCellsThunk(vector) as any)(store.dispatch, store.getState),
+  (diractionOne: Diraction, diractionTwo: Diraction) => (moveCellsThunk(diractionOne, diractionTwo) as any)(store.dispatch, store.getState),
   100,
 )
 
 export const addMoveCellsHandlersFromKeydown = () =>
   window.addEventListener('keydown', (event) => {
     if (['w', 'ц', 'ArrowUp'].some(key => key === event.key)) {
-      debouncedMoveCells(DIRACTIONS.UP)
+      debouncedMoveCells('RIGHT', 'UP')
     }
     
     else if (['d', 'в', 'ArrowRight'].some(key => key === event.key)) {
-      debouncedMoveCells(DIRACTIONS.LEFT)
+      debouncedMoveCells('DOWN', 'RIGHT')
     }
     
     else if (['s', 'ы', 'ArrowDown'].some(key => key === event.key)) {
-      debouncedMoveCells(DIRACTIONS.DOWN)
+      debouncedMoveCells('LEFT', 'DOWN')
     }
     
     else if (['a', 'ф', 'ArrowLeft'].some(key => key === event.key)) {
-      debouncedMoveCells(DIRACTIONS.RIGHT)
+      debouncedMoveCells('UP', 'LEFT')
     }
   })
 
@@ -39,6 +39,7 @@ export const addReturnFieldHandlersFromKeydown = () => {
   })
 }
 
+/*
 export const addMoveCellsHandlersFromMouse = () => {
   let eventDown: Maybe<MouseEvent> = Nothing
 
@@ -102,3 +103,4 @@ export const addMoveCellsHandlersFromTouch = () => {
       })
   })
 }
+*/

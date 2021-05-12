@@ -1,23 +1,21 @@
-import { CellRecord } from '../models/cell/schema'
 import CellRecordHelper from '../models/cell/helpers'
 import FieldHelpers from '../models/field/helpers'
 import { FieldRecord } from '../models/field/schema'
+import { Just } from 'purify-ts'
+import { Vector } from '../models/vector/schema'
 import { randomArrayElem } from '../utils/array'
 
 export default function selectRandomAvaibleCellPoint(field: FieldRecord): FieldRecord {
-  const avaibleCells: CellRecord[] = FieldHelpers.reduce<CellRecord[]>(
+  const avaiblePositions = FieldHelpers.reduce<Vector[]>(
     [],
-    (acc, cell) => cell.value === 0 ? [...acc, cell] : acc,
+    (acc, cell, position) => cell === undefined ? [...acc, position] : acc,
     field,
   )
-  const selectedCell = randomArrayElem(avaibleCells)
-  const cellVector = FieldHelpers.getCellPosition(field, selectedCell)
+  const selectedPosition = randomArrayElem(avaiblePositions)
 
-  return cellVector.map(
-    vector => FieldHelpers.setCellByPosition(
-      field,
-      vector,
-      CellRecordHelper.init(Math.random() > 0.8 ? 2 : 1),
-    )
-  ).orDefault(field)
+  return FieldHelpers.setCellByPosition(
+    field,
+    selectedPosition,
+    Just(CellRecordHelper.init(Math.random() > 0.8 ? 2 : 1)),
+  )
 }

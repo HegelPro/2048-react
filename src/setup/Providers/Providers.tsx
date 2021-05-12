@@ -1,7 +1,7 @@
 import {
   addMoveCellsHandlersFromKeydown,
-  addMoveCellsHandlersFromMouse,
-  addMoveCellsHandlersFromTouch,
+  // addMoveCellsHandlersFromMouse,
+  // addMoveCellsHandlersFromTouch,
   addReturnFieldHandlersFromKeydown,
 } from '../globalEvents/eventHandlers'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -15,8 +15,8 @@ import {theme} from '../theme'
 
 // Add global event handlers
 addMoveCellsHandlersFromKeydown()
-addMoveCellsHandlersFromMouse()
-addMoveCellsHandlersFromTouch()
+// addMoveCellsHandlersFromMouse()
+// addMoveCellsHandlersFromTouch()
 addReturnFieldHandlersFromKeydown()
 
 interface IProps {

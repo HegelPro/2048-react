@@ -12,24 +12,25 @@ import {version} from '../../package.json'
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const initialState = LocalStorageService.get('version')
-  .toMaybe()
-  .map(postVerion => postVerion === version)
-  .chain((isEqualsVersions) => isEqualsVersions
-    ? LocalStorageService.get('state').toMaybe()
-    : Nothing
-  )
-  .map(({field: {current, ...field}, ...state}) => ({...state, field: {...field, current, previous: current}}))
-  .orDefault(defaultRootState)
+// const initialState = LocalStorageService.get('version')
+//   .toMaybe()
+//   .map(postVerion => postVerion === version)
+//   .chain((isEqualsVersions) => isEqualsVersions
+//     ? LocalStorageService.get('state').toMaybe()
+//     : Nothing
+//   )
+//   .map(({field: {current, ...field}, ...state}) => ({...state, field: {...field, current, previous: current}}))
+//   .orDefault(defaultRootState)
 
-LocalStorageService.set('version', version)
+// LocalStorageService.set('version', version)
 
 
 const middleware = [thunk]
 
 export const store = createStore(
   rootReducer,
-  initialState,
+  // initialState,
+  defaultRootState,
   composeEnhancers(
     applyMiddleware(...middleware),
   ),
