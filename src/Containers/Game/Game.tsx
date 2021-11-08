@@ -1,20 +1,16 @@
-// import FieldHeader from '../../Components/FieldHeader/FieldHeader'
+import * as A from 'fp-ts/Array'
+import * as O from 'fp-ts/Option'
+import React, { useCallback } from 'react'
+import CatchWindowEvents from '../CatchWindowEvents/CatchWindowEvents'
+import { Diraction } from '../../models/diraction'
+import FieldHeader from '../../Components/FieldHeader/FieldHeader'
 import FieldView from '../../Components/Field/Field'
 import Grid from '@material-ui/core/Grid'
-import React, { useCallback, useEffect, useReducer, useRef, useState } from 'react'
-// import { RootState } from '../../store/types'
-// import { useSelector } from 'react-redux'
-import * as Field from '../../models/field'
-import {createStart} from '../../models/field'
-import {pipe} from 'fp-ts/function'
-import { FieldSettingsRecord } from '../../models/settings/schema'
-import { Diraction } from '../../models/diraction'
-import * as IO from 'fp-ts/lib/IO'
-import { useFpState } from '../../state/fpState'
-import CatchWindowEvents from '../CatchWindowEvents/CatchWindowEvents'
 import { moveCellsInDiraction } from '../../engine/moveCellsInDiraction'
+import {pipe} from 'fp-ts/function'
+import { useFpState } from '../../state/fpState'
 
-const kek: Record<Diraction, [Diraction, Diraction]> = {
+const moveDiractionToIterateDirection: Record<Diraction, [Diraction, Diraction]> = {
   'UP': ['RIGHT', 'UP'],
   'RIGHT': ['DOWN', 'RIGHT'],
   'DOWN': ['LEFT', 'DOWN'],
@@ -22,34 +18,33 @@ const kek: Record<Diraction, [Diraction, Diraction]> = {
 }
 
 const Game = () => {
-  // const field = useSelector((state: RootState) => state.field.current)
-  // const prevField = useSelector((state: RootState) => state.field.previous)
-  // const fieldSettings = useSelector((state: RootState) => state.settings)
-
   const {state, setFpState} = useFpState()
 
-  const moveCells = useCallback((diraction: Diraction) => setFpState(state => ({
-    ...state,
-    field: pipe(
-      state.field,
-      moveCellsInDiraction(kek[diraction])
+  const moveCells = useCallback((diraction: Diraction) => setFpState(fpState => {
+    return pipe(
+      fpState.field,
+      moveCellsInDiraction(moveDiractionToIterateDirection[diraction]),
+      O.map(newField => ({
+        ...fpState,
+        fieldHistory: [...fpState.fieldHistory, fpState.field],
+        field: newField
+      })),
+      O.getOrElse(() => fpState)
     )
-  })), [setFpState])
+  }), [setFpState])
 
   return (
     <CatchWindowEvents onMoveInDiraction={moveCells} onBack={() => {}}>
       <Grid container spacing={1} direction="column" alignItems="center">
-        {/* <Grid item>
+        <Grid item>
           <FieldHeader />
-        </Grid> */}
+        </Grid>
 
         <Grid item>
           <FieldView
             field={state.field}
-            // prevField={prevField}
+            previousField={A.last(state.fieldHistory)}
             settings={state.settings}
-            // field={[]}
-            // settings={{rows: 0, columns: 0}}
           />
         </Grid>
       </Grid>

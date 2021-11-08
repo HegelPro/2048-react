@@ -1,5 +1,5 @@
 import Box from '@material-ui/core/Box'
-import Header from '../../Components/Header/Header'
+import Header from '../Header/Header'
 import React from 'react'
 
 interface LayoutProps {

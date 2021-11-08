@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import withWidth, { WithWidth } from '@material-ui/core/withWidth'
-import { FieldSettingsRecord } from '../../models/settings/schema'
+import { FieldSettingsRecord } from '../../models/fieldSettings'
 import { useStyles } from './styles'
 
 export interface FieldBlockProps extends

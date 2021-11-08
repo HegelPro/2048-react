@@ -1,25 +1,24 @@
-export default {}
-// import FieldHelpers from '../../models/field/helpers'
-// import FieldStateRecordHelper from '../../models/state/helpers'
-// import React from 'react'
-// import Records from '../../Components/Records/Records'
-// import { RootState } from '../../store/types'
+import * as O from 'fp-ts/Option'
+import React from 'react'
+import Records from '../../Components/Records/Records'
 // import { useSelector } from 'react-redux'
+import {useFpState} from '../../state/fpState'
 
-// const Field = () => {
+const State = () => {
+    const {state} = useFpState()
 //   const records = useSelector((state: RootState) => state.state)
 //   const field = useSelector((state: RootState) => state.field.current)
 
 //   const record = FieldStateRecordHelper.getRecordByPosition(records, {
-//     x: FieldHelpers.getColumns(field),
-//     y: FieldHelpers.getRows(field),
+//     x: Field.getColumns(field),
+//     y: Field.getRows(field),
 //   })
 
-//   return (
-//     <Records
-//       record={record}
-//       field={field}
-//     />
-//   )
-// }
-// export default Field
+  return (
+    <Records
+      record={O.none}
+      field={state.field}
+    />
+  )
+}
+export default State

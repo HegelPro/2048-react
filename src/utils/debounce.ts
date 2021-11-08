@@ -4,7 +4,7 @@ interface IOptions {
   isImmediate: boolean,
 }
 
-function debounce<F extends Procedure>(
+export function debounce<F extends Procedure>(
   func: F,
   waitMilliseconds = 50,
   options: IOptions = {
@@ -36,5 +36,3 @@ function debounce<F extends Procedure>(
     }
   } as F
 }
-
-export default debounce

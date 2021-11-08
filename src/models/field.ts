@@ -7,8 +7,8 @@ import selectRandomAvaibleCellPoint from '../engine/selectRandomAvaibleCellIndex
 
 export type Field = Array<Array<O.Option<Cell.Cell>>>
 
-export const init = ({ columns, rows }: {columns: number, rows: number}): Field => {
-  return pipe(
+export const init = ({ columns, rows }: {columns: number, rows: number}): Field =>
+  pipe(
     A.range(1, columns),
     A.map(
       _ => pipe(
@@ -17,7 +17,6 @@ export const init = ({ columns, rows }: {columns: number, rows: number}): Field 
       )
     )
   )
-}
 
 export const createStart = 
   flow(
@@ -25,8 +24,8 @@ export const createStart =
     selectRandomAvaibleCellPoint
   )
 
-export const getCellsSumValue = (field: Field): number => {
-  return reduce(
+export const getCellsSumValue = (field: Field): number =>
+  reduce<number>(
     0,
     (acc, cell) => pipe(
       cell,
@@ -34,10 +33,9 @@ export const getCellsSumValue = (field: Field): number => {
       O.getOrElse(() => acc)
     )
   )(field)
-}
 
-export const setCell = ([positionX, positionY]: Vector.Vector, cell: O.Option<Cell.Cell>) => (field: Field): Field => {
-  return mapWithPosition(
+export const setCell = ([positionX, positionY]: Vector.Vector, cell: O.Option<Cell.Cell>) => (field: Field): Field =>
+  mapWithPosition(
     ([x, y], cellOne) => {
       return positionX === x && positionY === y
         ? cell
@@ -45,20 +43,33 @@ export const setCell = ([positionX, positionY]: Vector.Vector, cell: O.Option<Ce
     },
     field
   )
-}
 
-export const getCell = ([x, y]: Vector.Vector) => (field: Field): O.Option<Cell.Cell> => {
-  return pipe(
+export const getCell = ([x, y]: Vector.Vector) => (field: Field): O.Option<Cell.Cell> =>
+  pipe(
     field[y],
     O.fromNullable,
     O.map(row => row[x]),
     O.chain(O.fromNullable),
     O.flatten
   )
-}
 
-export const coalitionCellsInRow = (oneX: number, twoX: number) => (row: O.Option<Cell.Cell>[]): O.Option<Cell.Cell>[] => {
-  return pipe(
+export const getCellPosition = (cellOne: Cell.Cell) => (field: Field): O.Option<Vector.Vector> =>
+  reduceWithPosition<O.Option<Vector.Vector>>(
+    O.none,
+    (acc, cellTwo, position) =>
+      pipe(
+        cellTwo,
+        O.chain(cellTwo =>
+          Cell.eqCell.equals(cellOne, cellTwo)
+            ? O.some(position)
+            : acc
+        )
+      )
+      
+  )(field)
+
+export const coalitionCellsInRow = (oneX: number, twoX: number) => (row: O.Option<Cell.Cell>[]): O.Option<Cell.Cell>[] =>
+  pipe(
     row[oneX],
     O.fromNullable,
     O.flatten,
@@ -78,7 +89,6 @@ export const coalitionCellsInRow = (oneX: number, twoX: number) => (row: O.Optio
     ),
     O.getOrElse(() => row)
   )
-}
 
 // TODO - need refactor
 export const swapeCells = (onePosition: Vector.Vector, twoPosition: Vector.Vector) => (field: Field): Field => {
@@ -99,8 +109,8 @@ export const swapeCells = (onePosition: Vector.Vector, twoPosition: Vector.Vecto
 }
 
 // TODO - need refactor
-export const coalitionCells = (onePosition: Vector.Vector, twoPosition: Vector.Vector) => (field: Field): Field => {
-  return pipe(
+export const coalitionCells = (onePosition: Vector.Vector, twoPosition: Vector.Vector) => (field: Field): Field =>
+  pipe(
     getCell(onePosition)(field),
     O.chain(oneCell =>
       pipe(
@@ -129,12 +139,11 @@ export const coalitionCells = (onePosition: Vector.Vector, twoPosition: Vector.V
     ),
     O.getOrElse(() => field)
   )
-}
 
 export const eqField = A.getEq(A.getEq(O.getEq(Cell.eqCell)))
 
-export const reduce = <T>(start: T, f: (acc: T, cell: O.Option<Cell.Cell>) => T) => (field: Field): T => {
-  return pipe(
+export const reduce = <T>(start: T, f: (acc: T, cell: O.Option<Cell.Cell>) => T) => (field: Field): T =>
+  pipe(
     field,
     A.reduce(
       start,
@@ -148,10 +157,9 @@ export const reduce = <T>(start: T, f: (acc: T, cell: O.Option<Cell.Cell>) => T)
         )
     )
   )
-}
 
-export const reduceWithPosition = <T>(start: T, f: (acc: T, cell: O.Option<Cell.Cell>, vector: Vector.Vector) => T) => (field: Field): T => {
-  return pipe(
+export const reduceWithPosition = <T>(start: T, f: (acc: T, cell: O.Option<Cell.Cell>, vector: Vector.Vector) => T) => (field: Field): T =>
+  pipe(
     field,
     A.reduceWithIndex(
       start,
@@ -165,10 +173,9 @@ export const reduceWithPosition = <T>(start: T, f: (acc: T, cell: O.Option<Cell.
         )
     )
   )
-}
 
-export const mapWithPosition = <T>(f: (position: Vector.Vector, cell: O.Option<Cell.Cell>) => T, field: Field): T[][] => {
-  return pipe(
+export const mapWithPosition = <T>(f: (position: Vector.Vector, cell: O.Option<Cell.Cell>) => T, field: Field): T[][] =>
+  pipe(
     field,
     A.mapWithIndex(
       (y, row) => pipe(
@@ -179,4 +186,3 @@ export const mapWithPosition = <T>(f: (position: Vector.Vector, cell: O.Option<C
       )
     )
   )
-}

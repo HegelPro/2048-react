@@ -1,15 +1,16 @@
-import CellBlock from '../../Blocks/CellBlock/CellBlock'
 import * as Cell from '../../models/cell'
+import * as O from 'fp-ts/Option'
+import CellAnimation from '../../Containers/CellAnimation/CellAnimation'
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
 import { Vector } from '../../models/vector'
 import { useStyles } from './styles'
 
 export interface CellProps {
-  cell: Cell.Cell
-  size: number
-  currentPosition: Vector
-  // previousPosition: Maybe<Vector>
+  cell: Cell.Cell;
+  size: number;
+  currentPosition: Vector;
+  previousPosition: O.Option<Vector>;
 }
 
 const CellBoard = (props: CellProps) => {
@@ -18,33 +19,24 @@ const CellBoard = (props: CellProps) => {
     size,
     cell,
     currentPosition,
-    // previousPosition,
+    previousPosition
   } = props
-
-  const [x, y] = currentPosition
-
   return (
-    // <CellBlock
-    //   size={size}
-    //   currentPosition={currentPosition}
-    //   previousPosition={previousPosition}
-    // >
-    <div style={{
-      top: `${size * y}px`,
-      left: `${size * x}px`,
-      width: `${size}px`,
-      height: `${size}px`,
-      position: 'absolute',
-    }}>
-      <span className={classes.side} />
-      <div className={classes.root}>
-        <span className={classes.circle} />
-        <Typography className={classes.value}>
-          {cell.value}
-        </Typography>
+    <CellAnimation
+      size={size}
+      currentPosition={currentPosition}
+      previousPosition={previousPosition}
+    >
+      <div>
+        <span className={classes.side} />
+        <div className={classes.root}>
+          <span className={classes.circle} />
+          <Typography className={classes.value}>
+            {cell.value}
+          </Typography>
+        </div>
       </div>
-    </div>
-    // </CellBlock>
+    </CellAnimation>
   )
 }
 
